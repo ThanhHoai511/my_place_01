@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Updatetable extends Migration
+class Updatetable2 extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,7 @@ class Updatetable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('avatar');
-            $table->string('add');
-            $table->string('phone');
-            $table->date('dateofbirth');
+            $table->string('level');
         });
     }
 
