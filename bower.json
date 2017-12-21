@@ -1,0 +1,25 @@
+{
+  "name": "my_place_01",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Kenini1805 <huusu1996@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Kenini1805/my_place_01",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "Font-Awesome#^4.7.0",
+    "foundation": "^5.5.3",
+    "flat-color-icons": "^1.0.2",
+    "foundation-icons": "*",
+    "foundation-icon-fonts": "*"
+  }
+}
