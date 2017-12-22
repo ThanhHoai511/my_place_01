@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('backend.master');
+    return view('welcome');
 });
