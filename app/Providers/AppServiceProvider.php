@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Form;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        Form::macro('labelWithHTML', function ($html) {
+            echo '<label>'.'<input type="checkbox" name="remember" >'.$html.'</label>';
+        });
     }
 
     /**
