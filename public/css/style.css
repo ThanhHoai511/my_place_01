@@ -216,6 +216,9 @@ input[type="text"] {
     .coral-bg:hover {
         background: #FC5850;
     }
+.b3b3ff-bg {
+    background: #b3b3ff;
+}
 .white-bg-btn {
     background: #fff;
     color: #444;
@@ -229,10 +232,14 @@ input[type="text"] {
 .width-100 {
     width: 100%;
 }
+
 .width-95 {
     width: 95%;
 }
 
+.login-btn {
+    width: 100%;
+}
 
 .fb-blue {
     background: #013567;
@@ -246,7 +253,9 @@ input[type="text"] {
     background: #e14c86;
 }
 /*end color*/
-
+#login {
+    margin: 0 auto;
+}
 /*top menu*/
 #top-menu {
     min-height: 70px;
@@ -449,7 +458,22 @@ input[type="text"] {
     text-align: right;
 }
 /*end invoice*/
-
+.form-login {
+    width: 50%;
+    margin: auto;
+}
+.logo-login {
+    width: 100px;
+}
+.remember {
+    height: 50px;
+    line-height: 35px;
+    padding: 0.5rem;
+    background: #fff;
+    text-align: left;
+    border: 1px solid #cccccc;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
 /*form*/
 .custom-panel {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
@@ -474,8 +498,29 @@ input[type="text"] {
     padding: 10px;
 }
 
+.display-inline {
+    display: inline-block;
+}
 
+.slide-item img {
+    width: 50%;
+    float: left;
+}
 
+.slide-action {
+    float: left;
+    width: 50%;
+    padding-top: 15%;
+    padding-left: 15%;
+}
+
+.button-slide {
+    width: 120px;
+}
+
+#preview {
+    padding-bottom: 20px;
+}
 
 /*general*/
 
@@ -552,6 +597,10 @@ input[type="text"] {
     background: none repeat scroll 0% 0% #8d0b8a;
 }
 
+.slide-list li {
+    list-style: none;
+    padding: 15px;
+}
 
 .range-slider-handle {
     display: inline-block;
