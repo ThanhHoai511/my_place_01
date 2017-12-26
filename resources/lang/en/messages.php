@@ -69,4 +69,12 @@ return [
     'slider' => 'Slider',
     'change' => 'Change',
     'del-img' => 'Delete image',
+    'search-user' => 'Search User',
+    'user-list' => 'List User',
+    'del' => 'Delete',
+    'deletesuccessfully' => 'Delete Successfully!',
+    'deletefailed' => 'Delete Failed',
+    'something' => 'Something',
+    'successfull' => 'Successfull',
+    'updatefail' => 'Update fail',
 ];

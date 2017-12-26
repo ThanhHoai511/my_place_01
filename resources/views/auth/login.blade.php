@@ -48,7 +48,7 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                {{ Form::button( Lang::get('messages.login'), array('class' => 'btn btn-primary')) }}
+                                {{ Form::submit( Lang::get('messages.login'), array('class' => 'btn btn-primary')) }}
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ trans('messages.forgot') }}
