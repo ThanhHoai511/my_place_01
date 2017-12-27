@@ -59,4 +59,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Follow::class,'userfollowing_id');
     }
+
+    public function getPathImageAttribute()
+    {
+        return config('asset.image_path.upload') . $this->avatar;
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
