@@ -6597,6 +6597,25 @@ a:hover, .side-nav li a:not(.button):hover, .side-nav li a:not(.button):focus {
 .logo-admin {
     width: 50px;
 }
+.user-sub {
+    float: left;
+    padding: 0px 15px;
+}
+.btn-group {
+    padding-top: 20px;
+}
+.btn-group div {
+    float: left;
+    padding-right: 15px;
+}
+.user-item {
+    padding: 0px !important;
+    width: 48%;
+}
+.user-item img {
+    width: 100px;
+    float: left;
+}
 .tabs-content {
     margin-bottom: 1.5rem;
     width: 100%;
@@ -6713,25 +6732,25 @@ a {
 .side-nav {
     background: #fff;
 }
-.side-nav li {
-    list-style: none;
-}
-.side-nav > li {
-    padding: 10px;
-    border-bottom: 1px solid #ebeaeb;
-    vertical-align: middle;
-}
-.side-nav li a:not(.button) {
-    color: #444;
-}
-.side-nav .active {
-    color: #f16c65;
-}
-.side-nav li.active > a:first-child:not(.button) {
-    color: #f16c65;
-    font-weight: bold;
-    font-family: 'Roboto', 'sans-serif';
-}
+    .side-nav li {
+        list-style: none;
+    }
+    .side-nav > li {
+        padding: 10px;
+        border-bottom: 1px solid #ebeaeb;
+        vertical-align: middle;
+    }
+    .side-nav li a:not(.button) {
+        color: #444;
+    }
+    .side-nav .active {
+        color: #f16c65;
+    }
+    .side-nav li.active > a:first-child:not(.button) {
+        color: #f16c65;
+        font-weight: bold;
+        font-family: 'Roboto', 'sans-serif';
+    }
 .no-padding .columns {
     padding: 0px;
 }
@@ -6795,11 +6814,11 @@ input[type="text"] {
     background: #f16c65;
     color: #fff;
 }
+    .coral-bg:hover {
+        background: #FC5850;
+    }
 .b3b3ff-bg {
     background: #b3b3ff;
-}
-.coral-bg:hover {
-    background: #FC5850;
 }
 .white-bg-btn {
     background: #fff;

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('messages.register') }}</div>
+                <h3>{{ trans('messages.register') }}</h3>
 
                 <div class="panel-body">
                     {{ Form::open(array('route' => 'register', 'class' => 'form-horizontal')) }}
@@ -62,7 +62,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {{ Form::button(Lang::get('messages.register'), array('class' => 'btn btn-primary')) }}
+                                {{ Form::submit(Lang::get('messages.register'), array('class' => 'btn b3b3ff-bg log-btn')) }}
                             </div>
                         </div>
                     {{ Form::close() }}

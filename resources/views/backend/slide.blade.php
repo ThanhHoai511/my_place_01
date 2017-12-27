@@ -35,7 +35,7 @@
                         <div class="custom-panel-body display-inline">
                             <ul class="slide-list">
                                 <li class="slide-item display-inline">
-                                    {{ HTML::image(config('asset.image_path.slide') . 'chrismas_1.gif', {{ trans('message.slide') }}) }}
+                                    {{ HTML::image(config('asset.image_path.slide') . 'chrismas_1.gif', trans('message.slide')) }}
                                     <div class="slide-action">
                                         <div>
                                             <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('message.change') }}</a>
@@ -46,7 +46,7 @@
                                     </div>
                                 </li>
                                 <li class="slide-item display-inline">
-                                    {{ HTML::image(config('asset.image_path.slide') . 'chrismas_2.gif', {{ trans('message.slide') }})) }}
+                                    {{ HTML::image(config('asset.image_path.slide') . 'chrismas_2.gif', trans('message.slide')) }}
                                     <div class="slide-action">
                                         <div>
                                             <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('message.change') }}</a>
@@ -57,7 +57,7 @@
                                     </div>
                                 </li>
                                 <li class="slide-item display-inline">
-                                    {{ HTML::image(config('asset.image_path.slide') . 'chrismas_3.gif', {{ trans('message.slide') }})) }}
+                                    {{ HTML::image(config('asset.image_path.slide') . 'chrismas_3.gif', trans('message.slide')) }}
                                     <div class="slide-action">
                                         <div>
                                             <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('message.change') }}</a>

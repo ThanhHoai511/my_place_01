@@ -11,19 +11,26 @@ let mix = require('laravel-mix');
  |
  */
 
+mix.copyDirectory([
+    'resources/assets/css',
+], 'public/css');
+mix.copyDirectory([
+    'resources/assets/bower',
+], 'public/assets');
+mix.copyDirectory([
+    'resources/assets/images',
+], 'public/images');
 mix.js(['resources/assets/js/app.js',
-	'public/assets/modernizr/modernizr.js',
-	'public/assets/jquery/dist/jquery.js',
-	'public/assets/foundation/js/foundation/foundation.js',
+    'public/assets/modernizr/modernizr.js',
+    'public/assets/jquery/dist/jquery.js',
+    'public/assets/foundation/js/foundation/foundation.js',
 ], 'public/js/allscript.js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 mix.styles([
-	'public/assets/foundation/css/foundation.css',
-	'public/css/style.css',
+    'public/assets/foundation/css/foundation.css',
+    'public/css/style.css',
 ], 'public/css/login.css');
 mix.styles([
     'public/assets/foundation/css/foundation.css',
-    'public/assets/foundation-icon-fonts/foundation-icons.css',
     'public/css/style.css',
-    'public/css/flat-icon/flaticon.css',
 ], 'public/css/all.css');
