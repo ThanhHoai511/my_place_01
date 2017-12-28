@@ -1,7 +1,6 @@
 <div class="no-padding">
     <div class="large-2 medium-12 small-12 columns">
         <ul class="side-nav">
-            <li class="active"><a href="index.html"><i class="flaticon-dashboard1"></i>{{ trans('messages.dashboard') }}</a></li>
             <li><a href="{{ route('users.index') }}"><i class="flaticon-profile4"></i>{{ trans('messages.profile') }}</a></li>
             <li><a href="#"><i class="flaticon-businessman22"></i>{{ trans('messages.category') }}</a></li>
             <li><a href="#"><span class="flaticon-mailbox10"></span>{{ trans('messages.slide') }}</a></li>

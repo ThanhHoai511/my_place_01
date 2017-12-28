@@ -15,6 +15,25 @@ a:hover, .side-nav li a:not(.button):hover, .side-nav li a:not(.button):focus {
 .logo-admin {
     width: 50px;
 }
+.user-sub {
+    float: left;
+    padding: 0px 15px;
+}
+.btn-group {
+    padding-top: 20px;
+}
+.btn-group div {
+    float: left;
+    padding-right: 15px;
+}
+.user-item {
+    padding: 0px !important;
+    width: 48%;
+}
+.user-item img {
+    width: 100px;
+    float: left;
+}
 .tabs-content {
     margin-bottom: 1.5rem;
     width: 100%;

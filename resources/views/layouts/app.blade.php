@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     {{ HTML::style('css/app.css') }}
+    {{ Html::style('css/login.css') }}
 </head>
 <body>
     <div id="app">
@@ -28,6 +29,7 @@
                     </button>
 
                     <!-- Branding Image -->
+                    {{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('message.logo'), ['class' => 'logo-admin']) }}
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>

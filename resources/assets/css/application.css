@@ -30,6 +30,25 @@ footer {
     font-size: 15px;
     line-height: 30px;
 }
+.rate-icon {
+    width:30px;
+    margin: 0px 15px;
+}
+.navbar-brand {
+    color: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+.head-item-1st, .head-item-2nd {
+    color: #fff; 
+    font-family: Helvetica, Arial, sans-serif;
+}
+.color-white {
+    color: #fff;
+}
+.float-right {
+    float: right;
+}
 .form-group {
     display: table;
     width: 100%;
@@ -40,11 +59,17 @@ footer {
 .idea_picture {
     width:100%;
 }
+.logo-icon {
+    width: 55px;
+    margin-top: -10px;
+    float: left;
+    padding-right: 15px;
+}
 #head-navbar {
     background: #4267b2;
 }
 .wh {
-    color: white;
+    color: #fff;
 }
 .active {
     background-color: #3b5da0;
@@ -122,20 +147,34 @@ footer {
     display: inline-block;
 }
 .navlink {
-    color: white;
+    color: #fff;
     margin: 0px 15px;
 }
 .navlink:visited {
-    color: white;
+    color: #fff;
 }
 .ava {
-    width: 30px;
+    width: 30px !important;
 }
 .dropdown-menu>ul>li:hover {
     background-color: #f8f9fa;
 }
+.dropdown-menu ul {
+    padding:0;
+    margin:0;
+    list-style: none;
+}
+.dropdown-menu ul li {
+    padding: 10px 20px;
+    cursor:pointer;
+}
+.mini>p>img {
+    width:20px;
+    margin: 0px 15px;
+    padding:0;
+}
 #dropdownMenuButton:hover, #dropdownMenuButton:active, #dropdownMenuButton:visited {
-    color: white;
+    color: #fff;
 }
 .dropdown-item {
     display: block;
@@ -147,6 +186,19 @@ footer {
 }
 .btn2 {
     background-color: #428bca;
+}
+.background-b3b3ff {
+    background-color: #b3b3ff !important;
+}
+.abc {
+    width: 200px;
+}
+.action {
+    padding: 0 15px;
+}
+#filediv {
+    width: 70%;
+    float: right;
 }
 #myCarousel {
     text-align: center;

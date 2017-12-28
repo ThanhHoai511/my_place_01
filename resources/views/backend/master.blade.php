@@ -4,8 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ config('app.name') }}</title>
-    {{ Html::style('css/all.css') }}
     {{ Html::script('assets/jquery/dist/jquery.min.js') }}
+    {{ Html::style('assets/bootstrap/dist/css/bootstrap.min.css') }}
+    {{ Html::style('css/all.css') }}
+    {{ Html::style('css/flat-icon/flaticon.css') }}
+    {{ Html::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
     @yield('css')
 </head>
 <body>

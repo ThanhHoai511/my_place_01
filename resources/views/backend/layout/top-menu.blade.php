@@ -2,7 +2,8 @@
     <div class="row">
         <div class="large-2 medium-4 small-12 columns top-part-no-padding">
             <div class="logo-bg">
-                {{ HTML::image(config('asset.image_path.icon') . 'logo-icon.png', trans('messages.logo'), ['class' => 'logo-admin']) }}
+                {{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'logo-admin']) }}
+                 <a href="#" class="logo-title"> myplaces</a>
                 <i class="fi-list toggles" data-toggle="hide"></i>
             </div>
         </div>
@@ -30,7 +31,7 @@
                             </div>
                         </div>
                         <div class="medium-3 small-3 columns">
-                            {{ HTML::image(config('asset.image_path.icon') . 'logo-icon.png', trans('messages.logo'), ['class' => 'logo-admin']) }}
+                            {{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'logo-admin']) }}
                         </div>
                         <div class="medium-3 small-3 columns">
                             <i class="fi-power power-off"></i>
