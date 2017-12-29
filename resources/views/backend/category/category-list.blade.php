@@ -49,8 +49,14 @@
                                                 <a> <b>{{ trans('messages.concept') }}:</b> {{ $category->type_concept }} </a>
                                             </div>
                                             <div class="col-md-5">
-                                                <div> <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a> </div>
-                                                <div> <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a> </div>
+                                                {!! Form::open(['action' => ['CategoryController@destroy', $category->id], 'method' =>  'DELETE']) !!}
+                                                <div class="btn-group-sm">
+                                                    <a href="{{ action('CategoryController@edit', ['id' => $category->id]) }}" class="button radius tiny coral-bg button-slide">
+                                                        {{ trans('messages.change') }}
+                                                    </a>
+                                                   {!! Form::submit(Lang::get('messages.del'), ['class' => 'button radius tiny blue-bg button-slide']) !!}
+                                                </div>
+                                                {!! Form::close() !!}
                                             </div>
                                             <hr>
                                         </li>
@@ -62,8 +68,14 @@
                                                 <a><b>{{ trans('messages.concept') }}:</b> {{ $subCate->type_concept }}</a> 
                                             </div>
                                             <div class="col-md-5">
-                                                <div> <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a> </div>
-                                                <div> <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a> </div>
+                                                {!! Form::open(['action' => ['CategoryController@destroy', $subCate->id], 'method' =>  'DELETE']) !!}
+                                                <div class="btn-group-sm">
+                                                    <a href="{{ action('CategoryController@edit', ['id' => $subCate->id]) }}" class="button radius tiny coral-bg button-slide">
+                                                        {{ trans('messages.change') }}
+                                                    </a>
+                                                   {!! Form::submit(Lang::get('messages.del'), ['class' => 'button radius tiny blue-bg button-slide']) !!}
+                                                </div>
+                                                {!! Form::close() !!}
                                             </div>
                                         </li>
                                         @endforeach
