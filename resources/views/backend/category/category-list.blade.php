@@ -12,36 +12,27 @@
         <section id="general">
             <div class="row">
                 <div class="large-6 medium-6 columns">
+                    {{ Form::open(['action' => 'CategoryController@store', 'method' => 'POST']) }}
                     <div class="custom-panel">
                         <div class="custom-panel-heading">
                             <h4>{{ trans('messages.add-category') }}</h4>
                         </div>
                         <div class="custom-panel-body">
                             <h5>{{ trans('messages.enter-cate-name') }}</h5>
-                            <input type="text" name="link">
+                            {{ Form::text('name') }}
                             <h5>{{ trans('messages.cate-parent') }}</h5>
                             <div class="dropdown">
-                                <select name="cate-parent">
-                                    <option>{{ trans('messages.none') }}</option>
-                                    <option>{{ trans('messages.food-n-drink') }}</option>
-                                    <option>{{ trans('messages.movie') }}</option>
-                                    <option>{{ trans('messages.entertainment') }}</option>
-                                </select>
+                                    {{ Form::select('parent_id', $pluckCategory) }}
                             </div>
                             <h5>{{ trans('messages.cate-concept') }}</h5>
                             <div class="dropdown">
-                                <select name="cate-concept">
-                                    <option>{{ trans('messages.modern') }}</option>
-                                    <option>{{ trans('messages.modern') }}</option>
-                                    <option>{{ trans('messages.classic') }}</option>
-                                    <option>{{ trans('messages.vintage') }}</option>
-                                    <option>{{ trans('messages.outdoor') }}</option>
-                                </select>
+                                    {{ Form::select('type_concept', $pluckConcept) }}
                             </div>
-                            <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.add') }}</a>
-                            <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.back') }}</a>
+                            {{ Form::submit('Submit', ['class' => 'button radius tiny blue-bg button-slide']) }}
+                            
                         </div>
                     </div>
+                    {{ Form::close() }}
                 </div>
                 <div class="large-6 medium-6 columns">
                     <div class="custom-panel">
@@ -50,112 +41,36 @@
                         </div>
                         <div class="custom-panel-body display-inline">
                             <ul class="slide-list">
-                                <li class="slide-item display-inline cate-item">
-                                    <h4><b>{{ trans('messages.food-n-drink') }}</b></h4>
-                                    <hr>
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-7">
-                                                <h5><b>Vintage restaurant</b></h5>
-                                                <a><b>{{ trans('messages.concept') }}:</b> Vintage</a>
+                                @foreach($categories as $category)
+                                        @if($category->parent_id ==NULL)
+                                        <li class="slide-item display-inline cate-item">
+                                            <h4><b>{{ $category->name }}</b></h4>
+                                            <div class="col-md-5">
+                                                <a> <b>{{ trans('messages.concept') }}:</b> {{ $category->type_concept }} </a>
                                             </div>
                                             <div class="col-md-5">
-                                                <div>
-                                                    <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a>
-                                                </div>
+                                                <div> <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a> </div>
+                                                <div> <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a> </div>
+                                            </div>
+                                            <hr>
+                                        </li>
+                                        @endif
+                                        @foreach($category->get_children as $subCate)
+                                        <li>
+                                            <div class="col-md-7">
+                                                <h5><b>{{ $subCate->name }}</b></h5>
+                                                <a><b>{{ trans('messages.concept') }}:</b> {{ $subCate->type_concept }}</a> 
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div> <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a> </div>
+                                                <div> <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a> </div>
                                             </div>
                                         </li>
+                                        @endforeach
                                         <hr>
-                                        <li>
-                                            <div class="col-md-7">
-                                                <h5><b>Modern restaurant</b></h5>
-                                                <a><b>{{ trans('messages.concept') }}:</b> Modern</a>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div>
-                                                    <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <hr>
-                                        <li>
-                                            <div class="col-md-7">
-                                                <h5><b>Outdoor coffee shop</b></h5>
-                                                <a><b>{{ trans('messages.concept') }}:</b> Out door</a>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div>
-                                                    <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <hr>
-                                    </ul>
-                                </li>
-                                <li class="slide-item display-inline cate-item">
-                                    <h4><b>Movie</b></h4>
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-7">
-                                                <h5><b>Movie coffee</b></h5>
-                                                <a><b>{{ trans('messages.concept') }}:</b> Modern</a>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div>
-                                                    <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <hr>
-                                    </ul>
-                                </li>
-                                <li class="slide-item display-inline cate-item">
-                                    <h4><b>Entertain</b></h4>
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-7">
-                                                <h5><b>Game center</b></h5>
-                                                <a><b>{{ trans('messages.concept') }}:</b> None</a>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div>
-                                                    <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col-md-7">
-                                                <h5><b>Board game coffee shop</b></h5>
-                                                <a><b>Concept:</b> Modern</a>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div>
-                                                    <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('messages.change') }}</a>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('messages.del') }}</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <hr>
-                                    </ul>
-                                </li>
+                                @endforeach
                             </ul>
+                        {{ $categories->links() }}
                         </div>
                     </div>
                 </div>

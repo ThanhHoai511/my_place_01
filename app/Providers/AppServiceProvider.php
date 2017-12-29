@@ -33,5 +33,9 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\UserRepositoryInterface',
             'App\Repositories\Eloquents\UserRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Contracts\CategoryRepositoryInterface',
+            'App\Repositories\Eloquents\CategoryRepository'
+        );
     }
 }
