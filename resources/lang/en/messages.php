@@ -97,4 +97,5 @@ return [
     'movie' => 'Movie',
     'coffee' => 'Coffee',
     'concept' => 'Concept',
+    'cate-parent' => 'Category Parent',
 ];

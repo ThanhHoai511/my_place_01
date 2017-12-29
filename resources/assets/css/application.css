@@ -29,6 +29,7 @@ footer {
     margin-bottom: 10px;
     font-size: 15px;
     line-height: 30px;
+    padding: 15px;
 }
 .rate-icon {
     width:30px;
@@ -97,6 +98,7 @@ footer {
 .idea-title {
     font-size: 20px;
     line-height: 40px;
+    padding: 0px 20px;
 }
 .idea-title img {
     width: 40px;
@@ -107,9 +109,9 @@ footer {
     margin: 15px;
 }
 .idea-img img {
-    width: 100%;
+    width: 80%;
     padding: 15px;
-    float: left;
+    margin: auto 10%;
 }
 .idea-img p {
     margin: 0px 15px;
@@ -245,4 +247,52 @@ footer {
 }
 .star {
     font-size: 7px;
+}
+.padding0 {
+    padding: 0px;
+}
+.navbar-brand {
+    color: white !important;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+.logo-img {
+    width: 55px;
+    margin-top: -10px;
+    float: left;
+    padding-right: 15px;
+}
+.head-item-1st, .head-item-2nd {
+    font-family: Helvetica, Arial, sans-serif;
+    color: white !important;
+}
+.icon {
+    color: #df5a48;
+}
+.head-dropdown {
+    margin: 5px;
+}
+.head-dropdown-ul {
+    padding:0;
+    margin:0;
+    list-style: none;
+}
+.head-dropdown-ul li{
+    padding: 10px 20px;
+    cursor:pointer;
+}
+.left-item {
+    position: relative;
+}
+.left-item a {
+    position: absolute;
+    left: 40px;
+}
+.idea-img {
+    padding: 15px;
+}
+@media (max-width:992px) {
+    #right-menu {
+        display: none !important;
+    }
 }

@@ -21,7 +21,7 @@
                             <input type="text" name="link">
                             <h5>{{ trans('message.choose-img') }}</h5>
                             <input type="file" id="slide-image"/>
-                            <img id="preview" src="#"/>
+                            <img id="preview" src="#"/><br/>
                             <a href="#" class="button radius tiny coral-bg button-slide">{{ trans('message.add') }}</a>
                             <a href="#" class="button radius tiny blue-bg button-slide">{{ trans('message.back') }}</a>
                         </div>
@@ -75,4 +75,20 @@
             <br />
         </section>
     </div>
+@stop
+@section('script')
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#preview').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#slide-image").change(function(){
+    readURL(this);
+});
+</script>
 @stop
