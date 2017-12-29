@@ -40,4 +40,18 @@ class CategoryRepository implements CategoryRepositoryInterface
         $category->type_concept = $input['type_concept'];
         $category->save();
     }
+
+    public function update(array $input, $id)
+    {
+        $category = Category::find($id);;
+        $category->name = $input['name'];
+        $category->parent_id = $input['parent_id'];
+        $category->type_concept = $input['type_concept'];
+        $category->save();
+    }
+
+    public function delete($id)
+    {
+        return Category::destroy($id);
+    }
 }
