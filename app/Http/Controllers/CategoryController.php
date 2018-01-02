@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $pluckConcept = $this->categoryRepository->showConcept();
         $pluckConcept[''] = 'None';
 
-        return view('backend.category.category-list', compact('categories', 'pluckCategory','pluckConcept'));
+        return view('backend.category.category-list', compact('categories', 'pluckCategory', 'pluckConcept'));
     }
 
     /**
@@ -54,11 +54,11 @@ class CategoryController extends Controller
             $this->categoryRepository->create($input);
 
             return redirect()->action('CategoryController@index')
-            ->with('status', trans('messages.successfull') );
+            ->with('status', trans('messages.successfull'));
         } catch (Exception $e) {
             Log::debug($e);
 
-            return back()->withErrors( trans('messages.updatefail') );
+            return back()->withErrors(trans('messages.updatefail'));
         }
 
         return redirect()->action('CategoryController@index')
@@ -90,7 +90,7 @@ class CategoryController extends Controller
         $pluckConcept = $this->categoryRepository->showConcept();
         $pluckConcept[''] = 'None';
         
-        return view('backend.category.category-edit', compact('categories', 'pluckCategory','pluckConcept'));
+        return view('backend.category.category-edit', compact('categories', 'pluckCategory', 'pluckConcept'));
     }
 
     /**
@@ -108,11 +108,11 @@ class CategoryController extends Controller
             $result = $this->categoryRepository->update($input, $id);
 
             return redirect()->action('CategoryController@index')
-            ->with('status', trans('messages.successfull') );
+            ->with('status', trans('messages.successfull'));
         } catch (Exception $e) {
             Log::error($e);
 
-            return back()->withErrors( trans('messages.updatefail') );
+            return back()->withErrors(trans('messages.updatefail'));
         }
     }
 

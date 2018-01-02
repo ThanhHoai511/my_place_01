@@ -17,8 +17,8 @@ class ReviewsTableSeeder extends Seeder
                 'place_id' => 1,
                 'content' => 'Content cafe cuoi ngo',
                 'timewrite' => '2017-12-13 08:00:00',
-                'service_rate' => 5,
-                'quality_rate' => 5,
+                'service_rate' => 3,
+                'quality_rate' => 3,
                 'status' => '1', 
                 'created_at' => new DateTime(),
             ], [
@@ -27,7 +27,7 @@ class ReviewsTableSeeder extends Seeder
                 'content' => 'Content cafe cuoi ngo',
                 'timewrite' => '2017-12-13 08:00:00',
                 'service_rate' => 5,
-                'quality_rate' => 5,
+                'quality_rate' => 2,
                 'status' => '1', 
                 'created_at' => new DateTime(),
             ], [

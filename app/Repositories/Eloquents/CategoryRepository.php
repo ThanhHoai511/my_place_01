@@ -29,7 +29,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     
     public function showConcept()
     {
-        return $cate = Category::groupBy('type_concept')->pluck('type_concept','type_concept');
+        return $cate = Category::groupBy('type_concept')->pluck('type_concept', 'type_concept');
     }
 
     public function create(array $input)
@@ -43,7 +43,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function update(array $input, $id)
     {
-        $category = Category::find($id);;
+        $category = Category::find($id);
         $category->name = $input['name'];
         $category->parent_id = $input['parent_id'];
         $category->type_concept = $input['type_concept'];

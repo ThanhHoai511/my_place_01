@@ -14,13 +14,13 @@ class Category extends Model
         return $this->hasMany(CateVal::class);
     }
 
-    public function get_parent()
+    public function getParent()
     {
-    	return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(Category::class, 'parent_id');
     }
 
-    public function get_children()
+    public function getChildren()
     {
-    	return $this->hasMany(Category::class, 'parent_id');
+        return $this->hasMany(Category::class, 'parent_id');
     }
 }

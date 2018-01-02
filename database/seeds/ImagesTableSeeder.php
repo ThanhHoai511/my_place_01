@@ -15,37 +15,37 @@ class ImagesTableSeeder extends Seeder
             [
                 'review_id' => 1,
                 'new_id' => NULL,
-                'link' => 'review.png',
+                'link' => 'cafe-cuoi-ngo-1.jpg',
                 'created_at' => new DateTime(),
             ], [
                 'review_id' => 2,
                 'new_id' => NULL,
-                'link' => 'review1.png',
+                'link' => 'cafe-cuoi-ngo-1.jpg',
                 'created_at' => new DateTime(),
             ], [
                 'review_id' => 3,
                 'new_id' => NULL,
-                'link' => 'review.png',
+                'link' => 'cu-xa.jpg',
                 'created_at' => new DateTime(),
             ], [
                 'review_id' => NULL,
                 'new_id' => 1,
-                'link' => 'new.png',
+                'link' => 'cu-xa.jpg',
                 'created_at' => new DateTime(),
             ], [
                 'review_id' => NULL,
                 'new_id' => 2,
-                'link' => 'review.png',
+                'link' => 'cu-xa.jpg',
                 'created_at' => new DateTime(),
             ], [
                 'review_id' => 3,
                 'new_id' => NULL,
-                'link' => 'review3.png',
+                'link' => 'cu-xa.jpg',
                 'created_at' => new DateTime(),
             ], [
                 'review_id' => NULL,
                 'new_id' => 4,
-                'link' => 'new4.png',
+                'link' => 'cu-xa.jpg',
                 'created_at' => new DateTime(),
             ]
         ]);

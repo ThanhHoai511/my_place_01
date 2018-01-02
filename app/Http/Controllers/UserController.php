@@ -56,7 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -84,24 +84,24 @@ class UserController extends Controller
         $user = $this->userRepository->find($id);
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
-            $file->move('images/Upload',$file->getClientOriginalName());
+            $file->move('images/Upload', $file->getClientOriginalName());
             $linkimage = $file->getClientOriginalName();
         } else {
             $linkimage = $this->userRepository->updateavatar($id);
         }
-            try {
+        try {
                 $dataUpdate = $request->only('name', 'email', 'add', 'phone');
                 $dataUpdate['avatar'] = $linkimage;
                 $dataUpdate['password'] = $request->newpassword;
                 $result = $this->userRepository->update($dataUpdate, $id);
 
                 return redirect()->action('UserController@index')
-                ->with('status', trans('messages.successfull') );
-            } catch (Exception $e) {
+                ->with('status', trans('messages.successfull'));
+        } catch (Exception $e) {
                 Log::error($e);
     
-                return back()->withErrors( trans('messages.updatefail') );
-            }
+                return back()->withErrors(trans('messages.updatefail'));
+        }
     }
 
     /**
