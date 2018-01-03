@@ -31,6 +31,26 @@ footer {
     line-height: 30px;
     padding: 15px;
 }
+.number {
+    width: 200px;
+}
+#suggesstion-box {
+    border: 1px solid #333;
+}
+#suggesstion-box ul {
+    padding: 0px;
+}
+#suggesstion-box li{
+    list-style: none;
+    cursor: pointer;
+    padding: 0px 15px;
+}
+#suggesstion-box li:hover {
+    background-color: #e9ebee;
+}
+#filediv, .img-div, .img-div img {
+    width: 100%;
+}
 .rate-icon {
     width:30px;
     margin: 0px 15px;
@@ -94,6 +114,12 @@ footer {
     float: left;
     width: 20px;
     margin-right: 10px;
+}
+#searchPlace {
+    padding: 0px 15px;
+}
+.review-ava {
+    margin-left: 0px;
 }
 .idea-title {
     font-size: 20px;
@@ -192,15 +218,27 @@ footer {
 .background-b3b3ff {
     background-color: #b3b3ff !important;
 }
-.abc {
-    width: 200px;
-}
-.action {
+.actions {
     padding: 0 15px;
 }
 #filediv {
-    width: 70%;
     float: right;
+}
+.img-div {
+    padding: 15px;
+}
+#addScnt {
+    margin: 0px 15px;
+}
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+}
+.search-option {
+    height: 200px;
+    overflow: auto;
 }
 #myCarousel {
     text-align: center;
