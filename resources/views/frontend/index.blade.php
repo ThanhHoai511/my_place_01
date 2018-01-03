@@ -5,17 +5,25 @@
     @foreach($reviews  as $review)
     <div class="block">
         <div class="row idea-title">
+                {{ HTML::image($review->user->pathImage) }}
+                <b>{{ trans('messages.user') }}</b>
+                <a href="#">{{ $review->user->name }}</a>
+        </div>
+        <div class="row idea-title">
+                <b>{{ trans('messages.at') }}</b>
             <i class="fa fa-map-marker fa-lg"></i>
             <a href="#">{{ $review->place->name }}</a>
         </div>
         <div class="row idea-img">
             @foreach($review->image  as $item)
-                {{ HTML::image(config('asset.image_path.imagereviews') . $item->link) }}
+                {{ HTML::image(($item->PathReview)) }}
             @endforeach
             <p><b>{{ $review->submary }}</b></p>
-            <p>{{ $review->content }}</p><br />
+            <p class="more">{{ $review->content }}</p><br />
+            {{ Form::hidden('lesstext', trans('messages.pullout'), array('class' => 'lesstext')) }}
+            {{ Form::hidden('moretext', trans('messages.seemore'), array('class' => 'moretext')) }}
             <div class="field">
-                <label>Đánh giá: </label>
+                <label>{{ trans('messages.evaluate') }} </label>
                 <section class='rating-widget'>
                     <table>
                         <tr>
@@ -89,6 +97,7 @@
         </div>
     </div>
     @endforeach
+    {{ $reviews->links() }}
     <br>
 </div>
 @stop

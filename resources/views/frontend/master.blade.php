@@ -11,6 +11,8 @@
         {{ Html::script('assets/jquery/dist/jquery.min.js') }}
         {{ Html::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
         {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
+        {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
+        {{ Html::script('assets/jscroll/jquery.jscroll.js') }}
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="head-navbar">
@@ -33,6 +35,8 @@
         @include('frontend.layout.footer')
         {{ Html::script('assets/jquery/dist/jquery.min.js') }}
         {{ Html::script('js/myscripts.js') }}
+        {{ Html::script('js/Home/scollbar.js') }}
+        {{ Html::script('js/Home/seemore.js') }}
     </body>
     @yield('script')
 </html>

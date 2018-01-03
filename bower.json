@@ -21,6 +21,7 @@
     "flat-color-icons": "^1.0.2",
     "foundation-icons": "*",
     "foundation-icon-fonts": "*",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "jscroll": "jquery.jscroll#^2.3.9"
   }
 }
