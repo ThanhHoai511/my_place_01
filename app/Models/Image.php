@@ -18,4 +18,9 @@ class Image extends Model
     {
         return $this->belongsTo(News::class);
     }
+    
+    public function getPathReviewAttribute()
+    {
+        return config('asset.image_path.imagereviews') . $this->link;
+    }
 }
