@@ -1,7 +1,7 @@
 eslint:
   comment: true
   exit_code: 32512
-  ignore: true
+  ignore: false
 pdepend:
   comment: true
   exit_code: 32512
@@ -25,4 +25,4 @@ phpmetrics:
 phpunit:
   comment: true
   exit_code: 0
-  ignore: true
+  ignore: false

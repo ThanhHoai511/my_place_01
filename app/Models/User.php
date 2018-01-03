@@ -16,7 +16,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email', 
+        'email',
         'password',
     ];
 
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 
+        'password',
         'remember_token',
     ];
 
@@ -47,17 +47,17 @@ class User extends Authenticatable
 
     public function rateReviewVal()
     {
-        return $this->hasMany(RateReviewVal::class); 
+        return $this->hasMany(RateReviewVal::class);
     }
 
     public function follower()
     {
-        return $this->hasMany(Follow::class,'userfollower_id');
+        return $this->hasMany(Follow::class, 'userfollower_id');
     }
 
     public function following()
     {
-        return $this->hasMany(Follow::class,'userfollowing_id');
+        return $this->hasMany(Follow::class, 'userfollowing_id');
     }
 
     public function getPathImageAttribute()

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Repositories\Contracts\ReviewRepositoryInterface;
+use DB;
 
 class HomeController extends Controller
 {
@@ -11,9 +14,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $reviewRepository;
+
+    public function __construct(ReviewRepositoryInterface $reviewRepository)
     {
-        $this->middleware('auth');
+        $this->reviewRepository = $reviewRepository;
     }
 
     /**
@@ -23,6 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $reviews = $this->reviewRepository->paginateHome();
+        $rateReviewVals = $this->reviewRepository->listReviewVal();
+
+        return view('frontend.index', compact('reviews', 'rateReviewVals'));
     }
 }

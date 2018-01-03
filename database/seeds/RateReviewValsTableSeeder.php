@@ -27,6 +27,11 @@ class RateReviewValsTableSeeder extends Seeder
                 'review_id' => 3,
                 'rate_id' => 1,
                 'created_at' => new DateTime(),
+            ], [
+                'user_id' => 3,
+                'review_id' => 1,
+                'rate_id' => 1,
+                'created_at' => new DateTime(),
             ]
         ]);
     }

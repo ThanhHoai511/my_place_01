@@ -18,13 +18,13 @@ test:
       --report-xml=.framgia-ci-reports/metrics.xml
       app
   eslint:
-    ignore: true
     command: eslint --format=checkstyle
       --output-file=.framgia-ci-reports/eslint.xml
       resources/assets/js/
   phpcs:
     command: phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml app
   phpunit:
-    ignore: true
     command:
-    
+      - php -dzend_extension=xdebug.so vendor/bin/phpunit
+        --coverage-clover=.framgia-ci-reports/coverage-clover.xml
+        --coverage-html=.framgia-ci-reports/coverage

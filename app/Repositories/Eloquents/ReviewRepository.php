@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Repositories\Eloquents;
+
+use App\Repositories\Contracts\ReviewRepositoryInterface;
+use App\Models\Review;
+use App\Models\RateReviewVal;
+
+class ReviewRepository implements ReviewRepositoryInterface
+{
+    public function paginateHome()
+    {
+        return Review::paginate(config('paginate.paginateHome'));
+    }
+
+    public function listReviewVal()
+    {
+        return $rateReviewVals = RateReviewVal::all();
+    }
+}

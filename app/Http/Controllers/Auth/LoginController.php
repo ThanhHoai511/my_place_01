@@ -55,8 +55,9 @@ class LoginController extends Controller
         if (Auth::attempt($auth)) {
             if (Auth::user()->level == config('const.roleAdmin')) {
                 return redirect('/admin/users');
-             } else if (Auth::user()->level == config('const.roleUser'))
+            } elseif (Auth::user()->level == config('const.roleUser')) {
                 return redirect('/');
+            }
         } else {
             return redirect()->back();
         }
