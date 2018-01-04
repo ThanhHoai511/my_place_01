@@ -10,6 +10,12 @@ function selectPlace(val) {
     $('#suggesstion-box').hide();
 }
 $(document).ready(function(){
+    $(".like-show").click(function(){
+        $(".like").toggle();
+    });
+    $(".close").click(function(){
+        $(".like").hide();
+    });
     $('#myCarousel').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -78,6 +84,18 @@ $(document).ready(function(){
             }));
         }
     });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
     // To Preview Image
     function imageIsLoaded(e) {
         $('#previewimg' + number).attr('src', e.target.result);
@@ -94,7 +112,7 @@ $(document).ready(function(){
     });
     $('#searchPlace').keyup(function(){
         var key = $('#searchPlace').val();
-        var searchURL = window.location.protocol + "//" + window.location.host + "/getplaces?key=" + key;
+        var searchURL = window.location.protocol + "//" + window.location.host + "/get-places?key=" + key;
         $('#suggesstion-box').show();
         $.getJSON(searchURL, function(data) {
             var text = '<ul class="search-option">';

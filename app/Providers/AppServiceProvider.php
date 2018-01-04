@@ -41,5 +41,9 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\ReviewRepositoryInterface',
             'App\Repositories\Eloquents\ReviewRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Contracts\PlaceRepositoryInterface',
+            'App\Repositories\Eloquents\PlaceRepository'
+        );
     }
 }
