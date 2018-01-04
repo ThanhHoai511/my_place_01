@@ -13,6 +13,8 @@
     <!-- Styles -->
     {{ HTML::style('css/app.css') }}
     {{ Html::style('css/login.css') }}
+    {{ Html::script('assets/jquery/dist/jquery.min.js') }}
+    {{ Html::script('assets/sweetalert2/dist/sweetalert2.all.min.js') }}
 </head>
 <body>
     <div id="app">
@@ -74,9 +76,12 @@
         </nav>
 
         @yield('content')
+        
     </div>
 
     <!-- Scripts -->
+    @yield('adminJs')
     {{ HTML::script('js/app.js') }}
+    {{ Html::script('assets/jquery/dist/jquery.min.js') }}
 </body>
 </html>

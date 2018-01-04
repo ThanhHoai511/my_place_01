@@ -13,6 +13,7 @@
         {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
         {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
         {{ Html::script('assets/jscroll/jquery.jscroll.js') }}
+        {{ Html::script('assets/sweetalert2/dist/sweetalert2.all.min.js') }}
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="head-navbar">
@@ -33,6 +34,7 @@
             </div>
         </div>
         @include('frontend.layout.footer')
+        @section('contentJs')
         {{ Html::script('assets/jquery/dist/jquery.min.js') }}
         {{ Html::script('js/myscripts.js') }}
         {{ Html::script('js/Home/scollbar.js') }}

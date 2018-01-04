@@ -15,4 +15,6 @@ interface UserRepositoryInterface
     public function delete($id);
 
     public function updateavatar($id);
+
+    public function register(array $input);
 }

@@ -15,5 +15,4 @@ interface PlaceRepositoryInterface
     public function update(array $input, $id);
 
     public function delete($id);
-
 }
