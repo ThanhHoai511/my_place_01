@@ -240,6 +240,89 @@ footer {
     height: 200px;
     overflow: auto;
 }
+.fa-arrow-left, .fa-check, .fa-pencil-square-o, .fa-pencil-square-o  {
+    padding-right: 10px;
+}
+.width100 {
+    width: 100% !important;
+}
+.comment-input {
+    width: 70%;
+    padding: 8px;
+}
+.send-comment-btn {
+    width: 25%;
+    float: right;
+    color: #fff;
+}
+.close, .like-div {
+    cursor: pointer;
+}
+.like-div {
+    margin-right: 20px;
+    float: left;
+}
+.comment-ava {
+    width: 50px;
+    padding: 5px;
+}
+::-webkit-scrollbar {
+    padding-right: 10px;
+}
+.like {
+    display: none;
+    position: fixed;
+    top: 20%;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow: auto;
+}
+.link {
+    padding: 15px;
+    line-height: 30px;
+}
+.btn3 {
+    background: #fff;
+    right: 10px;
+    top: 0px;
+}
+.btn3:hover {
+    background-color: #E9EBED;
+}
+.expand {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+.show-img {
+    width: 100%;
+    padding: 15px;
+}
+.show-review-title {
+    position: relative;
+}
+.background-d8e9ef {
+    background-color: #d8e9ef !important;
+}
+.label-edit {
+    width: 40% !important;
+}
+.input-edit {
+    width: 60% !important;
+}
+#preview {
+    width: 300px;
+}
+.field {
+    font-size: 12px !important;
+}
+.checkbox-label {
+    display: inline;
+}
+.checkbox {
+    min-height: 0px !important;
+    display: inline;
+}
 #myCarousel {
     text-align: center;
     font-size: 25px;

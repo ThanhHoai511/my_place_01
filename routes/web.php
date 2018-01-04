@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('logout','Auth\LoginController@logout')->name('logout');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
     Route::resource('category', 'CategoryController');
@@ -23,4 +23,4 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'member'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
-
+Route::get('/get-places', 'SearchController@getPlaces');
