@@ -17,4 +17,9 @@ class ReviewRepository implements ReviewRepositoryInterface
     {
         return $rateReviewVals = RateReviewVal::all();
     }
+
+    public function create($dataValue)
+    {
+        return $result = Review::create($dataValue);
+    }
 }

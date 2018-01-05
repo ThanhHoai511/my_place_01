@@ -6,7 +6,7 @@
         </li>
         <li class="left-item crt">
         	<i class="fa fa-plus fa-lg icon"></i>
-        	<a href="/ideas/new">{{ trans('messages.create-review') }}</a>
+        	<a href="{{ action('ReviewController@create') }}">{{ trans('messages.create-review') }}</a>
         </li>
         <li class="left-item pages">
         	<i class="fa fa-info-circle fa-lg icon"></i>

@@ -7,4 +7,6 @@ interface ReviewRepositoryInterface
     public function paginateHome();
 
     public function listReviewVal();
+
+    public function create($dataValue);
 }

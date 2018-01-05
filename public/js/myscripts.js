@@ -28,7 +28,7 @@ $(document).ready(function(){
         prevArrow: '<i class="fa fa-angle-up"></i>'
     });
     /* 1. Visualizing things on Hover - See next part for action on click */
-    $('.stars li').on('mouseover', function(){
+    $('#stars-quality li').on('mouseover', function(){
         var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
    
     // Now highlight all the stars that's not after the current hovered star
@@ -46,7 +46,7 @@ $(document).ready(function(){
         });
     });  
     /* 2. Action to perform on click */
-    $('.stars li').on('click', function(){
+    $('#stars-quality li').on('click', function(){
         var onStar = parseInt($(this).data('value'), 10); // The star currently selected
         var stars = $(this).parent().children('li.star');
         
@@ -58,7 +58,45 @@ $(document).ready(function(){
             $(stars[i]).addClass('selected');
         }        
         var ratingValue = parseInt($('.stars li.selected').last().data('value'), 10);
+        var msg = ratingValue;
+        console.log('sss');
+        $('#ratequality_id').val(msg);
     });
+        /* 1. Visualizing things on Hover - See next part for action on click */
+        $('#stars-service li').on('mouseover', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+       
+        // Now highlight all the stars that's not after the current hovered star
+            $(this).parent().children('li.star').each(function(e){
+              if (e < onStar) {
+                $(this).addClass('hover');
+              }
+              else {
+                $(this).removeClass('hover');
+                }
+            });
+        }).on('mouseout', function(){
+            $(this).parent().children('li.star').each(function(e){
+                $(this).removeClass('hover');
+            });
+        });  
+        /* 2. Action to perform on click */
+        $('#stars-service li').on('click', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+            var stars = $(this).parent().children('li.star');
+            
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+            
+            for (i = 0; i < onStar; i++) {
+                $(stars[i]).addClass('selected');
+            }        
+            var ratingValue = parseInt($('.stars li.selected').last().data('value'), 10);
+            var msg = ratingValue;
+            console.log('sss');
+            $('#rateservice_id').val(msg);
+        });
     $('#addScnt').click(function() {
         $(this).before($("<div/>", {
             id: 'filediv'
@@ -117,7 +155,7 @@ $(document).ready(function(){
         $.getJSON(searchURL, function(data) {
             var text = '<ul class="search-option">';
             data.forEach(function(d) {
-                text += '<li class="place" data-name="' + d.name + '">' + d.name + '</li>';
+                text += '<li class="place"  data-id="' + d.id + '" data-name="' + d.name + '">' + d.name + '</li>';
             });
             text += '</ul>';
             $('#suggesstion-box').html(text);
