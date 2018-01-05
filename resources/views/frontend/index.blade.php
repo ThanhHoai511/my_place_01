@@ -19,7 +19,7 @@
                 {{ HTML::image(($item->PathReview)) }}
             @endforeach
             <p><b>{{ $review->submary }}</b></p>
-            <p class="more">{{ $review->content }}</p><br />
+            <p class="more">{!! $review->content !!}</p><br />
             {{ Form::hidden('lesstext', trans('messages.pullout'), array('class' => 'lesstext')) }}
             {{ Form::hidden('moretext', trans('messages.seemore'), array('class' => 'moretext')) }}
             <div class="field">

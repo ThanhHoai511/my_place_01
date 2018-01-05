@@ -8,12 +8,14 @@
         {{ Html::style('css/application.css') }}
         {{ Html::style('assets/slick-carousel/slick/slick.css') }}
         {{ Html::style('assets/font-awesome/css/font-awesome.min.css') }}
+        {{ Html::style('assets/AlertifyJS/build/css/alertify.css') }}
         {{ Html::script('assets/jquery/dist/jquery.min.js') }}
         {{ Html::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
         {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
         {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
         {{ Html::script('assets/jscroll/jquery.jscroll.js') }}
         {{ Html::script('assets/sweetalert2/dist/sweetalert2.all.min.js') }}
+        {{ Html::script('assets/AlertifyJS/src/js/alertify.js') }}
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="head-navbar">
