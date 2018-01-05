@@ -35,6 +35,7 @@
         </div>
         @include('frontend.layout.footer')
         @section('contentJs')
+        {{ Html::script('assets/ckeditor/ckeditor.js') }}
         {{ Html::script('assets/jquery/dist/jquery.min.js') }}
         {{ Html::script('js/myscripts.js') }}
         {{ Html::script('js/Home/scollbar.js') }}

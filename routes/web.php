@@ -22,5 +22,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 });
 Route::group(['prefix' => 'member'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('reviews', 'ReviewController');
 });
 Route::get('/get-places', 'SearchController@getPlaces');

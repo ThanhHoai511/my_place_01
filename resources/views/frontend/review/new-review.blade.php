@@ -1,51 +1,54 @@
 @extends('frontend.master')
 @section('main')
 <div class="block">
-    {{-- open form --}}
+        {{ Form::open(['action' => 'ReviewController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) }}
         <div id="error_explanation">
             <h2>
                {{ trans('messages.create-review') }}
             </h2>
         </div>
         <div class="field">
-            <label>{{ trans('messages.place') }}</label>
-            <input type="text" id="searchPlace">
+            {{ Form::hidden('place_id', null) }}
+            {{ Form::label('place', trans('messages.place'), array('class' => 'mylabel')) }}
+            {{ Form::text('submary', null, ['id' => 'searchPlace']) }}
             <div id="suggesstion-box"></div>
         </div>
         <div class="field">
-            <label>{{ trans('messages.short-description') }}</label>
-            <input type="text" name="title" id="submary">
+            {{ Form::label('place', trans('messages.short-description'), array('class' => 'mylabel')) }}
+            {{ Form::text('title', null, ['id' => 'submary']) }}
         </div>
         <div class="field">
-            <label>{{ trans('messages.your-review') }}</label>
-            <textarea name="content" id="idea_description"></textarea>
+            {{ Form::label('place', trans('messages.your-review'), array('class' => 'mylabel')) }}
+            {{ Form::text('content', null, ['id' => 'editor1']) }}
         </div>
         <div class="field">
-            <label>{{ trans('messages.date-visit') }}</label>
-            <input type="date" name="time">
+            {{ Form::label('place', trans('messages.date-visit'), array('class' => 'mylabel')) }}    
+            {{ Form::date('timewrite', \Carbon\Carbon::now()) }}
         </div>
         <div class="field">
-            <label>{{ trans('messages.your-rate') }}</label>
+            {{ Form::label('place', trans('messages.your-rate'), array('class' => 'mylabel')) }}
+            {{ Form::hidden('rateservice', null, ['id' => 'rateservice_id']) }}
+            {{ Form::hidden('ratequality', null, ['id' => 'ratequality_id']) }}
             <section class='rating-widget'>
                 <table>
                     <tr>
                         <td>{{ trans('messages.service') }}</td>
                         <td>
                             <div class='rating-stars'>
-                            <ul class='stars'>
-                                <li class='star' title='Poor' data-value='1'>
+                            <ul class='stars' id='stars-service' name='service_rate'>
+                                <li class='star' title='Poor' data-value='1' value = '1'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
-                                <li class='star' title='Fair' data-value='2'>
+                                <li class='star' title='Fair' data-value='2' value = '2'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
-                                <li class='star' title='Good' data-value='3'>
+                                <li class='star' title='Good' data-value='3' value = '3'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
-                                <li class='star' title='Excellent' data-value='4'>
+                                <li class='star' title='Excellent' data-value='4' value = '4'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
-                                <li class='star' title='WOW!!!' data-value='5'>
+                                <li class='star' title='WOW!!!' data-value='5' value = '5'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
                             </ul>
@@ -56,7 +59,7 @@
                         <td>{{ trans('messages.quality') }}</td>
                         <td>
                             <div class='rating-stars'>
-                            <ul class='stars'>
+                            <ul class='stars' id='stars-quality' name='quality_rate'>
                                 <li class='star' title='Poor' data-value='1'>
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
@@ -80,15 +83,15 @@
             </section>
         </div>
         <div class="field">
-            <label>{{ trans('messages.choose-img') }}</label>
+            {{ Form::label('place', trans('messages.choose-img'), array('class' => 'mylabel')) }}
             <div id="filediv">
-                <input name="file[]" type="file" id="file"/>
+                {{ Form::file('file[]', ['id' => 'file'], 'multiple') }}
             </div>
         </div>
         <div class="row actions">
-            <input type="button" id="addScnt" class="upload btn btn-primary btn2 col-md-3" value="{{ trans('messages.add-img') }}"/>
-            <input type="submit" value="{{ trans('messages.up-review') }}" name="submit" id="upload" class="upload btn btn-primary btn2 col-md-3"/>
+            {{ Form::button(trans('messages.add-img'), ['id' => 'addScnt', 'class' => 'upload btn btn-primary btn2 col-md-3']) }}
+            {{ Form::submit(trans('messages.up-review'), ['id' => 'upload', 'class' => 'upload btn btn-primary btn2 col-md-3']) }}
         </div>
-    {{-- endform --}}
+    {{ Form::close() }}
 </div>
 @stop
