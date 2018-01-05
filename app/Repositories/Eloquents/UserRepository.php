@@ -34,7 +34,20 @@ class UserRepository implements UserRepositoryInterface
         $user->phone = $input['phone'];
         $user->save();
     }
-
+    
+    public function register(array $input)
+    {
+        $user = new User;
+        $user->name = $input['name'];
+        $user->password = $input['password'];
+        $user->email = $input['email'];
+        $user->dateofbirth = $input['birthday'];
+        $user->add = $input['add'];
+        $user->level = $input['level'];
+        $user->avatar = $input['avatar'];
+        $user->phone = $input['phone'];
+        $user->save();
+    }
     public function delete($id)
     {
         return User::destroy($id);

@@ -17,29 +17,28 @@
         </ul>
         <p class="navbar-text pull-right color-white">
         <div class="col-md-1 dropdown head-dropdown float-right">
-            <!-- if user_signed_in -->
+            @if(Auth::check())
             <div class="dropdown color-white float-right">
                 <button class="btn btn-secondary dropdown-toggle color-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                    <!-- Image avatar here -->
+                        {{ HTML::image(Auth::user()->PathImage) }}
                     <strong>
-                        <!-- current_user.email -->User Email
+                    {{ Auth::user()->name}}
                     </strong>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <ul class="head-dropdown-ul">
-                        <li>
+                        <li style="color:black">
                             {{ trans('messages.edit-profile') }}
                         </li>
                         <li>
-                            {{ trans('messages.logout') }}
+                            <a href="{{ route('logout') }}">{{ trans('messages.logout') }}</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <!-- else
-                link_to "Sign up", new_user_registration_path, :class => 'navbar-link', :class => 'navlink', :class => 'dropdown-item' |
-                link_to "Login", new_user_session_path, :class => 'navbar-link', :class => 'navlink', :class => 'dropdown-item'  %>
-                end -->
+            @else
+            <a class="navbar-brand" href="{{ route('login') }}">{{ trans('messages.loginhome') }}</a>
+            @endif
         </div>
         </p>
     </div>

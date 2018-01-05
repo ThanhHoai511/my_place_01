@@ -6,6 +6,11 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Http\Request;
+use Auth;
+use Mail;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -27,16 +32,16 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->middleware('guest');
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -60,12 +65,34 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function register(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        try {
+            $data = $request->only('name', 'email', 'add', 'phone', 'birthday');
+            $data['avatar'] = config('const.default');
+            $data['level'] = config('const.roleUser');
+            $data['password'] = $request->password;
+
+            $result = $this->userRepository->register($data);
+            if ($request->check == config('checkbox.checktrue')) {
+                Mail::send('frontend.email.mailregister', [
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                ], function ($message) use ($data) {
+                    $message->to($data['email'], 'Visitor')->subject('Visitor Feedback!');
+                });
+                Session::flash('flash_message', trans('messages.sendsuccess'));
+
+                return redirect()->action('Auth\LoginController@showLoginForm')
+                ->with('status', trans('messages.successfull'));
+            }
+
+                return redirect()->action('Auth\LoginController@showLoginForm')
+                ->with('status', trans('messages.successfull'));
+        } catch (Exception $e) {
+                Log::error($e);
+
+                return back()->withErrors(trans('messages.updatefail'));
+        }
     }
 }
