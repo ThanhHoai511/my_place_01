@@ -7,6 +7,7 @@
     {{ Html::script('assets/jquery/dist/jquery.min.js') }}
     {{ Html::style('assets/bootstrap/dist/css/bootstrap.min.css') }}
     {{ Html::style('css/all.css') }}
+    {{ Html::style('css/backend-style.css') }}
     {{ Html::style('css/flat-icon/flaticon.css') }}
     {{ Html::style('assets/font-awesome/css/font-awesome.min.css') }}
     {{ Html::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
@@ -23,6 +24,7 @@
         </div>
     </div>
     {{ Html::script('js/allscript.js') }}
+    {{ Html::script('js/backend-scripts.js') }}
     @yield('script')
 </body>
 </html>

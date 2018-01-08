@@ -13,6 +13,9 @@ $(document).ready(function(){
     $(".like-show").click(function(){
         $(".like").toggle();
     });
+    $(".place-expand").click(function(){
+        $("#panel1c").toggle();
+    });
     $(".close").click(function(){
         $(".like").hide();
     });
