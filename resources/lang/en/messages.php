@@ -133,4 +133,11 @@ return [
     'avatar' => 'Avatar',
     'update' => 'Update',
     'need-current-pass' => 'we need your current password to confirm your changes',
+    'city-name' => 'Enter city name',
+    'add-city' => 'Add new city',
+    'city-manage' => 'City management',
+    'city' => 'City',
+    'edit-city' => 'Edit city name',
+    'city-old-name' => 'City old name',
+    'change-to' => 'Change to new name',
 ];

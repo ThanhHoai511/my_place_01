@@ -49,5 +49,9 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\ImageRepositoryInterface',
             'App\Repositories\Eloquents\ImageRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Contracts\CityRepositoryInterface',
+            'App\Repositories\Eloquents\CityRepository'
+        );
     }
 }

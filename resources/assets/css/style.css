@@ -15,6 +15,17 @@ a:hover, .side-nav li a:not(.button):hover, .side-nav li a:not(.button):focus {
 .logo-admin {
     width: 50px;
 }
+.city {
+    width: 100%;
+    border: 1px solid #333;
+}
+.side-menu-icon {
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    margin-left: 20px;
+}
 .user-sub {
     float: left;
     padding: 0px 15px;
