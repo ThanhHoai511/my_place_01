@@ -61,7 +61,7 @@
                                             <hr>
                                         </li>
                                         @endif
-                                        @foreach($category->get_children as $subCate)
+                                        @foreach($category->getChildren as $subCate)
                                         <li>
                                             <div class="col-md-7">
                                                 <h5><b>{{ $subCate->name }}</b></h5>

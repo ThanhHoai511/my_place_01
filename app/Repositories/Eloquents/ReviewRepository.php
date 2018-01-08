@@ -10,7 +10,7 @@ class ReviewRepository implements ReviewRepositoryInterface
 {
     public function paginateHome()
     {
-        return Review::orderBy('created_at','desc')->paginate(config('paginate.paginateHome'));
+        return Review::orderBy('created_at', 'desc')->paginate(config('paginate.paginateHome'));
     }
 
     public function listReviewVal()
