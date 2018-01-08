@@ -84,7 +84,7 @@ class CityController extends Controller
         $city = $this->cityRepository->find($id);
         $cities = $this->cityRepository->paginate();
         if (!$city) {
-           return view('errors.404');
+            return view('errors.404');
         }
         
         return view('backend.place.city-edit', compact('city', 'cities'));

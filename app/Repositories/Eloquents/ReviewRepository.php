@@ -22,4 +22,9 @@ class ReviewRepository implements ReviewRepositoryInterface
     {
         return $result = Review::create($dataValue);
     }
+
+    public function find($id)
+    {
+        return Review::find($id);
+    }
 }

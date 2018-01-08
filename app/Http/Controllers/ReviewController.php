@@ -6,6 +6,9 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\ReviewRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
+use App\Repositories\Contracts\RateReviewValRepositoryInterface;
+use App\Repositories\Contracts\RateReviewRepositoryInterface;
+use App\Repositories\Contracts\CommentRepositoryInterface;
 use Storage;
 use Auth;
 
@@ -18,11 +21,22 @@ class ReviewController extends Controller
      */
     protected $reviewRepository;
     protected $imageRepository;
+    protected $rateReviewValRepository;
+    protected $rateReviewRepository;
+    protected $commentRepository;
 
-    public function __construct(ReviewRepositoryInterface $reviewRepository, ImageRepositoryInterface $imageRepository)
-    {
+    public function __construct(
+        ReviewRepositoryInterface $reviewRepository,
+        ImageRepositoryInterface $imageRepository,
+        RateReviewValRepositoryInterface $rateReviewValRepository,
+        RateReviewRepositoryInterface $rateReviewRepository,
+        CommentRepositoryInterface $commentRepository
+    ) {
         $this->reviewRepository = $reviewRepository;
         $this->imageRepository = $imageRepository;
+        $this->rateReviewValRepository = $rateReviewValRepository;
+        $this->rateReviewRepository = $rateReviewRepository;
+        $this->commentRepository = $commentRepository;
     }
     public function index()
     {
@@ -84,9 +98,28 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $review = $this->reviewRepository->find($id);
+        $countLike = 0;
+        $countComment = 0;
+        $showComment = $this->commentRepository->findReviewId($id);
+        $rateReviewVal = $this->rateReviewValRepository->all();
+        $rateReview = $this->rateReviewRepository->findRateLike();
+        $comments = $this->commentRepository->all();
+        foreach ($comments as $comment) {
+            if ($comment->review_id == $review->id) {
+                $countComment++;
+            }
+        }
+        foreach ($rateReviewVal as $rateVal) {
+            foreach ($rateReview as $rate) {
+                if ($rateVal->review_id == $review->id && $rateVal->rate_id == $rate->id) {
+                    $countLike++ ;
+                }
+            }
+        }
 
+        return view('frontend.review.show-review', compact('review', 'countLike', 'countComment', 'showComment'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
