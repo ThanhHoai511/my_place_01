@@ -8,18 +8,17 @@ use DB;
 
 class ImageRepository implements ImageRepositoryInterface
 {
-    public function create($data, $place_id)
+    public function create($data, $placeId)
     {
-
         DB::beginTransaction();
         try {
             foreach ($data as $image) {
                 $newImage = new Image;
                 $newImage->link = $image;
-                $newImage->review_id = $place_id;
+                $newImage->review_id = $placeId;
                 $newImage->save();
             }
-        DB::commit();
+            DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             

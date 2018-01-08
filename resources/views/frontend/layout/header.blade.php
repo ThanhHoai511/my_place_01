@@ -27,8 +27,8 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <ul class="head-dropdown-ul">
-                        <li style="color:black">
-                            {{ trans('messages.edit-profile') }}
+                        <li>
+                            <a  href="{{ route('editprofile', Auth::user()->id) }}">{{ trans('messages.edit-profile') }}</a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}">{{ trans('messages.logout') }}</a>

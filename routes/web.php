@@ -24,5 +24,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'member'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('reviews', 'ReviewController');
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
+    });
 });
 Route::get('/get-places', 'SearchController@getPlaces');

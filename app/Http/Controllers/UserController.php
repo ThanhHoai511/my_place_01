@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Http\Requests\UpdateUserRequest;
+use Auth;
 
 class UserController extends Controller
 {
@@ -68,8 +69,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
-
-        return view('backend.users.profile', compact('user'));
+        if (Auth::user()->level == config('const.roleAdmin')) {
+            return view('backend.users.profile', compact('user'));
+        } elseif (Auth::user()->level == config('const.roleUser')) {
+            return view('frontend.user.edit-profile', compact('user'));
+        }
     }
 
     /**
@@ -90,17 +94,21 @@ class UserController extends Controller
             $linkimage = $this->userRepository->updateavatar($id);
         }
         try {
-                $dataUpdate = $request->only('name', 'email', 'add', 'phone');
-                $dataUpdate['avatar'] = $linkimage;
-                $dataUpdate['password'] = $request->newpassword;
-                $result = $this->userRepository->update($dataUpdate, $id);
-
+            $dataUpdate = $request->only('name', 'email', 'add', 'phone');
+            $dataUpdate['avatar'] = $linkimage;
+            $dataUpdate['password'] = $request->newpassword;
+            $result = $this->userRepository->update($dataUpdate, $id);
+            if (Auth::user()->level == config('const.roleAdmin')) {
                 return redirect()->action('UserController@index')
                 ->with('status', trans('messages.successfull'));
+            } elseif (Auth::user()->level == config('const.roleUser')) {
+                return redirect()->route('editprofile', Auth::user()->id)
+                ->with('status', trans('messages.successfull'));
+            }
         } catch (Exception $e) {
-                Log::error($e);
-    
-                return back()->withErrors(trans('messages.updatefail'));
+            Log::error($e);
+
+            return back()->withErrors(trans('messages.updatefail'));
         }
     }
 
