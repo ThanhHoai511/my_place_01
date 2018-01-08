@@ -12,7 +12,6 @@
         {{ Html::script('assets/jquery/dist/jquery.min.js') }}
         {{ Html::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
         {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
-        {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
         {{ Html::script('assets/jscroll/jquery.jscroll.js') }}
         {{ Html::script('assets/sweetalert2/dist/sweetalert2.all.min.js') }}
         {{ Html::script('assets/AlertifyJS/src/js/alertify.js') }}

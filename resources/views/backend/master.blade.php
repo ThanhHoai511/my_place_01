@@ -8,6 +8,7 @@
     {{ Html::style('assets/bootstrap/dist/css/bootstrap.min.css') }}
     {{ Html::style('css/all.css') }}
     {{ Html::style('css/flat-icon/flaticon.css') }}
+    {{ Html::style('assets/font-awesome/css/font-awesome.min.css') }}
     {{ Html::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
     @yield('css')
 </head>

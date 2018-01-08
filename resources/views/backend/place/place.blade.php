@@ -4,7 +4,7 @@
         <div class="row">
             <div class="large-10 columns">
                 <div class="page-name">
-                    <h3 class="left">{{ trans('messages.slide-manage') }}</h3>
+                    <h3 class="left">{{ trans('message.slide-manage') }}</h3>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -19,6 +19,12 @@
                         <div class="custom-panel-body">
                             <h5>{{ trans('messages.enter-link') }}</h5>
                             <input type="text" name="link">
+                            <h5>{{ trans('messages.dist')}}</h5>
+                            {{ Form::select('city', [
+                               1 => 'Hà Nội',
+                               2 => 'Đà Nẵng',
+                               3 => 'TP HCM']
+                            ) }}
                             <h5>{{ trans('messages.choose-img') }}</h5>
                             <input type="file" id="slide-image"/>
                             <img id="preview" src="#"/><br/>

@@ -40,7 +40,7 @@
                                                     </a>
                                                    {!! Form::submit(Lang::get('messages.del'), ['class' => 'button radius tiny blue-bg button-slide']) !!}
                                                 </div>
-                                           {!! Form::close() !!}
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </li>

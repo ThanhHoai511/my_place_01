@@ -42,14 +42,14 @@
                         <div class="custom-panel-body display-inline">
                             <ul class="slide-list">
                                 @foreach($categories as $category)
-                                        @if($category->parent_id ==NULL)
+                                        @if($category->parent_id == NULL)
                                         <li class="slide-item display-inline cate-item">
                                             <h4><b>{{ $category->name }}</b></h4>
                                             <div class="col-md-5">
                                                 <a> <b>{{ trans('messages.concept') }}:</b> {{ $category->type_concept }} </a>
                                             </div>
                                             <div class="col-md-5">
-                                                {!! Form::open(['action' => ['CategoryController@destroy', $category->id], 'method' =>  'DELETE']) !!}
+                                                {!! Form::open(['action' => ['CategoryController@destroy', $category->id], 'method' => 'DELETE']) !!}
                                                 <div class="btn-group-sm">
                                                     <a href="{{ action('CategoryController@edit', ['id' => $category->id]) }}" class="button radius tiny coral-bg button-slide">
                                                         {{ trans('messages.change') }}
@@ -68,7 +68,7 @@
                                                 <a><b>{{ trans('messages.concept') }}:</b> {{ $subCate->type_concept }}</a> 
                                             </div>
                                             <div class="col-md-5">
-                                                {!! Form::open(['action' => ['CategoryController@destroy', $subCate->id], 'method' =>  'DELETE']) !!}
+                                                {!! Form::open(['action' => ['CategoryController@destroy', $subCate->id], 'method' => 'DELETE']) !!}
                                                 <div class="btn-group-sm">
                                                     <a href="{{ action('CategoryController@edit', ['id' => $subCate->id]) }}" class="button radius tiny coral-bg button-slide">
                                                         {{ trans('messages.change') }}
