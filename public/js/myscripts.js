@@ -49,6 +49,7 @@ $(document).ready(function(){
     $('#stars-quality li').on('click', function(){
         var onStar = parseInt($(this).data('value'), 10); // The star currently selected
         var stars = $(this).parent().children('li.star');
+        $('#quality_rate_id').val(onStar);
         
         for (i = 0; i < stars.length; i++) {
             $(stars[i]).removeClass('selected');
@@ -59,7 +60,6 @@ $(document).ready(function(){
         }        
         var ratingValue = parseInt($('.stars li.selected').last().data('value'), 10);
         var msg = ratingValue;
-        console.log('sss');
         $('#ratequality_id').val(msg);
     });
         /* 1. Visualizing things on Hover - See next part for action on click */
@@ -84,6 +84,7 @@ $(document).ready(function(){
         $('#stars-service li').on('click', function(){
             var onStar = parseInt($(this).data('value'), 10); // The star currently selected
             var stars = $(this).parent().children('li.star');
+            $('#service_rate_id').val(onStar);
             
             for (i = 0; i < stars.length; i++) {
                 $(stars[i]).removeClass('selected');
@@ -94,7 +95,6 @@ $(document).ready(function(){
             }        
             var ratingValue = parseInt($('.stars li.selected').last().data('value'), 10);
             var msg = ratingValue;
-            console.log('sss');
             $('#rateservice_id').val(msg);
         });
     $('#addScnt').click(function() {
@@ -145,9 +145,6 @@ $(document).ready(function(){
         e.preventDefault();
         }
     });
-    $(".place").on("click", function() {
-        console.log('bb');
-    });
     $('#searchPlace').keyup(function(){
         var key = $('#searchPlace').val();
         var searchURL = window.location.protocol + "//" + window.location.host + "/get-places?key=" + key;
@@ -168,6 +165,10 @@ $(document).ready(function(){
                     $('#searchPlace').val($(this).text());
                     $('#suggesstion-box').hide();
                 });
+            });
+            $('.place').on("click", function() {
+                var placeId = ($(this).data('id'));
+                $('#place_id').val(placeId);
             });
         });
     });

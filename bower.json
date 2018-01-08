@@ -24,6 +24,7 @@
     "slick-carousel": "^1.8.1",
     "jscroll": "jquery.jscroll#^2.3.9",
     "sweetalert": "^2.1.0",
-    "sweetalert2": "^7.3.2"
+    "sweetalert2": "^7.3.2",
+    "AlertifyJS": "https://github.com/MohammadYounes/AlertifyJS.git#^1.11.0"
   }
 }
