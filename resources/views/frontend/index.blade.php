@@ -93,7 +93,7 @@
             <br/>
         </div>
         <div class="row idea-btn">
-            <div class="btn"><i class="fa fa-eye fa-lg"></i><a href="#">{{ trans('messages.show') }}</a></div>
+            <div class="btn"><i class="fa fa-eye fa-lg"></i><a href="{{ route('reviews.show', $review->id) }}">{{ trans('messages.show') }}</a></div>
         </div>
     </div>
     @endforeach

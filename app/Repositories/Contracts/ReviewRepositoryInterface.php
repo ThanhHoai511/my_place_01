@@ -9,4 +9,6 @@ interface ReviewRepositoryInterface
     public function listReviewVal();
 
     public function create($dataValue);
+
+    public function find($id);
 }

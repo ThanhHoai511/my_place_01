@@ -53,5 +53,17 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\CityRepositoryInterface',
             'App\Repositories\Eloquents\CityRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Contracts\RateReviewValRepositoryInterface',
+            'App\Repositories\Eloquents\RateReviewValRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Contracts\RateReviewRepositoryInterface',
+            'App\Repositories\Eloquents\RateReviewRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Contracts\CommentRepositoryInterface',
+            'App\Repositories\Eloquents\CommentRepository'
+        );
     }
 }
