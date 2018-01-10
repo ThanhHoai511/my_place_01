@@ -11,4 +11,6 @@ interface ReviewRepositoryInterface
     public function create($dataValue);
 
     public function find($id);
+
+    public function all();
 }

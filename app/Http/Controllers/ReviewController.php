@@ -101,24 +101,25 @@ class ReviewController extends Controller
         $review = $this->reviewRepository->find($id);
         $countLike = 0;
         $countComment = 0;
+        $userId = Auth::user()->id;
         $showComment = $this->commentRepository->findReviewId($id);
         $rateReviewVal = $this->rateReviewValRepository->all();
+        $hasLike = $this->rateReviewValRepository->findReviewID($id, $userId);
         $rateReview = $this->rateReviewRepository->findRateLike();
         $comments = $this->commentRepository->all();
-        foreach ($comments as $comment) {
-            if ($comment->review_id == $review->id) {
-                $countComment++;
-            }
-        }
-        foreach ($rateReviewVal as $rateVal) {
-            foreach ($rateReview as $rate) {
-                if ($rateVal->review_id == $review->id && $rateVal->rate_id == $rate->id) {
-                    $countLike++ ;
-                }
-            }
-        }
-
-        return view('frontend.review.show-review', compact('review', 'countLike', 'countComment', 'showComment'));
+        $rateValId = $this->rateReviewValRepository->findRate($id);
+        $countComment = $this->commentRepository->getCommentNumber($id);
+        $countLike = $this->rateReviewValRepository->getLikes($id);
+        return view('frontend.review.show-review', compact(
+            'review',
+            'rateValId',
+            'countLike',
+            'countComment',
+            'showComment',
+            'rateReview',
+            'hasLike',
+            'rateReviewVal'
+        ));
     }
     /**
      * Show the form for editing the specified resource.
@@ -152,5 +153,28 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function favorite(Request $request)
+    {
+        $reviewId = $request->reviewId;
+        $rateId = $request->rateId;
+        $userId = Auth::user()->id;
+        $hasLike = $this->rateReviewValRepository->findReviewID($reviewId, $userId);
+        $rateReviewVal = $this->rateReviewValRepository->all();
+        $rateReview = $this->rateReviewRepository->findRateLike();
+        if ($hasLike == config('const.hasLike')) {
+            $icon = true;
+            $resultReviewVal = $this->rateReviewValRepository->create($userId, $rateId, $reviewId);
+        } else {
+            $icon = false;
+            $resultReviewVal = $this->rateReviewValRepository->disLike($reviewId, $userId);
+        }
+        $countLike = $this->rateReviewValRepository->getLikes($reviewId);
+        
+        return response()->json([
+           'icon' => $icon,
+           'countLike' => $countLike,
+        ]);
     }
 }

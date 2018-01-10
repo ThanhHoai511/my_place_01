@@ -16,4 +16,9 @@ class CommentRepository implements CommentRepositoryInterface
     {
         return Comment::where('review_id', '=', $id)->get();
     }
+
+    public function getCommentNumber($reviewId)
+    {
+        return Comment::where('review_id', '=', $reviewId)->get()->count();
+    }
 }
