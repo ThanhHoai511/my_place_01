@@ -2,15 +2,13 @@
 
 namespace App\Repositories\Contracts;
 
-interface CityRepositoryInterface
+interface DistrictRepositoryInterface
 {
     public function all();
 
     public function search($key);
     
     public function find($id);
-
-    public function showCity();
 
     public function paginate();
 

@@ -12,15 +12,20 @@ class CityRepository implements CityRepositoryInterface
         return City::all();
     }
 
+    public function showCity()
+    {
+        return City::pluck('name', 'id');
+    }
+
     public function search($key)
     {
-        return City::where('name', 'like', '%'.$key.'%')
+        return City::where('name', 'like', '%' . $key . '%')
             ->get();
     }
 
-    public function find($id)
+    public function findOrFail($id)
     {
-        return City::find($id);
+        return City::findOrFail($id);
     }
 
     public function paginate()
@@ -37,7 +42,7 @@ class CityRepository implements CityRepositoryInterface
 
     public function update(array $input, $id)
     {
-        $city = City::find($id);
+        $city = City::findOrFail($id);
         $city->name = $input['name'];
         $city->save();
     }

@@ -140,4 +140,8 @@ return [
     'edit-city' => 'Edit city name',
     'city-old-name' => 'City old name',
     'change-to' => 'Change to new name',
+    'add-dist' => 'Add new district',
+    'choose-city' => 'Choose city',
+    'dist-name' => 'District\'s name',
+    'dist' => 'District',
 ];
