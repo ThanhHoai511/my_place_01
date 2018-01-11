@@ -24,7 +24,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'member'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('reviews', 'ReviewController');
-    Route::post('reviews', 'ReviewController@favorite');
+    Route::post('likereviews', 'ReviewController@favorite');
+    Route::post('comment', 'ReviewController@comment');
+    Route::post('updatecomment', 'ReviewController@updateComment');
+    Route::post('deletecomment', 'ReviewController@deleteComment');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
     });

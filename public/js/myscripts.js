@@ -177,7 +177,7 @@ $(document).ready(function(){
         $(".fa-thumbs-up").on("click", function (e) {
             var reviewId = $(this).data("review-id");
             var rateId = $(this).data("rate-id");
-            var url = baseUrl + 'member/reviews';
+            var url = baseUrl + 'member/likereviews';
             var container = $(this).find('+span');
             $.ajax({
                 type: 'post',
@@ -198,5 +198,83 @@ $(document).ready(function(){
                 }
             });
         });
-    });    
+    });
+    //Them comment
+    $(function () {
+        $('.send-comment-btn').on('click', function (e) {
+            var url = baseUrl + 'member/comment';
+            var reviewId = $('#review-id').val();
+            var comment = $('.comment-input').val();
+            var count = (parseInt($('.count-comment').attr('data-count')) + (1));
+            $.ajax({
+                type: 'post',
+                url: url,
+                data:{
+                    'comment': comment,
+                    'reviewId': reviewId,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    $('.comment-input').val('');
+                    $('.show-comment').prepend(data);
+                    $('.count-comment').html(count);
+                }
+            });
+        });
+    });
+    //Sua comment
+    $(function () {
+        $('.edit-comment').on('click', function (e) {
+            var commentId = $(this).attr('data-comment-id');
+            var reviewId = $(this).attr('data-review-id');
+            var content = $(this).attr('data-content');
+            var edit = $(this);
+            form = '';
+            form += '<form class="comment-update" method="get" enctype="multipart/form-data">'
+            form += '<input type="hidden" name="_token" value="{{ csrf_token() }}">'
+            form += '<input type="hidden" name="review_id" class="review_id" value='+ reviewId +'>'
+            form += '<input type="hidden" name="comment_id" class="comment_id" value='+ commentId +'>'
+            form += '<textarea name="content" class="content-update form-control">'+ content + '</textarea>'
+            form += '<button type="submit" class="btn buttonTransparent btn-comment">Edit</button>'
+            form += '</form>';
+            edit.parents('.comment-show').find('.content-comment').html(form);
+
+            
+        $('.comment-update').on('submit', function(e) {
+                var contentUpdate = $('.content-update').val();
+                var reviewId = $('.review_id').val();
+                var commentId = $('.comment_id').val();
+                var url = baseUrl + 'member/updatecomment';
+                $.ajax({
+                    type: 'post',
+                    url: url,
+                    data:{
+                        'contentUpdate': contentUpdate,
+                        'reviewId': reviewId,
+                        'commentId': commentId,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        edit.parents('.comment-content').html(response);
+                    },
+                }); 
+            });
+        });
+    });
+    //Xoa comment           
+$('.delete').on('submit', function(e) {
+        var commentId = $('.comment-id').val();
+        var url = baseUrl + 'member/deletecomment';
+        $.ajax({
+            type: 'post',
+            url: url,
+            data:{
+                'commentId': commentId,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data) {
+                alert('Delete success id = ' + data['commentId']);
+            },
+        }); 
+    });  
 });

@@ -9,4 +9,8 @@ interface CommentRepositoryInterface
     public function findReviewId($id);
 
     public function getCommentNumber($reviewId);
+
+    public function create($content, $reviewId, $userId);
+
+    public function delete($commentId);
 }

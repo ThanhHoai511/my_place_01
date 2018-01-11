@@ -36,24 +36,59 @@
         </div>
     </h4>
     @endforeach
-    <h4><i class="fa fa-comment fa-lg"></i><span>{{ $countComment }}</span>{{ trans('messages.comment') }}</h4>
+    <h4><i class="fa fa-comment fa-lg"></i><span class="count-comment" data-count="{{ $countComment }}">{{ $countComment }}</span>{{ trans('messages.comment') }}</h4>
     <div class="row">
         <div><a href="#" class="link"><i class="fa fa-pencil-square-o fa-lg"></i>{{ trans('messages.edit') }}</a>|<a href="#" class="link"><i class="fa fa-arrow-left fa-lg"></i>{{ trans('messages.back') }}</a>|<a href="#" class="link"><i class="fa fa-remove fa-lg"></i>{{ trans('messages.delete') }}</a></div>
     </div>
-    {{ Form::open() }}
+    {{ Form::open(['action' => 'ReviewController@comment']) }}
         <div class="comment">
             {{ Form::text('comment', null, array('class' => 'comment-input', 'placeholder' => trans('messages.leave-comment'))) }}
             {{ Form::button(trans('messages.send'), array('class' => 'send-comment-btn btn btn2')) }}
+            {{ Form::hidden('review-id', $review->id, array('id' => 'review-id')) }}
         </div>
     {{ Form::close() }}
-    @foreach($showComment as $comment)
-    <div>
-        {{ HTML::image(config('asset.image_path.upload') . $comment->user->avatar, null, ['class' => 'comment-ava']) }}
-        <strong><a href="#">{{ $comment->user->name }}</a></strong>
-        <br />
-        <p>{{ $comment->content }}</p>
+    <div class="show-comment">
+        <div class="row">
+            @foreach($showComment as $comment)
+            <div class="comment-show">
+                {{ Form::hidden('lesstext', $comment->id, array('class' => 'comment-id')) }}
+                <div class="col-md-10">
+                    {{ HTML::image($comment->user->pathImage, null, ['class' => 'comment-ava']) }}
+                    <strong><a href="#">{{ $comment->user->name }}</a></strong>
+                    <br/>
+                    <div class="content-comment">
+                        <p> {{ $comment->content }}</p>
+                        <p> {{ trans('messages.time') }} {{ $comment->created_at }}</p>
+                    </div>
+                </div>
+                @if(Auth::user()->id == $comment->user_id)
+                    <div class="col-md-2">
+                        <div class="dropdown manage-comment">
+                            <span class="dropdown-toggle manage-dropdown" data-toggle="dropdown">...</span>
+                            <ul class="dropdown-menu manage-menu">
+                                <li class="edit">
+                                    <button type="submit" class="btn edit-comment btn-manage" data-comment-id="{{ $comment->id }}" data-review-id="{{ $comment->review_id }}" data-content="{{ $comment->content }}">
+                                        <i class="fa fa-pencil"></i> 
+                                        {{ trans('site.edit') }}...
+                                        </button>
+                                </li>
+                                <li>
+                                    <form class="delete" enctype="multipart/form-data"> 
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn delete btn-manage">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i> 
+                                            {{ trans('site.delete') }}...
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+            </div>    
+            @endforeach
+        </div>
     </div>
-    @endforeach
     </p>
 </div>
 @stop
