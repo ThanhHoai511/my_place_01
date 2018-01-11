@@ -27,8 +27,7 @@ class HomeController extends Controller
         RateReviewRepositoryInterface $rateRepository,
         RateReviewValRepositoryInterface $rateValRepository,
         CommentRepositoryInterface $commentRepository
-    )
-    {
+    ) {
         $this->reviewRepository = $reviewRepository;
         $this->rateRepository = $rateRepository;
         $this->rateValRepository = $rateValRepository;

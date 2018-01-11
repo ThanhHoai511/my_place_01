@@ -12,7 +12,7 @@
     </div>
     <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-            <li><a class="head-item-1st active" href="/ideas">{{ trans('messages.home') }}</a></li>
+            <li><a class="head-item-1st active" href="{{ action('HomeController@index') }}">{{ trans('messages.home') }}</a></li>
             <li><a class="head-item-2nd" href="/pages/info">{{ trans('messages.personal') }}</a></li>
         </ul>
         <p class="navbar-text pull-right color-white">

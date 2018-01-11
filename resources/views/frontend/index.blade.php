@@ -98,7 +98,13 @@
             <br/>
         </div>
         <div class="row idea-btn">
-            <div class="btn"><i class="fa fa-eye fa-lg"></i><a href="{{ route('reviews.show', $review->id) }}">{{ trans('messages.show') }}</a></div>
+            @if(Auth::check())
+                <div class="btn"><i class="fa fa-eye fa-lg"></i><a href="{{ route('reviews.show', $review->id) }}">{{ trans('messages.show') }}</a></div>
+            @else
+                <div class="btn"><i class="fa fa-eye fa-lg"></i><a href="{{ route('login', $review->id) }}">{{ trans('messages.loginmore') }}</a></div>
+            @endif
+
+
         </div>
     </div>
     @endforeach

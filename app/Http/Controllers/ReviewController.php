@@ -177,4 +177,37 @@ class ReviewController extends Controller
            'countLike' => $countLike,
         ]);
     }
+
+    public function comment(Request $request)
+    {
+        $content = $request->comment;
+        $reviewId = $request->reviewId;
+        $userId = Auth::user()->id;
+        $avatarUser = Auth::user()->avatar;
+        $nameUser = Auth::user()->name;
+        $resultComment = $this->commentRepository->create($content, $reviewId, $userId);
+
+        return response(view('frontend.showcoment.show-comment', compact('content'))->render());
+    }
+
+    public function updateComment(Request $request)
+    {
+        $commentId = $request->commentId;
+        $reviewId = $request->reviewId;
+        $contentUpdate = $request->contentUpdate;
+        $userId = Auth::user()->id;
+        $resultComment = $this->commentRepository->update($commentId, $reviewId, $contentUpdate, $userId);
+
+        return redirect()->route('reviews.show', $reviewId);
+    }
+    
+    public function deleteComment(Request $request)
+    {
+        $commentId = $request->commentId;
+        $resultComment = $this->commentRepository->delete($commentId);
+
+        return response()->json([
+            'commentId' => $commentId,
+        ]);
+    }
 }
