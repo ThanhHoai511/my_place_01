@@ -2,6 +2,7 @@ n =  new Date();
 y = n.getFullYear();
 m = n.getMonth() + 1;
 d = n.getDate();
+var baseUrl = window.location.origin+window.location.pathname.split('/')[0] + '/';
 document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
 var $jq = jQuery.noConflict();
 var number = 0;// Declaring and defining global increment variable for rate star.
@@ -172,4 +173,30 @@ $(document).ready(function(){
             });
         });
     });
+    $(function () {
+        $(".fa-thumbs-up").on("click", function (e) {
+            var reviewId = $(this).data("review-id");
+            var rateId = $(this).data("rate-id");
+            var url = baseUrl + 'member/reviews';
+            var container = $(this).find('+span');
+            $.ajax({
+                type: 'post',
+                url: url,
+                data:{
+                    'reviewId': reviewId, 
+                    'rateId': rateId,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    var value = data['countLike'];
+                    $(container).html(value);
+                    if(data['icon'] == true) {
+                        $(".fa-thumbs-up").addClass('icon');
+                    } else {
+                        $(".fa-thumbs-up").removeClass('icon');
+                    }
+                }
+            });
+        });
+    });    
 });

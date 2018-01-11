@@ -77,18 +77,23 @@
                     </table>
                 </section>
             </div>
+            @foreach ($rateReview as $rate)
             <div class="mini">
-                <p><i class="fa fa-thumbs-up fa-lg  icon"></i>
-                    <?php $count = 0 ;?>
-                    @foreach ($rateReviewVals as $rateVal)
-                        @if ($rateVal->review_id == $review->id && $rateVal->rate_id == 1)
-                        <?php $count++ ; ?>
+                <p>
+                    @if(Auth::check())
+                        @if($hasLike[$review->id] == config('checkbox.checktrue'))
+                            <i class="fa fa-thumbs-up fa-lg icon" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}"></i><span>{{ $countLike[$review->id] }}</span> {{ trans('messages.like') }}
+                        @else
+                            <i class="fa fa-thumbs-up fa-lg" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}" data-user-id="{{ Auth::user()->id }}"></i><span>{{ $countLike[$review->id] }}</span> {{ trans('messages.like') }}
                         @endif
-                    @endforeach
-                    {{ $count }} {{ trans('messages.like') }}</p>
+                    @else
+                        <i class="fa fa-thumbs-up fa-lg"></i><span>{{ $countLike[$review->id] }}</span> {{ trans('messages.like') }}
+                    @endif
+                </p>
             </div>
+            @endforeach
             <div class="mini">
-                <p><i class="fa fa-comment fa-lg icon"></i> 15 {{ trans('messages.comment') }}</p>
+                <p><i class="fa fa-comment fa-lg"></i> <span>{{ $countComment[$review->id] }}</span> {{ trans('messages.comment') }}</p>
             </div>
             <br/>
         </div>

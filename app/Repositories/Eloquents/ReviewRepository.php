@@ -27,4 +27,9 @@ class ReviewRepository implements ReviewRepositoryInterface
     {
         return Review::find($id);
     }
+
+    public function all()
+    {
+        return Review::all();
+    }
 }

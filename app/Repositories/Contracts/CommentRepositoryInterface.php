@@ -7,4 +7,6 @@ interface CommentRepositoryInterface
     public function all();
 
     public function findReviewId($id);
+
+    public function getCommentNumber($reviewId);
 }

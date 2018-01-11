@@ -11,7 +11,7 @@
 |
 */
 Route::get('/', function () {
-    return view('backend.user.user-edit');
+    return view('auth.login');
 });
 Auth::routes();
 
@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'member'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('reviews', 'ReviewController');
+    Route::post('reviews', 'ReviewController@favorite');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
     });

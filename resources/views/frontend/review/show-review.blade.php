@@ -21,12 +21,22 @@
     @foreach($review->image  as $item)
         {{ HTML::image(($item->PathReview), trans('messages.logo'), ['class' => 'show-img']) }}    
     @endforeach
+    @foreach($rateReview as $rate)
     <h4 class="like-show">
         <div class="like-div">
-            <i class="fa fa-thumbs-up fa-lg icon"></i>{{ $countLike }} {{ trans('messages.like') }}
+            @if(Auth::check())
+                @if($hasLike == 1)
+                    <i class="fa fa-thumbs-up fa-lg icon" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}"></i><span>{{ $countLike }}</span> {{ trans('messages.like') }}
+                @else
+                    <i class="fa fa-thumbs-up fa-lg" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}" data-user-id="{{ Auth::user()->id }}"></i><span>{{ $countLike }}</span> {{ trans('messages.like') }}
+                @endif
+            @else
+                <i class="fa fa-thumbs-up fa-lg"></i><span>{{ $countLike }}</span> {{ trans('messages.like') }}
+            @endif
         </div>
     </h4>
-    <h4><i class="fa fa-comment fa-lg icon"></i>{{ $countComment }} {{ trans('messages.comment') }}</h4>
+    @endforeach
+    <h4><i class="fa fa-comment fa-lg"></i><span>{{ $countComment }}</span>{{ trans('messages.comment') }}</h4>
     <div class="row">
         <div><a href="#" class="link"><i class="fa fa-pencil-square-o fa-lg"></i>{{ trans('messages.edit') }}</a>|<a href="#" class="link"><i class="fa fa-arrow-left fa-lg"></i>{{ trans('messages.back') }}</a>|<a href="#" class="link"><i class="fa fa-remove fa-lg"></i>{{ trans('messages.delete') }}</a></div>
     </div>
@@ -45,16 +55,5 @@
     </div>
     @endforeach
     </p>
-</div>
-<div class="like col-md-5 col-sm-12 background-d8e9ef">
-    <p class="close"><i class="fa fa-close fa-lg icon"></i>Close</p>
-    <p><i class="fa fa-thumbs-up fa-lg icon"></i>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'comment-ava']) }}<strong><a href="#">Admin</a></strong></p>
-    <p><i class="fa fa-thumbs-down fa-lg"></i>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'comment-ava']) }}<strong><a href="#">User 2</a></strong></p>
-    <p><i class="fa fa-thumbs-up fa-lg icon"></i>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'comment-ava']) }}<strong><a href="#">Admin</a></strong></p>
-    <p><i class="fa fa-thumbs-down fa-lg"></i>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'comment-ava']) }}<strong><a href="#">User 2</a></strong></p>
-    <p><i class="fa fa-thumbs-up fa-lg icon"></i>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'comment-ava']) }}<strong><a href="#">Admin</a></strong></p>
-    <p><i class="fa fa-thumbs-down fa-lg"></i>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'comment-ava']) }}<strong><a href="#">User 2</a></strong></p>
-    <p><i class="fa fa-thumbs-up fa-lg icon"></i>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'comment-ava']) }}<strong><a href="#">Admin</a></strong></p>
-    <p><i class="fa fa-thumbs-down fa-lg"></i>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'comment-ava']) }}<strong><a href="#">User 2</a></strong></p>
 </div>
 @stop

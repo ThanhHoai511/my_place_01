@@ -2,21 +2,21 @@
 <html>
     <head>
         <title>myplaces</title>
+        <base href="{{ asset('') }}"/>
         {{ Html::style('assets/bootstrap/dist/css/bootstrap.css') }}
         {{ Html::style('assets/bootstrap/dist/css/bootstrap-theme.css') }}
         {{ Html::style('assets/bootstrap/dist/css/bootstrap.min.css') }}
         {{ Html::style('css/application.css') }}
         {{ Html::style('assets/slick-carousel/slick/slick.css') }}
         {{ Html::style('assets/font-awesome/css/font-awesome.min.css') }}
-        {{ Html::style('assets/AlertifyJS/build/css/alertify.css') }}
         {{ Html::script('assets/jquery/dist/jquery.min.js') }}
         {{ Html::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
         {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
         {{ Html::script('assets/jscroll/jquery.jscroll.js') }}
         {{ Html::script('assets/sweetalert2/dist/sweetalert2.all.min.js') }}
-        {{ Html::script('assets/AlertifyJS/src/js/alertify.js') }}
     </head>
     <body>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="head-navbar">
             @include('frontend.layout.header')
         </nav>
