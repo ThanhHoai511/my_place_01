@@ -21,10 +21,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('category', 'CategoryController');
     Route::resource('city', 'CityController');
     Route::resource('district', 'DistrictController');
+    Route::resource('reports', 'ReportController');
+    Route::post('approve', 'ReportController@approve')->name('approve');
 });
 Route::group(['prefix' => 'member'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('reviews', 'ReviewController');
+    Route::post('sendreport', 'ReportController@sendReport')->name('sendreport');
     Route::post('likereviews', 'ReviewController@favorite');
     Route::post('comment', 'ReviewController@comment');
     Route::post('updatecomment', 'ReviewController@updateComment');

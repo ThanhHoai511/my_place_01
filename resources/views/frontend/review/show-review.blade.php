@@ -10,10 +10,23 @@
         <a href="#">{{ $review->place->name }}</a>
         <div class="expand dropdown">
             {{ Form::button('<i class="fa fa-chevron-down fa-lg"></i>', array('class' => 'btn btn3 dropdown-toggle', 'data-toggle' => 'dropdown')) }}
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li><a href="#">{{ trans('messages.save-into-collection') }}</a></li>
-                <li><a href="#">{{ trans('messages.report') }}</a></li>
-            </ul>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#">{{ trans('messages.save-into-collection') }}</a></li>
+                    {{ Form::open(['action' => 'ReportController@sendReport']) }}
+                        @if($hasReport == config('checkbox.checktrue'))
+                            <li>{{ trans('messages.reported') }}</li>
+                        @else
+                            <li>
+                                {{ Form::text('content') }}
+                                <button type="submit">
+                                    {{ Form::hidden('reviewId', $review->id) }}
+                                    <i class="glyphicon glyphicon-thumbs-down"aria-hidden="true"></i> 
+                                    {{ trans('messages.report') }}
+                                </button>
+                            </li>
+                        @endif
+                    {{ Form::close() }}
+                </ul>
         </div>
     </div>
     <p><b>{{ $review->submary }}</b></p>

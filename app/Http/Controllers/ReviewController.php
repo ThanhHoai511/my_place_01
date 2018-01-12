@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Contracts\ReviewRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
 use App\Repositories\Contracts\RateReviewValRepositoryInterface;
+use App\Repositories\Contracts\ReportRepositoryInterface;
 use App\Repositories\Contracts\RateReviewRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
 use Storage;
@@ -24,19 +25,22 @@ class ReviewController extends Controller
     protected $rateReviewValRepository;
     protected $rateReviewRepository;
     protected $commentRepository;
+    protected $reportRepository;
 
     public function __construct(
         ReviewRepositoryInterface $reviewRepository,
         ImageRepositoryInterface $imageRepository,
         RateReviewValRepositoryInterface $rateReviewValRepository,
         RateReviewRepositoryInterface $rateReviewRepository,
-        CommentRepositoryInterface $commentRepository
+        CommentRepositoryInterface $commentRepository,
+        ReportRepositoryInterface $reportRepository
     ) {
         $this->reviewRepository = $reviewRepository;
         $this->imageRepository = $imageRepository;
         $this->rateReviewValRepository = $rateReviewValRepository;
         $this->rateReviewRepository = $rateReviewRepository;
         $this->commentRepository = $commentRepository;
+        $this->reportRepository = $reportRepository;
     }
     public function index()
     {
@@ -105,6 +109,7 @@ class ReviewController extends Controller
         $showComment = $this->commentRepository->findReviewId($id);
         $rateReviewVal = $this->rateReviewValRepository->all();
         $hasLike = $this->rateReviewValRepository->findReviewID($id, $userId);
+        $hasReport = $this->reportRepository->findReport($id, $userId);
         $rateReview = $this->rateReviewRepository->findRateLike();
         $comments = $this->commentRepository->all();
         $rateValId = $this->rateReviewValRepository->findRate($id);
@@ -118,7 +123,8 @@ class ReviewController extends Controller
             'showComment',
             'rateReview',
             'hasLike',
-            'rateReviewVal'
+            'rateReviewVal',
+            'hasReport'
         ));
     }
     /**

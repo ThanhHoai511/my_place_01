@@ -46,6 +46,12 @@
                     </li>
                 </ul>
             </li>
+            <li><a href="#"><span class="flaticon-mailbox10"></span>{{ trans('messages.slide') }}</a></li>
+            @if (!$countReport)
+                <li><a href="{{ action('ReportController@index') }}"><span></span>{{ trans('messages.report') }}</a></li>
+            @else
+                <li><a href="{{ action('ReportController@index') }}"><span class="count-report-news">{{ $countReport }}</span>{{ trans('messages.report') }}</a></li>
+            @endif
             <li>
                 <a href="{{ route('logout') }}">
                     <i class="flaticon-incoming4"></i>
