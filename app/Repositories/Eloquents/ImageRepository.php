@@ -25,4 +25,9 @@ class ImageRepository implements ImageRepositoryInterface
             return false;
         }
     }
+
+    public function delete($id)
+    {
+        return Image::destroy($id);
+    }
 }

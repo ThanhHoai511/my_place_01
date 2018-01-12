@@ -13,12 +13,6 @@
                     {{ trans('messages.category') }}
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <span class="flaticon-mailbox10"></span>
-                    {{ trans('messages.slide') }}
-                </a>
-            </li>
             <li class="dropdown">
 			    <ul>
                     <li>

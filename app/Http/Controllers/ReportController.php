@@ -84,7 +84,7 @@ class ReportController extends Controller
             return redirect()->route('reviews.show', $dataValue['reviewId']);
         } catch (Exception $e) {
             Log::error($e);
-
+            
             return back()->withErrors(trans('messages.updatefail'));
         }
     }

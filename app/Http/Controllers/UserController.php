@@ -5,20 +5,37 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Contracts\ReviewRepositoryInterface;
+use App\Repositories\Contracts\RateReviewRepositoryInterface;
+use App\Repositories\Contracts\RateReviewValRepositoryInterface;
+use App\Repositories\Contracts\CommentRepositoryInterface;
 use App\Http\Requests\UpdateUserRequest;
 use Auth;
 
 class UserController extends Controller
 {
     protected $userRepository;
+    protected $reviewRepository;
+    protected $rateRepository;
+    protected $rateValRepository;
+    protected $commentRepository;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        ReviewRepositoryInterface $reviewRepository,
+        RateReviewRepositoryInterface $rateRepository,
+        RateReviewValRepositoryInterface $rateValRepository,
+        CommentRepositoryInterface $commentRepository
+    ) {
         $this->userRepository = $userRepository;
+        $this->reviewRepository = $reviewRepository;
+        $this->rateRepository = $rateRepository;
+        $this->rateValRepository = $rateValRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     public function index()
@@ -135,5 +152,32 @@ class UserController extends Controller
             return redirect()->action('UsersController@index')
             ->withErrors(trans('messages.deletefailed'));
         }
+    }
+
+    public function mywall($id)
+    {
+        $reviews = $this->reviewRepository->findReview($id);
+        $rateReviewVals = $this->reviewRepository->listReviewVal();
+        $rateReview = $this->rateRepository->findRateLike();
+        if (Auth::check()) {
+            $userId = Auth::user()->id;
+            foreach ($reviews as $review) {
+                $countLike[$review->id] = $this->rateValRepository->getLikes($review->id);
+                $countComment[$review->id] = $this->commentRepository->getCommentNumber($review->id);
+                $hasLike[$review->id] = $this->rateValRepository->findReviewID($review->id, $userId);
+            }
+        }
+        foreach ($reviews as $review) {
+            $countLike[$review->id] = $this->rateValRepository->getLikes($review->id);
+            $countComment[$review->id] = $this->commentRepository->getCommentNumber($review->id);
+        }
+        return view('frontend.user.wall-profile', compact(
+            'reviews',
+            'rateReviewVals',
+            'countLike',
+            'rateReview',
+            'countComment',
+            'hasLike'
+        ));
     }
 }
