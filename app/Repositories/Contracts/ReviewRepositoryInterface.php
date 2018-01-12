@@ -13,4 +13,6 @@ interface ReviewRepositoryInterface
     public function find($id);
 
     public function all();
+
+    public function update($reviewId);
 }

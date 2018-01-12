@@ -5,6 +5,7 @@ namespace App\Providers;
 use Form;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Report;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,13 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Form::macro('labelWithHTML', function ($html) {
             echo '<label>'.'<input type="checkbox" name="remember" >'.$html.'</label>';
+        });
+
+        view()->composer(['backend.layout.left-side-bar'], function ($view) {
+            $countReport = Report::count();
+            $view->with([
+                'countReport' => $countReport,
+            ]);
         });
     }
 
@@ -68,6 +76,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\Contracts\CommentRepositoryInterface',
             'App\Repositories\Eloquents\CommentRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Contracts\ReportRepositoryInterface',
+            'App\Repositories\Eloquents\ReportRepository'
         );
     }
 }

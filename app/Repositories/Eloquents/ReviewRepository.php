@@ -10,7 +10,8 @@ class ReviewRepository implements ReviewRepositoryInterface
 {
     public function paginateHome()
     {
-        return Review::orderBy('created_at', 'desc')->paginate(config('paginate.paginateHome'));
+        return Review::where('status', '=', config('checkbox.checktrue'))
+        ->orderBy('created_at', 'desc')->paginate(config('paginate.paginateHome'));
     }
 
     public function listReviewVal()
@@ -25,11 +26,18 @@ class ReviewRepository implements ReviewRepositoryInterface
 
     public function find($id)
     {
-        return Review::find($id);
+        return Review::where('status', '=', config('checkbox.checktrue'))->findOrFail($id);
     }
 
     public function all()
     {
         return Review::all();
+    }
+
+    public function update($reviewId)
+    {
+        $review = Review::findOrFail($reviewId);
+        $review->status = config('checkbox.checkzero');
+        $review->save();
     }
 }

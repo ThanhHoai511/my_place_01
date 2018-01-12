@@ -33,4 +33,9 @@ class Review extends Model
     {
         return $this->belongsTo(Collection::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
 }
