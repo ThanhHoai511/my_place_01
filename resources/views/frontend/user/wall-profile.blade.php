@@ -95,6 +95,14 @@
             <div class="mini">
                 <p><i class="fa fa-comment fa-lg"></i> <span>{{ $countComment[$review->id] }}</span> {{ trans('messages.comment') }}</p>
             </div>
+            @if(Auth::user()->id == $review->user_id)
+                <div class="mini">
+                        <a href="{{ route('reviews.edit', $review->id) }}"><i class="fa fa-pencil-square-o fa-lg"></i>{{ trans('messages.edit') }}</a>
+                </div>
+                <div class="mini">
+                        <a href="#"><i class="fa fa-remove fa-lg"></i> <span></span> {{ trans('messages.delete') }}</a>
+                </div>
+            @endif
             <br/>
         </div>
         <div class="row idea-btn">
@@ -108,7 +116,6 @@
         </div>
     </div>
     @endforeach
-    {{ $reviews->links() }}
     <br>
 </div>
 @stop

@@ -3,7 +3,7 @@
 <div class="block">
     <div class="row idea-title">
             {{ HTML::image($review->user->pathImage) }}
-            <a href="#">{{ $review->user->name }}</a>
+            <a href="{{ route('mywall', $review->user_id) }}">{{ $review->user->name }}</a>
     </div>
     <div class="row idea-title show-review-title">
         <i class="fa fa-map-marker fa-lg"></i>

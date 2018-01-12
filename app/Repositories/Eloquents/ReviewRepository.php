@@ -40,4 +40,20 @@ class ReviewRepository implements ReviewRepositoryInterface
         $review->status = config('checkbox.checkzero');
         $review->save();
     }
+
+    public function findReview($id)
+    {
+        return Review::where('status', '=', config('checkbox.checktrue'))->where('user_id', '=', $id)->get();
+    }
+
+    public function edit($dataValue, $id)
+    {
+        $review = Review::findOrFail($id);
+        $review->submary = $dataValue['submary'];
+        $review->place_id = $dataValue['place_id'];
+        $review->timewrite = $dataValue['timewrite'];
+        $review->service_rate = $dataValue['service_rate'];
+        $review->quality_rate = $dataValue['quality_rate'];
+        $review->save();
+    }
 }

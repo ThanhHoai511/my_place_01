@@ -225,7 +225,26 @@ $(document).ready(function(){
             });
         });
     });
-    //Sua comment
+    //Xoa anh delete image
+    $(function () {
+        $('.removeimage').on('click', function (e) {
+            var url = baseUrl + 'member/deleteimage';
+            var imageId = $(this).data('id');
+            $('.image-old-' + imageId).remove();
+            $.ajax({
+                type: 'post',
+                url: url,
+                data:{
+                    'imageId': imageId,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    alert('Delete success');
+                }
+            });
+        });
+    });
+    //Sua comment removeimage
     $(function () {
         $('.edit-comment').on('click', function (e) {
             var commentId = $(this).attr('data-comment-id');

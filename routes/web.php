@@ -29,11 +29,14 @@ Route::group(['prefix' => 'member'], function () {
     Route::resource('reviews', 'ReviewController');
     Route::post('sendreport', 'ReportController@sendReport')->name('sendreport');
     Route::post('likereviews', 'ReviewController@favorite');
+    Route::post('deleteimage', 'ReviewController@remove')->name('remove');
     Route::post('comment', 'ReviewController@comment');
     Route::post('updatecomment', 'ReviewController@updateComment');
     Route::post('deletecomment', 'ReviewController@deleteComment');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
+        Route::get('wall/{id}', 'UserController@mywall')->name('mywall');
     });
+
 });
 Route::get('/get-places', 'SearchController@getPlaces');

@@ -31,6 +31,9 @@
                             <a  href="{{ route('editprofile', Auth::user()->id) }}">{{ trans('messages.edit-profile') }}</a>
                         </li>
                         <li>
+                            <a  href="{{ route('mywall', Auth::user()->id) }}">{{ trans('messages.edit-mywall') }}</a>
+                        </li>
+                        <li>
                             <a href="{{ route('logout') }}">{{ trans('messages.logout') }}</a>
                         </li>
                     </ul>

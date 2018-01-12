@@ -74,22 +74,24 @@ class ReviewController extends Controller
                     $file->move(config('asset.image_path.imagereviews'), $nameImage);
                 }
             }
-                $dataValue = $request->only(
-                    'submary',
-                    'content',
-                    'timewrite',
-                    'service_rate',
-                    'quality_rate',
-                    'place_id'
-                );
-                $dataValue['user_id'] = Auth::user()->id;
-                $dataValue['status'] = config('checkbox.checktrue');
-                $resultReview = $this->reviewRepository->create($dataValue);
-                $reviewId = $resultReview->id;
-                $requestImage = $this->imageRepository->create($data, $reviewId);
+            $dataValue = $request->only(
+                'submary',
+                'content',
+                'timewrite',
+                'service_rate',
+                'quality_rate',
+                'place_id'
+            );
+            $dataValue['user_id'] = Auth::user()->id;
+            $dataValue['status'] = config('checkbox.checktrue');
+            $resultReview = $this->reviewRepository->create($dataValue);
+            $reviewId = $resultReview->id;
+            $requestImage = $this->imageRepository->create($data, $reviewId);
+
             return redirect()->route('home');
         } catch (Exception $e) {
             Log::error($e);
+
             return back()->withErrors(trans('messages.updatefail'));
         }
     }
@@ -135,7 +137,9 @@ class ReviewController extends Controller
      */
     public function edit($id)
     {
-        //
+        $review = $this->reviewRepository->find($id);
+
+        return view('frontend.review.edit-review', compact('review'));
     }
 
     /**
@@ -147,7 +151,46 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            if ($request->hasFile('file')) {
+                $data = [];
+                foreach ($request->file('file') as $file) {
+                    $nameImage = str_random(4).date('h:i').$file->getClientOriginalName();
+                    array_push($data, $nameImage);
+                    $file->move(config('asset.image_path.imagereviews'), $nameImage);
+                }
+            } else {
+                $data[0] = null;
+            }
+            $dataValue = $request->only(
+                'submary',
+                'content',
+                'timewrite',
+                'place_id'
+            );
+            if ($request->service_rate == null) {
+                $dataValue['service_rate'] = $request->service_rate_old;
+            } else {
+                $dataValue['service_rate'] = $request->service_rate;
+            }
+            if ($request->quality_rate == null) {
+                $dataValue['quality_rate'] = $request->quality_rate_old;
+            } else {
+                $dataValue['quality_rate'] = $request->quality_rate;
+            }
+                $dataValue['user_id'] = Auth::user()->id;
+                $dataValue['status'] = config('checkbox.checktrue');
+                $resultReview = $this->reviewRepository->edit($dataValue, $id);
+            if ($data[0] != null) {
+                $requestImage = $this->imageRepository->create($data, $id);
+            }
+
+            return redirect()->route('reviews.edit', $id);
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return back()->withErrors(trans('messages.updatefail'));
+        }
     }
 
     /**
@@ -214,6 +257,16 @@ class ReviewController extends Controller
 
         return response()->json([
             'commentId' => $commentId,
+        ]);
+    }
+
+    public function remove(Request $request)
+    {
+        $id = $request->imageId;
+        $resultImage = $this->imageRepository->delete($id);
+
+        return response()->json([
+            'id' => $id,
         ]);
     }
 }
