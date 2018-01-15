@@ -8,9 +8,11 @@ interface PlaceRepositoryInterface
 
     public function search($key);
     
-    public function find($id);
+    public function findOrFail($id);
 
     public function paginate();
+
+    public function create(array $input);
 
     public function update(array $input, $id);
 

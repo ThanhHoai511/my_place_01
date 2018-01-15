@@ -8,7 +8,7 @@ interface CityRepositoryInterface
 
     public function search($key);
     
-    public function find($id);
+    public function findOrFail($id);
 
     public function showCity();
 

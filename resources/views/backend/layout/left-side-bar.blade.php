@@ -31,7 +31,7 @@
                                             <a href="{{ asset('/admin/district') }}">{{ trans('messages.dist') }}</a>
                                         </li>
                                         <li>
-                                            <a href="editor.html">{{ trans('messages.place') }}</a>
+                                            <a href="{{ asset('/admin/place') }}">{{ trans('messages.place') }}</a>
                                         </li>
                                     </ul>
                                 </div>

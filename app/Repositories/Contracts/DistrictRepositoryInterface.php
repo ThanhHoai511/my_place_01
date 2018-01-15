@@ -8,7 +8,11 @@ interface DistrictRepositoryInterface
 
     public function search($key);
     
-    public function find($id);
+    public function findOrFail($id);
+
+    public function showDist();
+
+    public function searchInCity($city_id);
 
     public function paginate();
 
