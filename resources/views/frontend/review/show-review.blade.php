@@ -50,9 +50,12 @@
     </h4>
     @endforeach
     <h4><i class="fa fa-comment fa-lg"></i><span class="count-comment" data-count="{{ $countComment }}">{{ $countComment }}</span>{{ trans('messages.comment') }}</h4>
+    @if(Auth::user()->id == $review->user_id)
     <div class="row">
-        <div><a href="#" class="link"><i class="fa fa-pencil-square-o fa-lg"></i>{{ trans('messages.edit') }}</a>|<a href="#" class="link"><i class="fa fa-arrow-left fa-lg"></i>{{ trans('messages.back') }}</a>|<a href="#" class="link"><i class="fa fa-remove fa-lg"></i>{{ trans('messages.delete') }}</a></div>
+        <div><a href="{{ route('reviews.edit', $review->id) }}" class="link"><i class="fa fa-pencil-square-o fa-lg"></i>{{ trans('messages.edit') }}</a>
+        |<a href=" {{ route('home') }} " class="remove-review"><i class="fa fa-remove fa-lg" data-id="{{ $review->id }}"></i>{{ trans('messages.delete') }}</a></div>
     </div>
+    @endif
     {{ Form::open(['action' => 'ReviewController@comment']) }}
         <div class="comment">
             {{ Form::text('comment', null, array('class' => 'comment-input', 'placeholder' => trans('messages.leave-comment'))) }}

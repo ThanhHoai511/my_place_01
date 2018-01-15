@@ -224,6 +224,7 @@ class ReviewController extends Controller
         return response()->json([
            'icon' => $icon,
            'countLike' => $countLike,
+           'reviewId' => $reviewId,
         ]);
     }
 
@@ -267,6 +268,17 @@ class ReviewController extends Controller
 
         return response()->json([
             'id' => $id,
+        ]);
+    }
+
+    public function removeReview(Request $request)
+    {
+        $idReview = $request->reviewId;
+        $resultUpdate = $this->reviewRepository->update($idReview);
+        $dataSuccess = 'Delete Success';
+
+        return response()->json([
+            'dataSuccess' => $dataSuccess,
         ]);
     }
 }

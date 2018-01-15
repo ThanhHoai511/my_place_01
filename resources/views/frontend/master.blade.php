@@ -30,7 +30,6 @@
                 <p class="alert alert-danger">
                     alert
                 </p>
-
                 @yield('main')
             </div>
         </div>

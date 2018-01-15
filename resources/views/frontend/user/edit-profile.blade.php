@@ -5,7 +5,7 @@
             <h2>{{ trans('messages.edit-profile') }}</h2>
         </div>
         {{ Form::open(['action' => ['UserController@update', $user->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) }}
-            <div class="field">
+            <div class="field idea-img">
                 {{ Form::label('images', trans('messages.avatar'), ['class' => 'label-edit']) }}
                 {{ Form::file('avatar', ['class' => 'input-edit', 'placeholder' => trans('messages.email'), 'required' => 1, 'id' => 'imgInp']) }}
                 {{ HTML::image(config('asset.image_path.upload') . $user->avatar, null, ['id' => 'preview']) }}

@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'member'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('reviews', 'ReviewController');
+    Route::post('removereview', 'ReviewController@removeReview')->name('removeReview');
     Route::post('sendreport', 'ReportController@sendReport')->name('sendreport');
     Route::post('likereviews', 'ReviewController@favorite');
     Route::post('deleteimage', 'ReviewController@remove')->name('remove');

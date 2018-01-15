@@ -156,6 +156,7 @@ class UserController extends Controller
 
     public function mywall($id)
     {
+        $infoUser = $this->userRepository->find($id);
         $reviews = $this->reviewRepository->findReview($id);
         $rateReviewVals = $this->reviewRepository->listReviewVal();
         $rateReview = $this->rateRepository->findRateLike();
@@ -177,7 +178,8 @@ class UserController extends Controller
             'countLike',
             'rateReview',
             'countComment',
-            'hasLike'
+            'hasLike',
+            'infoUser'
         ));
     }
 }

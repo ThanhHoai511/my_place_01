@@ -193,10 +193,12 @@ $(document).ready(function(){
                 success: function (data) {
                     var value = data['countLike'];
                     $(container).html(value);
-                    if(data['icon'] == true) {
-                        $(".fa-thumbs-up").addClass('icon');
-                    } else {
-                        $(".fa-thumbs-up").removeClass('icon');
+                    if (reviewId == data['reviewId']) {
+                        if(data['icon'] == true) {
+                            $(".fa-thumbs-up").addClass('icon');
+                        } else {
+                            $(".fa-thumbs-up").removeClass('icon');
+                        }
                     }
                 }
             });
@@ -240,6 +242,25 @@ $(document).ready(function(){
                 },
                 success: function (data) {
                     alert('Delete success');
+                }
+            });
+        });
+    });
+    //Xoa review
+    $(function () {
+        $('.remove-review').on('click', function (e) {
+            alert('Delete success');
+            var url = baseUrl + 'member/removereview';
+            var reviewId = $(this).data('id');
+            $.ajax({
+                type: 'post',
+                url: url,
+                data:{
+                    'reviewId': reviewId,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    alert(data['dataSuccess']);
                 }
             });
         });
