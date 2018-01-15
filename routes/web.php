@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('category', 'CategoryController');
     Route::resource('city', 'CityController');
     Route::resource('district', 'DistrictController');
+    Route::resource('place', 'PlaceController');
     Route::resource('reports', 'ReportController');
     Route::post('approve', 'ReportController@approve')->name('approve');
 });
@@ -41,3 +42,4 @@ Route::group(['prefix' => 'member'], function () {
 
 });
 Route::get('/get-places', 'SearchController@getPlaces');
+Route::get('/get-dists', 'SearchController@getDists');

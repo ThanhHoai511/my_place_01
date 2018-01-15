@@ -12,6 +12,17 @@ class DistrictRepository implements DistrictRepositoryInterface
         return Dist::all();
     }
 
+    public function showDist()
+    {
+        return Dist::pluck('name', 'id');
+    }
+
+    public function searchInCity($city_id)
+    {
+        return Dist::where('city_id', $city_id)
+            ->get();
+    }
+
     public function search($key)
     {
         return Dist::where('name', 'like', '%' . $key . '%')

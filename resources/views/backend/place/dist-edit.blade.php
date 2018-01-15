@@ -12,7 +12,7 @@
         <section id="general">
             <div class="row">
                 <div class="large-6 medium-6 columns">
-                    {{ Form::open(['action' => 'DistrictController@store', 'method' => 'POST']) }}
+                    {{ Form::open(['action' => ['DistrictController@update', $dist->id], 'method' => 'PUT']) }}
                         <div class="custom-panel">
                             <div class="custom-panel-heading">
                                 <h4>{{ trans('messages.add-dist') }}</h4>

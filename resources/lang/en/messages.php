@@ -144,4 +144,12 @@ return [
     'choose-city' => 'Choose city',
     'dist-name' => 'District\'s name',
     'dist' => 'District',
+    'place-manage' => 'Place management',
+    'add-place' => 'Add new place',
+    'place-name' => 'Place\'s name',
+    'open-hour' => 'Open hour',
+    'to' => 'To',
+    'price-range' => 'Price range',
+    'choose-dist' => 'Choose district',
+    'edit-place' => 'Edit Place',
 ];

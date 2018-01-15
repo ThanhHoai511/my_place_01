@@ -12,33 +12,41 @@
         <section id="general">
             <div class="row">
                 <div class="large-6 medium-6 columns">
-                    {{ Form::open(['action' => 'PlaceController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) }}
+                    {{ Form::open(['action' => ['PlaceController@update', $place->id], 'method' => 'put', 'enctype' => 'multipart/form-data']) }}
                         <div class="custom-panel">
                             <div class="custom-panel-heading">
-                                <h4>{{ trans('messages.add-place') }}</h4>
+                                <h4>{{ trans('messages.edit-place') }}</h4>
                             </div>
                             <div class="custom-panel-body">
                                 @include('errors.note')
                                 <h5>{{ trans('messages.place-name') }}</h5>
-                                {{ Form::text('name', null) }}
+                                {{ Form::text('name', $place->name) }}
                                 <h5>{{ trans('messages.choose-city') }}</h5>
-                                {{ Form::select('city', $cityId, null, ['class' => 'city-select', 'placeholder' => 'choose a city']) }}
+                                {{ Form::select('city', $cityId, $city->id, ['class' => 'city-select', 'placeholder' => 'choose a city']) }}
                                 <h5>{{ trans('messages.choose-dist') }}</h5>
-                                <div id="dist-box"></div>
+                                <div id="dist-box">
+                                    {{ Form::select('dist_id', $distId, $place->dist_id, ['class' => 'city-select', 'placeholder' => 'choose a dist']) }}
+                                    
+                                </div>
                                 <h5>{{ trans('messages.address') }}</h5>
-                                {{ Form::textarea('add') }}
+                                {{ Form::textarea('add', $place->add) }}
                                 <h5>{{ trans('messages.open-hour') }}</h5>
-                                {{ Form::time('open', null, ['class' => 'time']) }} 
+                                {{ Form::time('open', $place->open_hour, ['class' => 'time']) }} 
                                 <a class="mid-text">{{ trans('messages.to') }}</a>
-                                {{ Form::time('close', null, ['class' => 'time']) }}<br /><br /><br />
+                                {{ Form::time('close', $place->close_hour, ['class' => 'time']) }}<br /><br /><br />
                                 <h5>{{ trans('messages.price-range') }}</h5>
-                                {{ Form::number('price_from', null, ['class' => 'time']) }}
+                                {{ Form::number('price_from', $range[0], ['class' => 'time']) }}
                                 <a class="mid-text"> - </a>
+                                @if (isset($range[1]))
+                                {{ Form::number('price_to', $range[1], ['class' => 'time']) }}<br/><br /><br />
+                                @else
                                 {{ Form::number('price_to', null, ['class' => 'time']) }}<br/><br /><br />
+                                @endif
                                 <h5>{{ trans('messages.choose-img') }}</h5>
                                 {{ Form::file('image', ['id' => 'slide-image']) }}
-                                {{ HTML::image('#', null, ['id' => 'preview']) }}
-                                {{ Form::submit(trans('messages.add'), ['class' => 'button radius tiny coral-bg button-slide']) }}
+                                {{ HTML::image($place->image_place, null, ['id' => 'preview']) }}
+                                {{ Form::submit(trans('messages.update'), ['class' => 'button radius tiny coral-bg button-slide']) }}
+                                <a href="{{ asset('/admin/place/') }}" class="button radius tiny coral-bg button-slide">New Place</a>
                             </div>
                         </div>
                     {{ Form::close() }}
@@ -105,7 +113,7 @@
         })
         $('.pagination li a').click(function() {
             var page = $(this).attr('href').split('page=')[1];
-            $.get('place?page=' + page, function(data) {
+            $.get('edit?page=' + page, function(data) {
                 $('body').html(data);
             });
             return false;

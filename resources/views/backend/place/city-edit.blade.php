@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="large-6 medium-6 columns">
                     <div class="custom-panel">
-                        {{ Form::open(['action' => ['CityController@update', $city->id], 'method' => 'post']) }}
+                        {{ Form::open(['action' => ['CityController@update', $city->id], 'method' => 'put']) }}
                             <div class="custom-panel-heading">
                                 <h4>{{ trans('messages.edit-city') }}</h4>
                             </div>
