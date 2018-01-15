@@ -40,6 +40,8 @@
         {{ Html::script('js/myscripts.js') }}
         {{ Html::script('js/Home/scollbar.js') }}
         {{ Html::script('js/Home/seemore.js') }}
+        {{ Html::script('js/searchmap.js') }}
+        {{ Html::script('js/googlemap.js') }}
     </body>
     @yield('script')
 </html>

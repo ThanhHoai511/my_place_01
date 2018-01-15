@@ -66,4 +66,13 @@ class PlaceRepository implements PlaceRepositoryInterface
     {
         return Place::destroy($id);
     }
+
+    public function addPlace($namePlace, $address, $image)
+    {
+        $place = new Place;
+        $place->name = $namePlace;
+        $place->add = $address;
+        $place->image = $image;
+        $place->save();
+    }
 }
