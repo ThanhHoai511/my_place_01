@@ -1,7 +1,44 @@
 @extends('frontend.master')
 @section('main')
-<p id="notice">Notice</p>
 <div class="block">
+<div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ $infoUser->name }}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12" align="center">
+                {{ HTML::image($infoUser->pathImage, null, ['class' => 'width100']) }}
+                </div>
+                <div class=" col-md-12">
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td>{{ trans('messages.email') }}</td>
+                                <td>{{ $infoUser->email }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ trans('messages.add') }}</td>
+                                <td>{{ $infoUser->add }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ trans('messages.dob') }}</td>
+                                <td>{{ $infoUser->dateofbirth }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ trans('messages.phone') }}</td>
+                                <td>{{ $infoUser->phone }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ trans('messages.level') }}</td>
+                                <td>{{ $infoUser->level }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     @foreach($reviews  as $review)
     <div class="block">
         <div class="row idea-title">
@@ -95,14 +132,6 @@
             <div class="mini">
                 <p><i class="fa fa-comment fa-lg"></i> <span>{{ $countComment[$review->id] }}</span> {{ trans('messages.comment') }}</p>
             </div>
-            @if(Auth::user()->id == $review->user_id)
-                <div class="mini">
-                        <a href="{{ route('reviews.edit', $review->id) }}"><i class="fa fa-pencil-square-o fa-lg"></i>{{ trans('messages.edit') }}</a>
-                </div>
-                <div class="mini">
-                        <a href="#"><i class="fa fa-remove fa-lg"></i> <span></span> {{ trans('messages.delete') }}</a>
-                </div>
-            @endif
             <br/>
         </div>
         <div class="row idea-btn">
