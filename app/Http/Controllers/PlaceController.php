@@ -79,7 +79,16 @@ class PlaceController extends Controller
         $city = $this->cityRepository->findOrFail($getdistId->city_id);
         $places = $this->placeRepository->paginate();
 
-        return view('backend.place.place-edit', compact('place', 'range', 'cities', 'dists', 'cityId', 'distId', 'places', 'city'));
+        return view('backend.place.place-edit', compact(
+            'place',
+            'range',
+            'cities',
+            'dists',
+            'cityId',
+            'distId',
+            'places',
+            'city'
+        ));
     }
 
     public function update(PlaceEditRequest $request, $id)
@@ -102,7 +111,8 @@ class PlaceController extends Controller
         }
     }
 
-    public function saveImage($request) {
+    public function saveImage($request)
+    {
         $file = $request->image;
         $file->move(config('asset.image_path.imagereviews'), $file->getClientOriginalName());
         $linkimage = $file->getClientOriginalName();
@@ -123,5 +133,21 @@ class PlaceController extends Controller
             return redirect()->action('PlaceController@index')
             ->withErrors(trans('messages.deletefailed'));
         }
+    }
+
+    public function addPlace(Request $request)
+    {
+        $namePlace = $request->namePlace;
+        $address = $request->add;
+        $image = config('const.adddefault');
+        $resultAddress = $this->placeRepository->addPlace(
+            $namePlace,
+            $address,
+            $image
+        );
+
+        return response()->json([
+            'namePlace' => $namePlace,
+        ]);
     }
 }

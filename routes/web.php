@@ -30,6 +30,7 @@ Route::group(['prefix' => 'member'], function () {
     Route::resource('reviews', 'ReviewController');
     Route::post('removereview', 'ReviewController@removeReview')->name('removeReview');
     Route::post('sendreport', 'ReportController@sendReport')->name('sendreport');
+    Route::post('addplace', 'PlaceController@addPlace')->name('addplace');
     Route::post('likereviews', 'ReviewController@favorite');
     Route::post('deleteimage', 'ReviewController@remove')->name('remove');
     Route::post('comment', 'ReviewController@comment');
