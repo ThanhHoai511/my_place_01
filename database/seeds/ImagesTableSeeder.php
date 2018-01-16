@@ -15,12 +15,12 @@ class ImagesTableSeeder extends Seeder
             [
                 'review_id' => 1,
                 'new_id' => NULL,
-                'link' => 'cafe-cuoi-ngo-1.jpg',
+                'link' => 'cafe-cuoi-ngo.jpg',
                 'created_at' => new DateTime(),
             ], [
                 'review_id' => 2,
                 'new_id' => NULL,
-                'link' => 'cafe-cuoi-ngo-1.jpg',
+                'link' => 'cafe-cuoi-ngo.jpg',
                 'created_at' => new DateTime(),
             ], [
                 'review_id' => 3,

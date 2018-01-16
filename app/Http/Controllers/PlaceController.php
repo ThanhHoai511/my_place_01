@@ -8,24 +8,41 @@ use App\Models\Dist;
 use App\Models\Place;
 use App\Http\Requests\PlaceRequest;
 use App\Http\Requests\PlaceEditRequest;
+use App\Repositories\Contracts\ReviewRepositoryInterface;
 use App\Repositories\Contracts\DistrictRepositoryInterface;
 use App\Repositories\Contracts\CityRepositoryInterface;
+use App\Repositories\Contracts\RateReviewRepositoryInterface;
+use App\Repositories\Contracts\RateReviewValRepositoryInterface;
 use App\Repositories\Contracts\PlaceRepositoryInterface;
+use App\Repositories\Contracts\CommentRepositoryInterface;
+use Auth;
 
 class PlaceController extends Controller
 {
     protected $districtRepository;
     protected $cityRepository;
     protected $placeRepository;
+    protected $reviewRepository;
+    protected $rateRepository;
+    protected $rateValRepository;
+    protected $commentRepository;
     
     public function __construct(
         CityRepositoryInterface $cityRepository,
         DistrictRepositoryInterface $districtRepository,
-        PlaceRepositoryInterface $placeRepository
+        PlaceRepositoryInterface $placeRepository,
+        ReviewRepositoryInterface $reviewRepository,
+        RateReviewRepositoryInterface $rateRepository,
+        RateReviewValRepositoryInterface $rateValRepository,
+        CommentRepositoryInterface $commentRepository
     ) {
         $this->cityRepository = $cityRepository;
         $this->districtRepository = $districtRepository;
         $this->placeRepository = $placeRepository;
+        $this->reviewRepository = $reviewRepository;
+        $this->rateRepository = $rateRepository;
+        $this->rateValRepository = $rateValRepository;
+        $this->commentRepository = $commentRepository;
     }
     public function index()
     {
@@ -149,5 +166,40 @@ class PlaceController extends Controller
         return response()->json([
             'namePlace' => $namePlace,
         ]);
+    }
+    public function showPlace($id)
+    {
+        try {
+            $reviews = $this->reviewRepository->findPlace($id);
+            $infoPlace = $this->placeRepository->findOrFail($id);
+            $rateReviewVals = $this->reviewRepository->listReviewVal();
+            $rateReview = $this->rateRepository->findRateLike();
+            if (Auth::check()) {
+                $userId = Auth::user()->id;
+                foreach ($reviews as $review) {
+                    $countLike[$review->id] = $this->rateValRepository->getLikes($review->id);
+                    $countComment[$review->id] = $this->commentRepository->getCommentNumber($review->id);
+                    $hasLike[$review->id] = $this->rateValRepository->findReviewID($review->id, $userId);
+                }
+            }
+            foreach ($reviews as $review) {
+                $countLike[$review->id] = $this->rateValRepository->getLikes($review->id);
+                $countComment[$review->id] = $this->commentRepository->getCommentNumber($review->id);
+            }
+
+            return view('frontend.place.show-place', compact(
+                'reviews',
+                'infoPlace',
+                'rateReviewVals',
+                'rateReview',
+                'countComment',
+                'hasLike',
+                'countLike'
+            ));
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return back()->withErrors(trans('messages.updatefail'));
+        }
     }
 }

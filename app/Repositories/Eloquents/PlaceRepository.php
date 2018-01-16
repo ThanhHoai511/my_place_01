@@ -75,4 +75,24 @@ class PlaceRepository implements PlaceRepositoryInterface
         $place->image = $image;
         $place->save();
     }
+
+    public function countReview($placeId)
+    {
+        return Place::findOrFail($placeId)->count();
+    }
+
+    public function updateRate($dataPlace)
+    {
+        try {
+            $place = Place::findOrFail($dataPlace['place_id']);
+            $place->avg_service_rate = $place->avg_service_rate + $dataPlace['service_rate'];
+            $place->avg_quality_rate = $place->avg_quality_rate + $dataPlace['quality_rate'];
+            $place->total_rate++;
+            $place->save();
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return back()->withErrors(trans('messages.updatefail'));
+        }
+    }
 }

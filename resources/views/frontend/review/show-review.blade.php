@@ -7,7 +7,7 @@
     </div>
     <div class="row idea-title show-review-title">
         <i class="fa fa-map-marker fa-lg"></i>
-        <a href="#">{{ $review->place->name }}</a>
+        <a href="{{ route('showplace', $review->place_id) }}">{{ $review->place->name }}</a>
         <div class="expand dropdown">
             {{ Form::button('<i class="fa fa-chevron-down fa-lg"></i>', array('class' => 'btn btn3 dropdown-toggle', 'data-toggle' => 'dropdown')) }}
                 <ul class="dropdown-menu dropdown-menu-right">

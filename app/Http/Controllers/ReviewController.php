@@ -10,6 +10,7 @@ use App\Repositories\Contracts\RateReviewValRepositoryInterface;
 use App\Repositories\Contracts\ReportRepositoryInterface;
 use App\Repositories\Contracts\RateReviewRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
+use App\Repositories\Contracts\PlaceRepositoryInterface;
 use Storage;
 use Auth;
 
@@ -26,6 +27,7 @@ class ReviewController extends Controller
     protected $rateReviewRepository;
     protected $commentRepository;
     protected $reportRepository;
+    protected $placeRepository;
 
     public function __construct(
         ReviewRepositoryInterface $reviewRepository,
@@ -33,10 +35,12 @@ class ReviewController extends Controller
         RateReviewValRepositoryInterface $rateReviewValRepository,
         RateReviewRepositoryInterface $rateReviewRepository,
         CommentRepositoryInterface $commentRepository,
+        PlaceRepositoryInterface $placeRepository,
         ReportRepositoryInterface $reportRepository
     ) {
         $this->reviewRepository = $reviewRepository;
         $this->imageRepository = $imageRepository;
+        $this->placeRepository = $placeRepository;
         $this->rateReviewValRepository = $rateReviewValRepository;
         $this->rateReviewRepository = $rateReviewRepository;
         $this->commentRepository = $commentRepository;
@@ -87,6 +91,10 @@ class ReviewController extends Controller
             $resultReview = $this->reviewRepository->create($dataValue);
             $reviewId = $resultReview->id;
             $requestImage = $this->imageRepository->create($data, $reviewId);
+            $dataPlace['place_id'] = $dataValue['place_id'];
+            $dataPlace['service_rate'] = $dataValue['service_rate'];
+            $dataPlace['quality_rate'] = $dataValue['quality_rate'];
+            $resultPlace = $this->placeRepository->updateRate($dataPlace);
 
             return redirect()->route('home');
         } catch (Exception $e) {
