@@ -19,4 +19,8 @@ interface ReviewRepositoryInterface
     public function findReview($id);
 
     public function edit($dataValue, $id);
+
+    public function findPlace($id);
+    
+    public function countReview($id);
 }

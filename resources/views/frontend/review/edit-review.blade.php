@@ -90,7 +90,7 @@
             <div class="imageold">
                 @foreach($review->image as $image)
                 <div class="image-old-{{ $image->id }}">
-                    {{ HTML::image(config('asset.image_path.imagereviews') . $image->link, null, ['id' => 'preview-' . $image->id, 'class' => 'preview']) }}
+                    {{ HTML::image(config('asset.image_path.imagereviews') . $image->link, null, ['id' => 'preview-' . $image->id, 'class' => 'show-img']) }}
                     <i class="fa fa-remove removeimage" data-id = "{{ $image->id }}" ></i> <span></span> {{ trans('messages.delete') }}
                 </div>
                 @endforeach

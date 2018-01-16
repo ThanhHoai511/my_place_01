@@ -3,35 +3,81 @@
 <div class="block">
     <div class="panel panel-info">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ $infoUser->name }}</h3>
+            <h3 class="panel-title">{{ $infoPlace->name }}</h3>
         </div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-12" align="center">
-                    {{ HTML::image($infoUser->pathImage, null, ['class' => 'width100']) }}
+                    {{ HTML::image($infoPlace->ImagePlace, null, ['class' => 'width100']) }}
                 </div>
                 <div class=" col-md-12">
                     <table class="table table-user-information">
                         <tbody>
                             <tr>
-                                <td>{{ trans('messages.email') }}</td>
-                                <td>{{ $infoUser->email }}</td>
-                            </tr>
-                            <tr>
                                 <td>{{ trans('messages.add') }}</td>
-                                <td>{{ $infoUser->add }}</td>
+                                <td>{{ $infoPlace->add }}</td>
                             </tr>
                             <tr>
-                                <td>{{ trans('messages.dob') }}</td>
-                                <td>{{ $infoUser->dateofbirth }}</td>
+                                <td>{{ trans('messages.openhour') }}</td>
+                                <td>{{ $infoPlace->open_hour }}</td>
                             </tr>
                             <tr>
-                                <td>{{ trans('messages.phone') }}</td>
-                                <td>{{ $infoUser->phone }}</td>
+                                <td>{{ trans('messages.closehour') }}</td>
+                                <td>{{ $infoPlace->close_hour }}</td>
                             </tr>
                             <tr>
-                                <td>{{ trans('messages.level') }}</td>
-                                <td>{{ $infoUser->level }}</td>
+                                <td>{{ trans('messages.range') }}</td>
+                                <td>{{ $infoPlace->range }} đ</td>
+                            </tr>
+                            <tr>
+                                <td>{{ trans('messages.service') }}</td>
+                                <td>
+                                    <div class='rating-stars'>
+                                        <ul class='stars'>
+                                            <li class='star @if ($infoPlace->avg_service_rate/$infoPlace->total_rate >= 1 ) selected @endif' title='Poor' data-value='1'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star @if ($infoPlace->avg_service_rate/$infoPlace->total_rate > 1.5 ) selected @endif' title='Fair' data-value='2'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star @if ($infoPlace->avg_service_rate/$infoPlace->total_rate > 2.5 ) selected @endif' title='Good' data-value='3'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star @if ($infoPlace->avg_service_rate/$infoPlace->total_rate > 3.5 ) selected @endif' title='Excellent' data-value='4'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star @if ($infoPlace->avg_service_rate/$infoPlace->total_rate > 4.5 ) selected @endif' title='WOW!!!' data-value='5'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                        </ul>
+                                        <span>{{ number_format($infoPlace->avg_service_rate/$infoPlace->total_rate, 2) }}/5 in {{ $infoPlace->total_rate }} rated </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{{ trans('messages.quality') }}</td>
+                                <td>
+                                    <div class='rating-stars'>
+                                        <ul class='stars'>
+                                            <li class='star @if ($infoPlace->avg_service_rate/$infoPlace->total_rate >= 1 ) selected @endif' title='Poor' data-value='1'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star @if ($infoPlace->avg_quality_rate/$infoPlace->total_rate > 1.5 ) selected @endif' title='Fair' data-value='2'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star @if ($infoPlace->avg_quality_rate/$infoPlace->total_rate > 2.5 ) selected @endif' title='Good' data-value='3'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star @if ($infoPlace->avg_quality_rate/$infoPlace->total_rate > 3.5 ) selected @endif' title='Excellent' data-value='4'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star @if ($infoPlace->avg_quality_rate/$infoPlace->total_rate > 4.5) selected @endif' title='WOW!!!' data-value='5'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                        </ul>
+                                        <span>{{ number_format($infoPlace->avg_quality_rate/$infoPlace->total_rate, 2) }}/5 in {{ $infoPlace->total_rate }} rated </span>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -119,13 +165,13 @@
             <div class="mini">
                 <p>
                     @if(Auth::check())
-                    @if($hasLike[$review->id] == config('checkbox.checktrue'))
-                    <i class="fa fa-thumbs-up fa-lg icon" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}"></i><span>{{ $countLike[$review->id] }}</span> {{ trans('messages.like') }}
+                        @if($hasLike[$review->id] == config('checkbox.checktrue'))
+                            <i class="fa fa-thumbs-up fa-lg icon" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}"></i><span>{{ $countLike[$review->id] }}</span> {{ trans('messages.like') }}
+                        @else
+                            <i class="fa fa-thumbs-up fa-lg" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}" data-user-id="{{ Auth::user()->id }}"></i><span>{{ $countLike[$review->id] }}</span> {{ trans('messages.like') }}
+                        @endif
                     @else
-                    <i class="fa fa-thumbs-up fa-lg" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}" data-user-id="{{ Auth::user()->id }}"></i><span>{{ $countLike[$review->id] }}</span> {{ trans('messages.like') }}
-                    @endif
-                    @else
-                    <i class="fa fa-thumbs-up fa-lg"></i><span>{{ $countLike[$review->id] }}</span> {{ trans('messages.like') }}
+                            <i class="fa fa-thumbs-up fa-lg"></i><span>{{ $countLike[$review->id] }}</span> {{ trans('messages.like') }}
                     @endif
                 </p>
             </div>

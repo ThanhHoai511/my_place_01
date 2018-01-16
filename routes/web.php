@@ -36,6 +36,7 @@ Route::group(['prefix' => 'member'], function () {
     Route::post('comment', 'ReviewController@comment');
     Route::post('updatecomment', 'ReviewController@updateComment');
     Route::post('deletecomment', 'ReviewController@deleteComment');
+    Route::get('showplace/{id}', 'PlaceController@showPlace')->name('showplace');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
         Route::get('wall/{id}', 'UserController@mywall')->name('mywall');

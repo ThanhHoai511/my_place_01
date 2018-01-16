@@ -19,4 +19,6 @@ interface PlaceRepositoryInterface
     public function delete($id);
 
     public function addPlace($namePlace, $address, $image);
+
+    public function countReview($placeId);
 }

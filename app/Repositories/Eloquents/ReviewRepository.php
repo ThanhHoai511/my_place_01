@@ -56,4 +56,14 @@ class ReviewRepository implements ReviewRepositoryInterface
         $review->quality_rate = $dataValue['quality_rate'];
         $review->save();
     }
+
+    public function findPlace($id)
+    {
+        return Review::where('status', '=', config('checkbox.checktrue'))->where('place_id', '=', $id)->get();
+    }
+
+    public function countReview($id)
+    {
+        return Review::where('status', '=', config('checkbox.checktrue'))->where('place_id', '=', $id)->count();
+    }
 }

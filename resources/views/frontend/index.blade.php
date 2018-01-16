@@ -12,7 +12,7 @@
         <div class="row idea-title">
                 <b>{{ trans('messages.at') }}</b>
             <i class="fa fa-map-marker fa-lg"></i>
-            <a href="#">{{ $review->place->name }}</a>
+            <a href="{{ route('showplace', $review->place_id) }}">{{ $review->place->name }}</a>
         </div>
         <div class="row idea-img">
             @foreach($review->image  as $item)

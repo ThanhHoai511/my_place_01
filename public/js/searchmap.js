@@ -65,9 +65,8 @@ function initMap() {
         document.getElementById('location').innerHTML = place.formatted_address;
         document.getElementById('lat').innerHTML = place.geometry.location.lat();
         document.getElementById('lon').innerHTML = place.geometry.location.lng();
-
-
         var add = document.getElementById('location').innerHTML;
+        
         $(document).ready(function(){
             $('.add-address').on('click', function(e) {
                 var url = baseUrl + 'member/addplace';
@@ -75,7 +74,7 @@ function initMap() {
                     type: 'post',
                     url: url,
                     data:{
-                        'namePlace': address,
+                        'namePlace': place.name,
                         'add': add,
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
