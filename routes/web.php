@@ -42,7 +42,8 @@ Route::group(['prefix' => 'member'], function () {
     Route::get('showplace/{id}', 'PlaceController@showPlace')->name('showplace');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
-        Route::get('wall/{id}', 'UserController@mywall')->name('mywall');
+        Route::get('wall/{id}', 'UserController@myWall')->name('mywall');
+        Route::get('collection/{id}', 'UserController@showCollection')->name('mycollection');
     });
 
 });

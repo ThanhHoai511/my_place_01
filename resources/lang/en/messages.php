@@ -159,4 +159,11 @@ return [
     'into-new-col' => 'into new collection',
     'col-name-unique' => 'Collection\'s name is unique',
     'add-to-new-col' => 'Add to new collection',
+    'edit-mywall' => 'My wall',
+    'my-collection' => 'My collection',
+    'collection' => 'collection',
+    'submary' => 'Submary',
+    'contentreport' => 'Report\'s content',
+    'approve' => 'Approve',
+    'preview' => 'Preview',
 ];

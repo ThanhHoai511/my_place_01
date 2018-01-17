@@ -86,6 +86,9 @@ textarea {
 .float-right {
     float: right;
 }
+.float-left {
+    float: left;
+}
 .form-group {
     display: table;
     width: 100%;
@@ -488,6 +491,35 @@ textarea {
 }
 .idea-img {
     padding: 15px;
+}
+.stylish-input-group {
+    width: 310px;
+    float: left;
+    padding: 8px;
+}
+.stylish-input-group .form-control{
+    border-right:0; 
+    box-shadow:0 0 0; 
+    border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+.list-none {
+    list-style: none;
+}
+body::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 @media (max-width:992px) {
     #right-menu {

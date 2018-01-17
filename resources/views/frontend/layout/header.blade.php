@@ -15,6 +15,14 @@
             <li><a class="head-item-1st active" href="{{ action('HomeController@index') }}">{{ trans('messages.home') }}</a></li>
             <li><a class="head-item-2nd" href="/pages/info">{{ trans('messages.personal') }}</a></li>
         </ul>
+        <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control"  placeholder="Search" >
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>  
+                    </span>
+                </div>
         <p class="navbar-text pull-right color-white">
         <div class="col-md-1 dropdown head-dropdown float-right">
             @if(Auth::check())
@@ -28,10 +36,13 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <ul class="head-dropdown-ul">
                         <li>
-                            <a  href="{{ route('editprofile', Auth::user()->id) }}">{{ trans('messages.edit-profile') }}</a>
+                            <a href="{{ route('editprofile', Auth::user()->id) }}">{{ trans('messages.edit-profile') }}</a>
                         </li>
                         <li>
-                            <a  href="{{ route('mywall', Auth::user()->id) }}">{{ trans('messages.edit-mywall') }}</a>
+                            <a href="{{ route('mywall', Auth::user()->id) }}">{{ trans('messages.edit-mywall') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('mycollection', Auth::user()->id) }}">{{ trans('messages.my-collection') }}</a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}">{{ trans('messages.logout') }}</a>

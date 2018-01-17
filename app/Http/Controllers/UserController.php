@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Contracts\ReviewRepositoryInterface;
 use App\Repositories\Contracts\RateReviewRepositoryInterface;
+use App\Repositories\Contracts\CollectionRepositoryInterface;
+use App\Repositories\Contracts\ImageRepositoryInterface;
 use App\Repositories\Contracts\RateReviewValRepositoryInterface;
+use App\Repositories\Contracts\PlaceRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
 use App\Http\Requests\UpdateUserRequest;
 use Auth;
@@ -19,22 +22,27 @@ class UserController extends Controller
     protected $rateRepository;
     protected $rateValRepository;
     protected $commentRepository;
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $collectionRepository;
+    protected $imageRepository;
+    protected $placeRepository;
+
     public function __construct(
         UserRepositoryInterface $userRepository,
         ReviewRepositoryInterface $reviewRepository,
         RateReviewRepositoryInterface $rateRepository,
         RateReviewValRepositoryInterface $rateValRepository,
+        CollectionRepositoryInterface $collectionRepository,
+        PlaceRepositoryInterface $placeRepository,
+        ImageRepositoryInterface $imageRepository,
         CommentRepositoryInterface $commentRepository
     ) {
         $this->userRepository = $userRepository;
         $this->reviewRepository = $reviewRepository;
         $this->rateRepository = $rateRepository;
         $this->rateValRepository = $rateValRepository;
+        $this->collectionRepository = $collectionRepository;
+        $this->placeRepository = $placeRepository;
+        $this->imageRepository = $imageRepository;
         $this->commentRepository = $commentRepository;
     }
 
@@ -45,44 +53,6 @@ class UserController extends Controller
         return view('backend.users.listprofile', ['listuser' => $listuser]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
@@ -93,13 +63,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $user = $this->userRepository->find($id);
@@ -129,12 +92,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $user = $this->userRepository->find($id);
@@ -154,7 +111,7 @@ class UserController extends Controller
         }
     }
 
-    public function mywall($id)
+    public function myWall($id)
     {
         $infoUser = $this->userRepository->find($id);
         $reviews = $this->reviewRepository->findReview($id);
@@ -172,6 +129,7 @@ class UserController extends Controller
             $countLike[$review->id] = $this->rateValRepository->getLikes($review->id);
             $countComment[$review->id] = $this->commentRepository->getCommentNumber($review->id);
         }
+
         return view('frontend.user.wall-profile', compact(
             'reviews',
             'rateReviewVals',
@@ -181,5 +139,13 @@ class UserController extends Controller
             'hasLike',
             'infoUser'
         ));
+    }
+
+    public function showCollection($id) {
+        $user = $this->userRepository->find($id);
+        $collection = $this->collectionRepository->userCollection($id);
+        $collectionItem = $this->collectionRepository->findUserCollectionReview($id);
+
+        return view('frontend.user.collection', compact('collection',  'user', 'collectionItem'));
     }
 }

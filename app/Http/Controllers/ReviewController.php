@@ -17,11 +17,6 @@ use Auth;
 
 class ReviewController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     protected $reviewRepository;
     protected $imageRepository;
     protected $rateReviewValRepository;
@@ -37,8 +32,7 @@ class ReviewController extends Controller
         RateReviewValRepositoryInterface $rateReviewValRepository,
         RateReviewRepositoryInterface $rateReviewRepository,
         CommentRepositoryInterface $commentRepository,
-        ReportRepositoryInterface $reportRepository,
-        CollectionRepositoryInterface $collectionRepository
+        CollectionRepositoryInterface $collectionRepository,
         PlaceRepositoryInterface $placeRepository,
         ReportRepositoryInterface $reportRepository
     ) {
@@ -51,27 +45,12 @@ class ReviewController extends Controller
         $this->reportRepository = $reportRepository;
         $this->collectionRepository = $collectionRepository;
     }
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('frontend.review.new-review');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try {
@@ -109,12 +88,6 @@ class ReviewController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $review = $this->reviewRepository->find($id);
@@ -130,7 +103,7 @@ class ReviewController extends Controller
         $rateValId = $this->rateReviewValRepository->findRate($id);
         $countComment = $this->commentRepository->getCommentNumber($id);
         $countLike = $this->rateReviewValRepository->getLikes($id);
-        $collection = $this->collectionRepository->userCollection();
+        $collection = $this->collectionRepository->userCollection(Auth::user()->id);
         $checkIfInCol = $this->collectionRepository->checkIfIn($id);
         $collection_all = $this->collectionRepository->all();
         return view('frontend.review.show-review', compact(
@@ -147,12 +120,7 @@ class ReviewController extends Controller
             'checkIfInCol'
         ));
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $review = $this->reviewRepository->find($id);
@@ -160,13 +128,6 @@ class ReviewController extends Controller
         return view('frontend.review.edit-review', compact('review'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         try {
@@ -209,17 +170,6 @@ class ReviewController extends Controller
 
             return back()->withErrors(trans('messages.updatefail'));
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function favorite(Request $request)
@@ -303,7 +253,7 @@ class ReviewController extends Controller
     public function addToCollection($id)
     {
         $review = $this->reviewRepository->find($id);
-        $collection = $this->collectionRepository->userCollection();
+        $collection = $this->collectionRepository->userCollection(Auth::user()->id);
 
         return view('frontend.add-to-collection', compact('review', 'collection'));
     }

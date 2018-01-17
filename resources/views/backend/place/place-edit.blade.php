@@ -22,12 +22,20 @@
                                 <h5>{{ trans('messages.place-name') }}</h5>
                                 {{ Form::text('name', $place->name) }}
                                 <h5>{{ trans('messages.choose-city') }}</h5>
+                                @if ($city)
                                 {{ Form::select('city', $cityId, $city->id, ['class' => 'city-select', 'placeholder' => 'choose a city']) }}
+                                @else
+                                {{ Form::select('city', $cityId, null, ['class' => 'city-select', 'placeholder' => 'choose a city']) }}
+                                @endif
                                 <h5>{{ trans('messages.choose-dist') }}</h5>
+                                @if ($place->dist_id)
                                 <div id="dist-box">
                                     {{ Form::select('dist_id', $distId, $place->dist_id, ['class' => 'city-select', 'placeholder' => 'choose a dist']) }}
                                     
                                 </div>
+                                @else
+                                <div id="dist-box"></div>
+                                @endif
                                 <h5>{{ trans('messages.address') }}</h5>
                                 {{ Form::textarea('add', $place->add) }}
                                 <h5>{{ trans('messages.open-hour') }}</h5>
@@ -56,7 +64,7 @@
                         <div class="custom-panel-heading">
                             <h4>{{ trans('messages.dist') }}</h4>
                         </div>
-                        <div class="custom-panel-body display-inline">
+                        <div class="custom-panel-body display-inline width-100">
                             <ul class="slide-list">
                                 @foreach ($places as $value)
                                     <li class="slide-item display-inline city">

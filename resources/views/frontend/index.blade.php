@@ -1,6 +1,5 @@
 @extends('frontend.master')
 @section('main')
-<p id="notice">Notice</p>
 <div class="block">
     @foreach($reviews  as $review)
     <div class="block">
@@ -103,8 +102,6 @@
             @else
                 <div class="btn"><i class="fa fa-eye fa-lg"></i><a href="{{ route('login', $review->id) }}">{{ trans('messages.loginmore') }}</a></div>
             @endif
-
-
         </div>
     </div>
     @endforeach
