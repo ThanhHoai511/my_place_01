@@ -23,4 +23,9 @@ class Place extends Model
     {
         return config('asset.image_path.imagereviews') . $this->image;
     }
+
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
 }

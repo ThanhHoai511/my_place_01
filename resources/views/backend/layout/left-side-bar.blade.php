@@ -33,6 +33,11 @@
                                         <li>
                                             <a href="{{ asset('/admin/place') }}">{{ trans('messages.place') }}</a>
                                         </li>
+                                        @if (!$countPlace)
+                                            <li><a href="{{ action('PlaceController@listPlace') }}"><span></span>{{ trans('messages.placepending') }}</a></li>
+                                        @else
+                                            <li><a href="{{ action('PlaceController@listPlace') }}">{{ trans('messages.placepending') }}<span class="count-report-news">{{ $countPlace }}</span></a></li>
+                                        @endif
                                     </ul>
                                 </div>
                             </dd>

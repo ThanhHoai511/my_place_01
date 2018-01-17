@@ -73,6 +73,7 @@ class PlaceRepository implements PlaceRepositoryInterface
         $place->name = $namePlace;
         $place->add = $address;
         $place->image = $image;
+        $place->status = config('checkbox.checkzero');
         $place->save();
     }
 

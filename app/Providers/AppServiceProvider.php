@@ -6,6 +6,7 @@ use Form;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Report;
+use App\Models\Location;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,8 +25,10 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer(['backend.layout.left-side-bar'], function ($view) {
             $countReport = Report::count();
+            $countPlace = Location::count();
             $view->with([
                 'countReport' => $countReport,
+                'countPlace' => $countPlace,
             ]);
         });
     }
