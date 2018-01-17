@@ -31,7 +31,7 @@ class DistrictRepository implements DistrictRepositoryInterface
 
     public function findOrFail($id)
     {
-        return Dist::findOrFail($id);
+        return Dist::find($id);
     }
 
     public function paginate()
@@ -49,7 +49,7 @@ class DistrictRepository implements DistrictRepositoryInterface
 
     public function update(array $input, $id)
     {
-        $dist = Dist::findOrFail($id);
+        $dist = Dist::find($id);
         $dist->name = $input['name'];
         $dist->city_id = $input['city'];
         $dist->save();

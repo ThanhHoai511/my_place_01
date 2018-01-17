@@ -48,7 +48,8 @@ Route::group(['prefix' => 'member'], function () {
     Route::post('uploadplace/{id}', 'PlaceController@uploadPlace')->name('uploadplace');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
-        Route::get('wall/{id}', 'UserController@mywall')->name('mywall');
+        Route::get('wall/{id}', 'UserController@myWall')->name('mywall');
+        Route::get('collection/{id}', 'UserController@showCollection')->name('mycollection');
     });
 
 });

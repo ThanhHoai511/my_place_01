@@ -97,7 +97,7 @@ class PlaceController extends Controller
         $dists = $this->districtRepository->all();
         $distId = $this->districtRepository->showDist();
         $getdistId = $this->districtRepository->findOrFail($place->dist_id);
-        $city = $this->cityRepository->findOrFail($getdistId->city_id);
+        $city = $getdistId ? $this->cityRepository->findOrFail($getdistId->city_id) : null;
         $places = $this->placeRepository->paginate();
 
         return view('backend.place.place-edit', compact(

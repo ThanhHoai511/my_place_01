@@ -15,27 +15,7 @@ class CollectionController extends Controller
     {
         $this->collectionRepository = $collectionRepository;
     }
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $unique_name = $this->collectionRepository->checkUniqueName($request->name);
@@ -45,7 +25,7 @@ class CollectionController extends Controller
             return back()->with($alert);
         } else {
             try {
-                $collection = $this->collectionRepository->userCollection();
+                $collection = $this->collectionRepository->userCollection(Auth::user()->id);
                 $input = $request->only('name', 'review_id');
                 $input['user_id'] = Auth::user()->id;
                 $collection_id = $this->collectionRepository->create($input);
@@ -94,50 +74,5 @@ class CollectionController extends Controller
             return back()->with($alert);
             
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

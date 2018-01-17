@@ -30,4 +30,9 @@ class ImageRepository implements ImageRepositoryInterface
     {
         return Image::destroy($id);
     }
+
+    public function getFirst($review_id)
+    {
+        return Image::where('review_id', $review_id)->first();
+    }
 }

@@ -48,7 +48,7 @@
                         <div class="custom-panel-heading">
                             <h4>{{ trans('messages.dist') }}</h4>
                         </div>
-                        <div class="custom-panel-body display-inline">
+                        <div class="custom-panel-body display-inline width-100">
                             <ul class="slide-list">
                                 @foreach ($places as $value)
                                     <li class="slide-item display-inline city">

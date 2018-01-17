@@ -29,13 +29,11 @@ class CollectionRepository implements CollectionRepositoryInterface
         return Collection::paginate(config('paginate.paginateCollection'));
     }
 
-    public function userCollection()
+    public function userCollection($id)
     {
-        return Collection::where(function($query) {
-            $query->where('user_id', Auth::user()->id)
-                ->orWhere('user_id', 1);
-            })->where('review_id', null)
-                ->get();
+        return Collection::whereIn('user_id', [$id, 1])
+            ->where('review_id', null)
+            ->get();
     }
 
     public function saveToCollection(array $input)
@@ -46,6 +44,8 @@ class CollectionRepository implements CollectionRepositoryInterface
         $collection->collection_id = $input['collection_id'];
         $collection->review_id = $input['review_id'];
         $collection->save();
+        
+        return 1;
     }
 
     public function checkUniqueName($name)
@@ -102,6 +102,12 @@ class CollectionRepository implements CollectionRepositoryInterface
         return $collection;
     }
 
+    public function findUserCollectionReview($user_id) {
+        return Collection::whereIn('user_id', [$user_id, 1])
+            ->where('review_id', '<>', null)
+            ->get();
+    }
+
     public function checkExist($review_id, $collection_id) {
         $collection = Collection::where(function($query) {
             $query->where('user_id', Auth::user()->id)
@@ -110,6 +116,7 @@ class CollectionRepository implements CollectionRepositoryInterface
             ->where('review_id', $review_id)
             ->where('collection_id', $collection_id)
             ->get();
+
         return $collection->count();
     }
 

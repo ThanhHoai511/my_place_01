@@ -14,6 +14,12 @@ class Review extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getImageReviewAttribute()
+    {
+        $image = $this->image->first();
+        return config('asset.image_path.imagereviews') . $image['link'];
+    }
+
     public function rateReviewVal()
     {
         return $this->hasMany(RateReviewVal::class);

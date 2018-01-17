@@ -16,6 +16,6 @@ class Collection extends Model
 
     public function review()
     {
-        return $this->hasMany(Review::class);
+        return $this->belongsTo(Review::class);
     }
 }

@@ -14,7 +14,7 @@ interface CollectionRepositoryInterface
 
     public function update(array $input, $id);
 
-    public function userCollection();
+    public function userCollection($user_id);
 
     public function checkUniqueName($name);
 
