@@ -24,12 +24,16 @@
             @include('frontend.layout.left-side-bar')
             @include('frontend.layout.right-slide')
             <div class="col-md-6 col-md-offset-2 padding0">
-                <p class="alert alert-success">
-                    Notice aa
-                </p>
-                <p class="alert alert-danger">
-                    alert
-                </p>
+                @if(Session::has('pass'))
+                    <p class="alert alert-success">
+                        {{ session('pass') }}
+                    </p>
+                @endif
+                @if(Session::has('error'))
+                    <p class="alert alert-danger">
+                        {{ session('error') }}
+                    </p>
+                @endif
                 @yield('main')
             </div>
         </div>

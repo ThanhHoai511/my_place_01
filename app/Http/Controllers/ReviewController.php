@@ -10,6 +10,7 @@ use App\Repositories\Contracts\RateReviewValRepositoryInterface;
 use App\Repositories\Contracts\ReportRepositoryInterface;
 use App\Repositories\Contracts\RateReviewRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
+use App\Repositories\Contracts\CollectionRepositoryInterface;
 use App\Repositories\Contracts\PlaceRepositoryInterface;
 use Storage;
 use Auth;
@@ -27,6 +28,7 @@ class ReviewController extends Controller
     protected $rateReviewRepository;
     protected $commentRepository;
     protected $reportRepository;
+    protected $collectionRepository;
     protected $placeRepository;
 
     public function __construct(
@@ -35,6 +37,8 @@ class ReviewController extends Controller
         RateReviewValRepositoryInterface $rateReviewValRepository,
         RateReviewRepositoryInterface $rateReviewRepository,
         CommentRepositoryInterface $commentRepository,
+        ReportRepositoryInterface $reportRepository,
+        CollectionRepositoryInterface $collectionRepository
         PlaceRepositoryInterface $placeRepository,
         ReportRepositoryInterface $reportRepository
     ) {
@@ -45,6 +49,7 @@ class ReviewController extends Controller
         $this->rateReviewRepository = $rateReviewRepository;
         $this->commentRepository = $commentRepository;
         $this->reportRepository = $reportRepository;
+        $this->collectionRepository = $collectionRepository;
     }
     public function index()
     {
@@ -73,7 +78,7 @@ class ReviewController extends Controller
             if ($request->hasFile('file')) {
                 $data = [];
                 foreach ($request->file('file') as $file) {
-                    $nameImage = str_random(4).date('h:i').$file->getClientOriginalName();
+                    $nameImage = str_random(4) . date('h:i') . $file->getClientOriginalName();
                     array_push($data, $nameImage);
                     $file->move(config('asset.image_path.imagereviews'), $nameImage);
                 }
@@ -125,6 +130,9 @@ class ReviewController extends Controller
         $rateValId = $this->rateReviewValRepository->findRate($id);
         $countComment = $this->commentRepository->getCommentNumber($id);
         $countLike = $this->rateReviewValRepository->getLikes($id);
+        $collection = $this->collectionRepository->userCollection();
+        $checkIfInCol = $this->collectionRepository->checkIfIn($id);
+        $collection_all = $this->collectionRepository->all();
         return view('frontend.review.show-review', compact(
             'review',
             'rateValId',
@@ -134,7 +142,9 @@ class ReviewController extends Controller
             'rateReview',
             'hasLike',
             'rateReviewVal',
-            'hasReport'
+            'hasReport',
+            'collection',
+            'checkIfInCol'
         ));
     }
     /**
@@ -288,5 +298,13 @@ class ReviewController extends Controller
         return response()->json([
             'dataSuccess' => $dataSuccess,
         ]);
+    }
+
+    public function addToCollection($id)
+    {
+        $review = $this->reviewRepository->find($id);
+        $collection = $this->collectionRepository->userCollection();
+
+        return view('frontend.add-to-collection', compact('review', 'collection'));
     }
 }

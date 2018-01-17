@@ -1,6 +1,9 @@
 @extends('frontend.master')
 @section('main')
 <div class="block">
+    <div class="row idea-title" style="position: relative;">
+        {{ HTML::image($review->user->pathImage) }}
+        <a href="{{ route('mywall', $review->user_id) }}">{{ $review->user->name }}</a>
     <div class="row idea-title">
             {{ HTML::image($review->user->pathImage) }}
             <a href="{{ route('mywall', $review->user_id) }}">{{ $review->user->name }}</a>
@@ -10,17 +13,34 @@
         <a href="{{ route('showplace', $review->place_id) }}">{{ $review->place->name }}</a>
         <div class="expand dropdown">
             {{ Form::button('<i class="fa fa-chevron-down fa-lg"></i>', array('class' => 'btn btn3 dropdown-toggle', 'data-toggle' => 'dropdown')) }}
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#">{{ trans('messages.save-into-collection') }}</a></li>
+                <ul class="dropdown-menu dropdown-menu-right collection-ul">
+                    <li>
+                        <ul class="save-collection">{{ trans('messages.save-into-collection') }}
+                            @if (isset($collection))
+                                @foreach ($collection as $item)
+                                    <li>
+                                        <a href="{{ route('savereview', [$review->id, $item->id]) }}">{{ $item->name }}
+                                        @foreach ($checkIfInCol as $check)
+                                            @if ($check->collection_id == $item->id)
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                                @break;
+                                            @endif
+                                        @endforeach</a>
+                                    </li>
+                                @endforeach
+                                <li><a href="{{ route('savecollection', $review->id) }}"><i class="fa fa-plus" aria-hidden="true"></i>{{ trans('messages.add-to-new-col') }}</a></li>
+                            @endif
+                        </ul>
+                    </li>
                     {{ Form::open(['action' => 'ReportController@sendReport']) }}
                         @if($hasReport == config('checkbox.checktrue'))
                             <li>{{ trans('messages.reported') }}</li>
                         @else
                             <li>
                                 {{ Form::text('content') }}
-                                <button type="submit">
+                                <button type="submit" class="btn btn2">
                                     {{ Form::hidden('reviewId', $review->id) }}
-                                    <i class="glyphicon glyphicon-thumbs-down"aria-hidden="true"></i> 
+                                    <i class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></i> 
                                     {{ trans('messages.report') }}
                                 </button>
                             </li>
@@ -28,6 +48,10 @@
                     {{ Form::close() }}
                 </ul>
         </div>
+    </div>
+    <div class="row idea-title show-review-title">
+        <i class="fa fa-map-marker fa-lg"></i>
+        <a href="#">{{ $review->place->name }}</a>
     </div>
     <p><b>{{ $review->submary }}</b></p>
     <p class="more">{!! $review->content !!}</p><br />
@@ -49,7 +73,7 @@
         </div>
     </h4>
     @endforeach
-    <h4><i class="fa fa-comment fa-lg"></i><span class="count-comment" data-count="{{ $countComment }}">{{ $countComment }}</span>{{ trans('messages.comment') }}</h4>
+    <h4><i class="fa fa-comment fa-lg"></i><span class="count-comment" data-count="{{ $countComment }}">{{ $countComment }}</span> {{ trans('messages.comment') }}</h4>
     @if(Auth::user()->id == $review->user_id)
     <div class="row">
         <div><a href="{{ route('reviews.edit', $review->id) }}" class="link"><i class="fa fa-pencil-square-o fa-lg"></i>{{ trans('messages.edit') }}</a>
@@ -85,7 +109,7 @@
                                 <li class="edit">
                                     <button type="submit" class="btn edit-comment btn-manage" data-comment-id="{{ $comment->id }}" data-review-id="{{ $comment->review_id }}" data-content="{{ $comment->content }}">
                                         <i class="fa fa-pencil"></i> 
-                                        {{ trans('site.edit') }}...
+                                        {{ trans('site.edit') }}
                                         </button>
                                 </li>
                                 <li>
@@ -93,7 +117,7 @@
                                         {{ csrf_field() }}
                                         <button type="submit" class="btn delete btn-manage">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i> 
-                                            {{ trans('site.delete') }}...
+                                            {{ trans('site.delete') }}
                                         </button>
                                     </form>
                                 </li>
