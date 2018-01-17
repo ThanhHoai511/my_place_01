@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'member'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('reviews', 'ReviewController');
+    Route::resource('collection', 'CollectionController');
     Route::post('removereview', 'ReviewController@removeReview')->name('removeReview');
     Route::post('sendreport', 'ReportController@sendReport')->name('sendreport');
     Route::post('addplace', 'PlaceController@addPlace')->name('addplace');
@@ -36,6 +37,8 @@ Route::group(['prefix' => 'member'], function () {
     Route::post('comment', 'ReviewController@comment');
     Route::post('updatecomment', 'ReviewController@updateComment');
     Route::post('deletecomment', 'ReviewController@deleteComment');
+    Route::get('reviews/{id}/collection', 'ReviewController@addToCollection')->name('savecollection');
+    Route::get('reviews/{id}/save/{collection_id}', 'CollectionController@save')->name('savereview');
     Route::get('showplace/{id}', 'PlaceController@showPlace')->name('showplace');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');

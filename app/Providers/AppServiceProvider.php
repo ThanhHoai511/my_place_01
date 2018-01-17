@@ -81,5 +81,9 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\ReportRepositoryInterface',
             'App\Repositories\Eloquents\ReportRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Contracts\CollectionRepositoryInterface',
+            'App\Repositories\Eloquents\CollectionRepository'
+        );
     }
 }

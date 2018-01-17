@@ -152,4 +152,11 @@ return [
     'price-range' => 'Price range',
     'choose-dist' => 'Choose district',
     'edit-place' => 'Edit Place',
+    'user' => 'User',
+    'loginhome' => 'Login',
+    'new-collection' => 'New collection',
+    'collection-name' => 'Collection\'s name',
+    'into-new-col' => 'into new collection',
+    'col-name-unique' => 'Collection\'s name is unique',
+    'add-to-new-col' => 'Add to new collection',
 ];

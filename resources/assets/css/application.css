@@ -28,6 +28,19 @@ footer {
 textarea {
     height: 100px;
 }
+.save-collection li {
+    display: none;
+    padding: 0px 10px !important;
+}
+.save-collection {
+    padding: 0px 10px !important;
+}
+.save-collection:hover li{
+    display: block;
+}
+.collection-ul {
+    width: 200px;
+}
 .field {
     margin-bottom: 10px;
     font-size: 15px;

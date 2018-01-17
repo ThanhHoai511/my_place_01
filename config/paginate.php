@@ -6,4 +6,5 @@ return [
     'paginateCity' => 10,
     'paginateDist' => 5,
     'paginatePlace' => 5,
+    'paginateCollection' => 10,
 ];
