@@ -14,6 +14,7 @@
     @yield('css')
 </head>
 <body>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="row full-width wrapper">
         <div class="large-12 columns content-bg">
             @include('backend.layout.top-menu')

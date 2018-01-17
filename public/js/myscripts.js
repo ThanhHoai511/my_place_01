@@ -304,7 +304,7 @@ $(document).ready(function(){
             });
         });
     });
-    //Xoa comment           
+    //Xoa comment   
 $('.delete').on('submit', function(e) {
         var commentId = $('.comment-id').val();
         var url = baseUrl + 'member/deletecomment';

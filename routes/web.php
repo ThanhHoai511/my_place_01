@@ -22,6 +22,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('city', 'CityController');
     Route::resource('district', 'DistrictController');
     Route::resource('place', 'PlaceController');
+    Route::get('listplace', 'PlaceController@listPlace')->name('listplace');
+    Route::get('previewplade/{id}', 'PlaceController@previewPlade')->name('previewplade');
+    Route::post('deleteplace', 'PlaceController@deletePlace')->name('deleteplace');
+    Route::post('appoveplace', 'PlaceController@appovePlace')->name('appoveplace');
     Route::resource('reports', 'ReportController');
     Route::post('approve', 'ReportController@approve')->name('approve');
 });
@@ -37,6 +41,8 @@ Route::group(['prefix' => 'member'], function () {
     Route::post('updatecomment', 'ReviewController@updateComment');
     Route::post('deletecomment', 'ReviewController@deleteComment');
     Route::get('showplace/{id}', 'PlaceController@showPlace')->name('showplace');
+    Route::get('editplace/{id}', 'PlaceController@editPlace')->name('editplace');
+    Route::post('uploadplace/{id}', 'PlaceController@uploadPlace')->name('uploadplace');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
         Route::get('wall/{id}', 'UserController@mywall')->name('mywall');
