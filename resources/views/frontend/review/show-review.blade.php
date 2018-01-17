@@ -48,20 +48,24 @@
     </div>
     <p><b>{{ $review->submary }}</b></p>
     <p class="more">{!! $review->content !!}</p><br />
+    <div class="slide-image">
     @foreach($review->image  as $item)
-        {{ HTML::image(($item->PathReview), trans('messages.logo'), ['class' => 'show-img']) }}    
+    <div>
+        {{ HTML::image(($item->PathReview), trans('messages.logo'), ['class' => 'show-img']) }}
+    </div>  
     @endforeach
+    </div>
     @foreach($rateReview as $rate)
     <h4 class="like-show">
         <div class="like-div">
             @if(Auth::check())
                 @if($hasLike == 1)
-                    <i class="fa fa-thumbs-up fa-lg icon" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}"></i><span> {{ $countLike }}</span> {{ trans('messages.like') }}
+                    <i class="fa fa-thumbs-up fa-lg icon like-review" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}"></i><span> {{ $countLike }}</span> {{ trans('messages.like') }}
                 @else
-                    <i class="fa fa-thumbs-up fa-lg" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}" data-user-id="{{ Auth::user()->id }}"></i><span>{{ $countLike }}</span> {{ trans('messages.like') }}
+                    <i class="fa fa-thumbs-up fa-lg like-review" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}" data-user-id="{{ Auth::user()->id }}"></i><span>{{ $countLike }}</span> {{ trans('messages.like') }}
                 @endif
             @else
-                <i class="fa fa-thumbs-up fa-lg"></i><span>{{ $countLike }}</span> {{ trans('messages.like') }}
+                <i class="fa fa-thumbs-up fa-lg like-review"></i><span>{{ $countLike }}</span> {{ trans('messages.like') }}
             @endif
         </div>
     </h4>

@@ -292,4 +292,11 @@ class PlaceController extends Controller
         return redirect()->route('listplace')
         ->with('status', trans('messages.deletesuccessfully'));
     }
+
+    public function topWeek()
+    {
+        $infoPlaces = $this->placeRepository->softReview();
+
+        return view('frontend.place.top-place', compact('infoPlaces'));
+    }
 }

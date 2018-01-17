@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Report;
 use App\Models\Location;
+use App\Models\Place;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,13 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'countReport' => $countReport,
                 'countPlace' => $countPlace,
+            ]);
+        });
+
+        view()->composer(['frontend.layout.right-slide'], function ($view) {
+            $topPlaces = Place::orderBy('total_rate', 'DESC')->take(5)->get();
+            $view->with([
+                'topPlaces' => $topPlaces,
             ]);
         });
     }
@@ -87,6 +95,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\Contracts\CollectionRepositoryInterface',
             'App\Repositories\Eloquents\CollectionRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Contracts\LocationRepositoryInterface',
+            'App\Repositories\Eloquents\LocationRepository'
         );
     }
 }

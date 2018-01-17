@@ -7,10 +7,10 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-12" align="center">
+                <div class="col-md-4" align="center">
                     {{ HTML::image($infoUser->pathImage, null, ['class' => 'width100']) }}
                 </div>
-                <div class=" col-md-12">
+                <div class=" col-md-8">
                     <table class="table table-user-information">
                         <tbody>
                             <tr>
@@ -52,9 +52,13 @@
             <a href="#">{{ $review->place->name }}</a>
         </div>
         <div class="row idea-img">
-            @foreach($review->image  as $item)
-            {{ HTML::image(($item->PathReview)) }}
-            @endforeach
+            <div class="slide-image">
+                @foreach($review->image  as $item)
+                <div>
+                    {{ HTML::image(($item->PathReview)) }}
+                </div>
+                @endforeach
+            </div>
             <p><b>{{ $review->submary }}</b></p>
             <p class="more">{!! $review->content !!}</p>
             <br />
