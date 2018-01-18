@@ -9,7 +9,7 @@
         	<a href="{{ action('ReviewController@create') }}">{{ trans('messages.create-review') }}</a>
         </li>
         <li class="left-item crt">
-            <i class="fa fa-arrow-circle-up icon" aria-hidden="true"></i>
+            <i class="fa fa-star fa-lg icon" aria-hidden="true"></i>
         	<a href="{{ action('PlaceController@topWeek') }}">{{ trans('messages.top') }}</a>
         </li>
     </ul>
