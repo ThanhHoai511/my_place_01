@@ -11,13 +11,13 @@
         myplaces</a>
     </div>
     <div class="collapse navbar-collapse">
-        <div class="input-group stylish-input-group">
+        <div class="input-group stylish-input-group head-bar">
         <ul class="nav navbar-nav">
             <li><a class="head-item-1st active" href="{{ action('HomeController@index') }}">{{ trans('messages.home') }}</a></li>
             <li><a class="head-item-2nd" href="/pages/info">{{ trans('messages.personal') }}</a></li>
         </ul>
         {{ Form::open(['action' => ['SearchController@searchKey'], 'method' => 'get']) }}
-            <div class="input-group stylish-input-group">
+            <div class="input-group stylish-input-group search-bar">
                 {{ Form::text('key', null, ['class' => 'form-control', 'placeholder' => trans('search')]) }}
                 <span class="input-group-addon">
                     {{ Form::button('<span class="glyphicon glyphicon-search"></span>', ['type' => 'submit'] )  }}

@@ -47,6 +47,9 @@ textarea {
     line-height: 30px;
     padding: 15px;
 }
+.search-bar {
+    width: 310px;
+}
 .number {
     width: 200px;
 }
@@ -507,7 +510,6 @@ textarea {
     padding: 15px;
 }
 .stylish-input-group {
-    width: 310px;
     float: left;
     padding: 8px;
 }
@@ -515,6 +517,9 @@ textarea {
     border-right:0; 
     box-shadow:0 0 0; 
     border-color:#ccc;
+}
+.head-bar {
+    width: 80%;
 }
 .stylish-input-group button{
     border:0;
