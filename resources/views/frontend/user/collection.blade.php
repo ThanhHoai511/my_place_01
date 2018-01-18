@@ -3,7 +3,7 @@
 <div class="block">
     <div class="panel-info">
         <div class="field panel-heading">
-            <h2 class="text-center">{{ $user->name }} {{ trans('messages.collection') }}</h2>
+            <h2 class="text-center">{{ trans('messages.user-collection', ['name' => $user->name]) }}</h2>
         </div>
         @foreach ($collection as $value)
             <div>

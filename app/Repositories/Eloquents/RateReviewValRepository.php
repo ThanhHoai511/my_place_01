@@ -39,4 +39,9 @@ class RateReviewValRepository implements RateReviewValRepositoryInterface
     {
         return RateReviewVal::where('review_id', '=', $reviewId)->get()->count();
     }
+
+    public function getUserLike($reviewId)
+    {
+        return RateReviewVal::where('review_id', '=', $reviewId)->get();
+    }
 }

@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('add') ? ' has-error' : '' }}">
-                            {{ Form::label('add', trans('messages.add'), array('class' => 'col-md-4 control-label')) }}
+                            {{ Form::label('add', trans('messages.address'), array('class' => 'col-md-4 control-label')) }}
 
                             <div class="col-md-6">
                                 {{ Form::text('add', old('username'), ['class' => 'form-control', 'id' => 'name', 'required' => 'true', 'autofocus' => 'autofocus']) }}
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                            {{ Form::label('birthday', trans('messages.birthday'), array('class' => 'col-md-4 control-label')) }}
+                            {{ Form::label('birthday', trans('messages.dob'), array('class' => 'col-md-4 control-label')) }}
 
                             <div class="col-md-6">
                             {{ Form::date('birthday', \Carbon\Carbon::now()) }}

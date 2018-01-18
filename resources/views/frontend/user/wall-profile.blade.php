@@ -33,6 +33,10 @@
                                 <td>{{ trans('messages.level') }}</td>
                                 <td>{{ $infoUser->level }}</td>
                             </tr>
+                            <tr>
+                                <td>{{ trans('messages.collection') }}</td>
+                                <td><a href="{{ route('mycollection', $infoUser->id) }}">{{ trans('messages.show') }}</a></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

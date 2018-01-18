@@ -91,7 +91,7 @@
                                                 <i class='fa fa-star fa-fw'></i>
                                             </li>
                                         </ul>
-                                        <span>{{ number_format($infoPlace->avg_quality_rate/$infoPlace->total_rate, 2) }}/5 in {{ $infoPlace->total_rate }} rated </span>
+                                        <span>{{ number_format($infoPlace->avg_quality_rate/$infoPlace->total_rate, 2) }}/5 {{ trans('messages.in') }} {{ $infoPlace->total_rate }} {{ trans('messages.rated') }} </span>
                                     </div>
                                 </td>
                             </tr>

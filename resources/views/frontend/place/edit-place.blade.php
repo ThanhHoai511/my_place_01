@@ -4,7 +4,7 @@
         {{ Form::open(['action' => ['PlaceController@uploadPlace', $place->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) }}
         <div id="error_explanation">
             <h2>
-               {{ trans('messages.create-review') }}
+               {{ trans('messages.edit-place') }}
             </h2>
         </div>
         <div class="field">
@@ -38,16 +38,16 @@
             {{ Form::number('price_from', $range[0], ['class' => 'form-control']) }}
         </div>
         <div class="field">
-            {{ Form::label('place', trans('messages.price-to'), array('class' => 'mylabel')) }}
+            {{ Form::label('place', trans('messages.to'), array('class' => 'mylabel')) }}
             {{ Form::number('price_to', null, ['class' => 'form-control']) }}
         </div>
         <div class="field">
             {{ Form::label('place', trans('messages.choose-img'), array('class' => 'mylabel')) }}
-            {{ Form::file('image', ['class' => 'input-edit', 'placeholder' => trans('messages.email'), 'required' => 1, 'id' => 'imgInp']) }}
+            {{ Form::file('image', ['class' => 'input-edit', 'placeholder' => trans('messages.email'), 'id' => 'imgInp']) }}
             {{ HTML::image($place->image_place, null, ['id' => 'preview']) }}
         </div>
         <div class="row actions">
-            {{ Form::submit(trans('messages.up-review'), ['id' => 'upload', 'class' => 'upload btn btn-primary btn2 col-md-3', 'id' => 'submit_id']) }}
+            {{ Form::submit(trans('messages.send'), ['id' => 'upload', 'class' => 'upload btn btn-primary btn2 col-md-3', 'id' => 'submit_id']) }}
         </div>
     {{ Form::close() }}
 </div>

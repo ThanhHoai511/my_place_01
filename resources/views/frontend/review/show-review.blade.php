@@ -56,13 +56,14 @@
     @endforeach
     </div>
     @foreach($rateReview as $rate)
-    <h4 class="like-show">
+    <h4>
         <div class="like-div">
             @if(Auth::check())
                 @if($hasLike == 1)
-                    <i class="fa fa-thumbs-up fa-lg icon like-review" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}"></i><span> {{ $countLike }}</span> {{ trans('messages.like') }}
+                    <i class="fa fa-thumbs-up fa-lg icon like-review" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}"></i><span> {{ $countLike }}</span> <a class="like-show">{{ trans('messages.like') }}</a>
                 @else
-                    <i class="fa fa-thumbs-up fa-lg like-review" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}" data-user-id="{{ Auth::user()->id }}"></i><span>{{ $countLike }}</span> {{ trans('messages.like') }}
+                    <i class="fa fa-thumbs-up fa-lg like-review" data-review-id="{{ $review->id }}" data-rate-id="{{ $rate->id }}" data-user-id="{{ Auth::user()->id }}"></i><span>{{ $countLike }}</span> 
+                    <a class="like-show">{{ trans('messages.like') }}</a>
                 @endif
             @else
                 <i class="fa fa-thumbs-up fa-lg like-review"></i><span>{{ $countLike }}</span> {{ trans('messages.like') }}
@@ -127,5 +128,13 @@
         </div>
     </div>
     </p>
+</div>
+<div class="like col-md-5 col-sm-12 background-d8e9ef">
+    <p class="close"><i class="fa fa-close fa-lg icon"></i>Close</p>
+    @if (isset($like_user))
+        @foreach ($like_user as $user)
+            <p><i class="fa fa-thumbs-up fa-lg icon"></i>{{ HTML::image($user->user->pathImage, $user->name, ['class' => 'comment-ava']) }}<strong><a href="{{ route('mywall', $user->id) }}">{{ $user->user->name }}</a></strong></p>
+        @endforeach
+    @endif
 </div>
 @stop
