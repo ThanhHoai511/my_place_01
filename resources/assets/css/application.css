@@ -509,6 +509,13 @@ textarea {
 .list-none {
     list-style: none;
 }
+.col-review-div {
+    max-height: 300px;
+    overflow-y: hidden;
+}
+.col-review-div img {
+    padding-left: 0px;
+}
 body::-webkit-scrollbar {
     width: 1em;
 }

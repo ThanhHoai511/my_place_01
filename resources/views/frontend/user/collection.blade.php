@@ -11,7 +11,7 @@
                 <ul class="row padding0">
                     @foreach ($collectionItem as $item)
                         @if ($item->collection_id == $value->id)
-                            <li class="col-md-6 list-none">
+                            <li class="col-md-6 list-none col-review-div">
                                 <a href="{{ route('mywall', $item->review->user->id) }}">{{ $item->review->user->name }}</a>
                                 {{ trans('messages.at') }}
                                 <a href="{{ route('showplace', $item->review->place->id) }}"> {{ $item->review->place->name }}</a>
@@ -28,4 +28,15 @@
         @endforeach
     </div>
 </div>
+@stop
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function() { 
+        var heights = $(".col-review-div").map(function() {
+            return $(this).height();
+        }).get(),
+        maxHeight = Math.max.apply(null, heights);
+        $(".col-review-div").height(maxHeight);
+    });
+</script>
 @stop

@@ -23,4 +23,6 @@ interface ReviewRepositoryInterface
     public function findPlace($id);
     
     public function countReview($id);
+
+    public function search($key);
 }

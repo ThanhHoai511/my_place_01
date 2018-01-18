@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 });
 Route::group(['prefix' => 'member'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/search', 'SearchController@searchKey')->name('search');
     Route::resource('reviews', 'ReviewController');
     Route::resource('collection', 'CollectionController');
     Route::post('removereview', 'ReviewController@removeReview')->name('removeReview');

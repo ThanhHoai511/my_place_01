@@ -15,9 +15,9 @@
                 <th>{{ trans('messages.address') }}</th>
                 <th>{{ trans('messages.submary') }}</th>
                 <th>{{ trans('messages.contentreport') }}</th>
-                <th>{{ trans('messages.aprove') }}t</th>
-                <th>{{ trans('messages.delete') }}</th>
                 <th>{{ trans('messages.preview') }}</th>
+                <th>{{ trans('messages.delete') }}</th>
+                <th>{{ trans('messages.approve') }}</th>
             </tr>
             </thead>
             <tbody>

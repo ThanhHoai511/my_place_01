@@ -5,6 +5,8 @@ namespace App\Repositories\Contracts;
 interface UserRepositoryInterface
 {
     public function all();
+
+    public function search($key);
     
     public function find($id);
 
