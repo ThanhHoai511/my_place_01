@@ -15,14 +15,14 @@
             <li><a class="head-item-1st active" href="{{ action('HomeController@index') }}">{{ trans('messages.home') }}</a></li>
             <li><a class="head-item-2nd" href="/pages/info">{{ trans('messages.personal') }}</a></li>
         </ul>
-        <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control"  placeholder="Search" >
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>  
-                    </span>
-                </div>
+        {{ Form::open(['action' => ['SearchController@searchKey'], 'method' => 'get']) }}
+            <div class="input-group stylish-input-group">
+                {{ Form::text('key', null, ['class' => 'form-control', 'placeholder' => trans('search')]) }}
+                <span class="input-group-addon">
+                    {{ Form::button('<span class="glyphicon glyphicon-search"></span>', ['type' => 'submit'] )  }}
+                </span>
+            </div>
+        {{ Form::close() }}
         <p class="navbar-text pull-right color-white">
         <div class="col-md-1 dropdown head-dropdown float-right">
             @if(Auth::check())

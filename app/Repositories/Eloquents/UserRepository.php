@@ -12,6 +12,12 @@ class UserRepository implements UserRepositoryInterface
         return User::all();
     }
 
+    public function search($key)
+    {
+        return User::where('name', 'like', '%' . $key . '%')
+            ->get();
+    }
+
     public function find($id)
     {
         return User::find($id);

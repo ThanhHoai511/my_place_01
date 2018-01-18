@@ -14,10 +14,10 @@
             <tr>
                 <th>{{ trans('messages.name') }}</th>
                 <th>{{ trans('messages.dist') }}</th>
-                <th>{{ trans('messages.range') }}</th>
-                <th>{{ trans('messages.open') }}</th>
-                <th>{{ trans('messages.close') }}</th>
-                <th>{{ trans('messages.image') }}</th>
+                <th>{{ trans('messages.price-range') }}</th>
+                <th>{{ trans('messages.open-hour') }}</th>
+                <th>{{ trans('messages.close-hour') }}</th>
+                <th>{{ trans('messages.img') }}</th>
                 <th>{{ trans('messages.approve') }}</th>
                 <th>{{ trans('messages.delete') }}</th>
                 <th>{{ trans('messages.preview') }}</th>

@@ -88,5 +88,9 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\CollectionRepositoryInterface',
             'App\Repositories\Eloquents\CollectionRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Contracts\LocationRepositoryInterface',
+            'App\Repositories\Eloquents\LocationRepository'
+        );
     }
 }
