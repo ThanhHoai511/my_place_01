@@ -32,7 +32,7 @@
                 @if (isset($user->name))
                     <div class="row">
                         <div class="col-md-8">
-                            <a href="#"><h3>{{ $user->name }}</h3></a>
+                            <a href="{{ route('mywall', $user->id) }}"><h3>{{ $user->name }}</h3></a>
                             <p>{{ $user->email }}</p>
                         </div>
                         <div class="col-md-4">

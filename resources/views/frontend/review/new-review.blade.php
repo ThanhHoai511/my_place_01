@@ -111,7 +111,7 @@
                 <li>{{ trans('messages.country') }}: <span id="country"></span></li>
                 <li>{{ trans('messages.latitude') }}: <span id="lat"></span></li>
                 <li>{{ trans('messages.longitude') }}: <span id="lon"></span></li>
-                {{ Form::button('Add-Address', ['class' => 'upload btn btn-primary btn2 col-md-3 add-address']) }}
+                {{ Form::button(trans('messages.add-address'), ['class' => 'upload btn btn-primary btn2 col-md-3 add-address']) }}
             </ul>
         </div>
     </div>

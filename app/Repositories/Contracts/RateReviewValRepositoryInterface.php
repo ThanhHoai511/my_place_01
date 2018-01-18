@@ -15,4 +15,6 @@ interface RateReviewValRepositoryInterface
     public function findRate($id);
 
     public function getLikes($reviewId);
+
+    public function getUserLike($reviewId);
 }

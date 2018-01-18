@@ -106,6 +106,7 @@ class ReviewController extends Controller
         $collection = $this->collectionRepository->userCollection(Auth::user()->id);
         $checkIfInCol = $this->collectionRepository->checkIfIn($id);
         $collection_all = $this->collectionRepository->all();
+        $like_user = $this->rateReviewValRepository->getUserLike($id);
         return view('frontend.review.show-review', compact(
             'review',
             'rateValId',
@@ -117,7 +118,8 @@ class ReviewController extends Controller
             'rateReviewVal',
             'hasReport',
             'collection',
-            'checkIfInCol'
+            'checkIfInCol',
+            'like_user'
         ));
     }
 

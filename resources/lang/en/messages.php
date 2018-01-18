@@ -175,4 +175,13 @@ return [
     'loginmore' => 'Login for more',
     'top' => 'Top place',
     'top-month' => 'Top place of the month',
+    'time' => 'Time',
+    'reported' => 'Reported',
+    'postalcode' => 'Postal code',
+    'country' => 'Country',
+    'latitude' => 'Latitude',
+    'longtitude' => 'Longtitude',
+    'edit-place' => 'Edit place',
+    'user-collection' => ':name\'s collection',
+    'add-address' => 'Add address', 
 ];
