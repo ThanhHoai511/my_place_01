@@ -47,7 +47,7 @@
         <a href="{{ route('showplace', $review->place_id) }}">{{ $review->place->name }}</a>
     </div>
     <p><b>{{ $review->submary }}</b></p>
-    <p class="more">{!! $review->content !!}</p><br />
+    <p class="content-review">{!! $review->content !!}</p><br />
     <div class="slide-image">
     @foreach($review->image  as $item)
     <div>
@@ -101,7 +101,7 @@
                 @if(Auth::user()->id == $comment->user_id)
                     <div class="col-md-2">
                         <div class="dropdown manage-comment">
-                            <span class="dropdown-toggle manage-dropdown" data-toggle="dropdown">...</span>
+                            <span class="dropdown-toggle manage-dropdown" data-toggle="dropdown"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
                             <ul class="dropdown-menu manage-menu">
                                 <li class="edit">
                                     <button type="submit" class="btn edit-comment btn-manage" data-comment-id="{{ $comment->id }}" data-review-id="{{ $comment->review_id }}" data-content="{{ $comment->content }}">
