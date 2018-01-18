@@ -96,4 +96,9 @@ class PlaceRepository implements PlaceRepositoryInterface
             return back()->withErrors(trans('messages.updatefail'));
         }
     }
+
+    public function softReview()
+    {
+        return Place::orderBy('total_rate', 'DESC')->take(5)->get();
+    }
 }

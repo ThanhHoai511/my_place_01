@@ -47,6 +47,7 @@ Route::group(['prefix' => 'member'], function () {
     Route::get('showplace/{id}', 'PlaceController@showPlace')->name('showplace');
     Route::get('editplace/{id}', 'PlaceController@editPlace')->name('editplace');
     Route::post('uploadplace/{id}', 'PlaceController@uploadPlace')->name('uploadplace');
+    Route::get('topweek', 'PlaceController@topWeek')->name('topweek');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
         Route::get('wall/{id}', 'UserController@myWall')->name('mywall');

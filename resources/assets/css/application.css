@@ -154,10 +154,23 @@ textarea {
     margin: 15px;
 }
 .idea-img img {
-    width: 80%;
-    padding: 15px;
-    margin: auto 10%;
+    width: 90%;
+    margin: auto;
 }
+.slick-prev:before,
+.slick-next:before
+{
+    color: rgb(19, 112, 233) !important;
+}
+.slick-prev
+{
+    left: 0px !important;
+}
+.slick-next
+{
+    right: 0px !important;
+}
+
 .idea-img p {
     margin: 0px 15px;
 }
@@ -409,6 +422,7 @@ textarea {
 }
 .slide-img {
     width: 100%;
+    height: 250px;
 }
 #left-menu, #right-menu {
     position: fixed;

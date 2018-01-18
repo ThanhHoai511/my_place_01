@@ -31,6 +31,14 @@ $(document).ready(function(){
         nextArrow: '<i class="fa fa-angle-down"></i>',
         prevArrow: '<i class="fa fa-angle-up"></i>'
     });
+    $('.slide-image').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear'
+      });
+      
     /* 1. Visualizing things on Hover - See next part for action on click */
     $('#stars-quality li').on('mouseover', function(){
         var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
@@ -177,7 +185,7 @@ $(document).ready(function(){
         });
     });
     $(function () {
-        $(".fa-thumbs-up").on("click", function (e) {
+        $(".like-review").on("click", function (e) {
             var reviewId = $(this).data("review-id");
             var rateId = $(this).data("rate-id");
             var url = baseUrl + 'member/likereviews';

@@ -14,9 +14,13 @@
             <a href="{{ route('showplace', $review->place_id) }}">{{ $review->place->name }}</a>
         </div>
         <div class="row idea-img">
-            @foreach($review->image  as $item)
-                {{ HTML::image(($item->PathReview)) }}
-            @endforeach
+            <div class="slide-image">
+                @foreach($review->image as $item)
+                    <div>
+                        {{ HTML::image($item->PathReview) }}
+                    </div>
+                @endforeach
+            </div>
             <p><b>{{ $review->submary }}</b></p>
             <p class="more">{!! $review->content !!}</p><br />
             {{ Form::hidden('lesstext', trans('messages.pullout'), array('class' => 'lesstext')) }}

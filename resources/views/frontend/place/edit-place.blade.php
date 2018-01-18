@@ -39,7 +39,7 @@
         </div>
         <div class="field">
             {{ Form::label('place', trans('messages.price-to'), array('class' => 'mylabel')) }}
-            {{ Form::number('price_to', $range[1], ['class' => 'form-control']) }}
+            {{ Form::number('price_to', null, ['class' => 'form-control']) }}
         </div>
         <div class="field">
             {{ Form::label('place', trans('messages.choose-img'), array('class' => 'mylabel')) }}

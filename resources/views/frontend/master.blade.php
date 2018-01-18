@@ -8,6 +8,7 @@
         {{ Html::style('assets/bootstrap/dist/css/bootstrap.min.css') }}
         {{ Html::style('css/application.css') }}
         {{ Html::style('assets/slick-carousel/slick/slick.css') }}
+        {{ Html::style('assets/slick-carousel/slick/slick-theme.css') }}
         {{ Html::style('assets/font-awesome/css/font-awesome.min.css') }}
         {{ Html::script('assets/jquery/dist/jquery.min.js') }}
         {{ Html::script('assets/bootstrap/dist/js/bootstrap.min.js') }}

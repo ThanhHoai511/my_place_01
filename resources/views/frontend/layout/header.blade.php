@@ -6,11 +6,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ route('home') }}">
         {{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'logo-img']) }}
         myplaces</a>
     </div>
     <div class="collapse navbar-collapse">
+        <div class="input-group stylish-input-group">
         <ul class="nav navbar-nav">
             <li><a class="head-item-1st active" href="{{ action('HomeController@index') }}">{{ trans('messages.home') }}</a></li>
             <li><a class="head-item-2nd" href="/pages/info">{{ trans('messages.personal') }}</a></li>
