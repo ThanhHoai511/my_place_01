@@ -93,19 +93,21 @@ class ReviewController extends Controller
         $review = $this->reviewRepository->find($id);
         $countLike = 0;
         $countComment = 0;
-        $userId = Auth::user()->id;
         $showComment = $this->commentRepository->findReviewId($id);
         $rateReviewVal = $this->rateReviewValRepository->all();
-        $hasLike = $this->rateReviewValRepository->findReviewID($id, $userId);
-        $hasReport = $this->reportRepository->findReport($id, $userId);
+        if (Auth::check()) {
+            $userId = Auth::user()->id;
+            $hasLike = $this->rateReviewValRepository->findReviewID($id, $userId);
+            $hasReport = $this->reportRepository->findReport($id, $userId);
+            $collection = $this->collectionRepository->userCollection($userId);
+            $checkIfInCol = $this->collectionRepository->checkIfIn($id);
+            $collection_all = $this->collectionRepository->all();
+        }
         $rateReview = $this->rateReviewRepository->findRateLike();
         $comments = $this->commentRepository->all();
         $rateValId = $this->rateReviewValRepository->findRate($id);
         $countComment = $this->commentRepository->getCommentNumber($id);
         $countLike = $this->rateReviewValRepository->getLikes($id);
-        $collection = $this->collectionRepository->userCollection(Auth::user()->id);
-        $checkIfInCol = $this->collectionRepository->checkIfIn($id);
-        $collection_all = $this->collectionRepository->all();
         $like_user = $this->rateReviewValRepository->getUserLike($id);
         return view('frontend.review.show-review', compact(
             'review',

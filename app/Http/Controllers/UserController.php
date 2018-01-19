@@ -65,6 +65,10 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'avatar' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
+            'name' => 'required',
+        ]);
         $user = $this->userRepository->find($id);
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
