@@ -16,6 +16,11 @@ class ReportRepository implements ReportRepositoryInterface
         $report->save();
     }
 
+    public function all()
+    {
+        return Report::all();
+    }
+
     public function findReport($id, $userId)
     {
         return Report::where('review_id', '=', $id)->where('user_id', '=', $userId)->get()->count();

@@ -8,7 +8,7 @@
         </button>
     </div>
     <div class="collapse navbar-collapse">
-        <div class="input-group stylish-input-group head-bar">
+        <div class="input-group stylish-input-group head-bar padding0">
         <ul class="nav navbar-nav">
             <li><a class="navbar-brand" href="{{ route('home') }}">
         {{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'logo-img']) }}
@@ -48,6 +48,11 @@
                         <li>
                             <a href="{{ route('logout') }}">{{ trans('messages.logout') }}</a>
                         </li>
+                        @if (Auth::user()->level == config('const.roleAdmin'))
+                            <li>
+                                <a href="{{ route('adminPage') }}">{{ trans('messages.admin-page') }}</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

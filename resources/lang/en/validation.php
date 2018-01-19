@@ -9,5 +9,7 @@ return [
     'price-required' => 'Price range is required',
     'image-required' => 'Image is required',
     'image-wrong' => 'Image must be .jpg, .png, .gif or .svg',
+    'image-max' => 'Image is too large',
+    'user-name-required' => 'Username is required',
     'content.required' => 'Content is required',
 ];

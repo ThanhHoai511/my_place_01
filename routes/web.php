@@ -10,12 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/login', 'HomeController@index')->name('home')->middleware('CheckLogout');
 Auth::routes();
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::resource('users', 'UserController');
+Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdmin'], function () {
+    Route::get('/', 'AdminController@index')->name('adminPage');
+    Route::resource('users', 'UserController')->middleware('CheckAdmin');
     Route::resource('category', 'CategoryController');
     Route::resource('city', 'CityController');
     Route::resource('district', 'DistrictController');
@@ -27,7 +28,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('reports', 'ReportController');
     Route::post('approve', 'ReportController@approve')->name('approve');
 });
-Route::group(['prefix' => 'member'], function () {
+Route::group(['prefix' => '/'], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/search', 'SearchController@searchKey')->name('search');
     Route::resource('reviews', 'ReviewController');
     Route::resource('collection', 'CollectionController');

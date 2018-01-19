@@ -12,7 +12,7 @@ use App\Repositories\Contracts\ImageRepositoryInterface;
 use App\Repositories\Contracts\RateReviewValRepositoryInterface;
 use App\Repositories\Contracts\PlaceRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Auth;
 
 class UserController extends Controller
@@ -63,7 +63,7 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $this->validate($request, [
             'avatar' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
