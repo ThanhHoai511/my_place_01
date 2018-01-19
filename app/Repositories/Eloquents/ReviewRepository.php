@@ -56,6 +56,7 @@ class ReviewRepository implements ReviewRepositoryInterface
     {
         $review = Review::findOrFail($id);
         $review->submary = $dataValue['submary'];
+        $review->content = $dataValue['content'];
         $review->place_id = $dataValue['place_id'];
         $review->timewrite = $dataValue['timewrite'];
         $review->service_rate = $dataValue['service_rate'];

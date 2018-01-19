@@ -151,15 +151,25 @@ class ReviewController extends Controller
                 'timewrite',
                 'place_id'
             );
-            if ($request->service_rate == null) {
+            if ($request->service_rate == null && $request->quality_rate == null) {
                 $dataValue['service_rate'] = $request->service_rate_old;
-            } else {
-                $dataValue['service_rate'] = $request->service_rate;
-            }
-            if ($request->quality_rate == null) {
                 $dataValue['quality_rate'] = $request->quality_rate_old;
-            } else {
+            } elseif ($request->service_rate == null && $request->quality_rate != null) {
+                $dataValue['quality_rate_old'] = $request->quality_rate_old;
                 $dataValue['quality_rate'] = $request->quality_rate;
+                $dataValue['service_rate'] = $request->service_rate_old;
+                $updateQualityRate = $this->placeRepository->updateQualityRate($dataValue, $id);
+            } elseif ($request->service_rate != null && $request->quality_rate == null) {
+                $dataValue['service_rate_old'] = $request->service_rate_old;
+                $dataValue['service_rate'] = $request->service_rate;
+                $dataValue['quality_rate'] = $request->quality_rate_old;
+                $updateServiceRate = $this->placeRepository->updateServiceRate($dataValue, $id);
+            } else {
+                $dataValue['service_rate_old'] = $request->service_rate_old;
+                $dataValue['service_rate'] = $request->service_rate;
+                $dataValue['quality_rate_old'] = $request->quality_rate_old;
+                $dataValue['quality_rate'] = $request->quality_rate;
+                $updateRateAll = $this->placeRepository->updateRateAll($dataValue, $id);
             }
                 $dataValue['user_id'] = Auth::user()->id;
                 $dataValue['status'] = config('checkbox.checktrue');
@@ -168,7 +178,7 @@ class ReviewController extends Controller
                 $requestImage = $this->imageRepository->create($data, $id);
             }
 
-            return redirect()->route('reviews.edit', $id);
+            return redirect()->route('home', $id);
         } catch (Exception $e) {
             Log::error($e);
 
@@ -207,9 +217,15 @@ class ReviewController extends Controller
         $userId = Auth::user()->id;
         $avatarUser = Auth::user()->avatar;
         $nameUser = Auth::user()->name;
-        $resultComment = $this->commentRepository->create($content, $reviewId, $userId);
-
-        return response(view('frontend.showcoment.show-comment', compact('content'))->render());
+        $data = $this->commentRepository->create($content, $reviewId, $userId);
+        return response(view('frontend.showcoment.show-comment', compact(
+            'content',
+            'data',
+            'userId',
+            'avatarUser',
+            'nameUser',
+            'reviewId'
+        ))->render());
     }
 
     public function updateComment(Request $request)

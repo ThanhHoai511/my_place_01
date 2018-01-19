@@ -47,7 +47,8 @@ class SearchController extends Controller
             ->header('Content-type', 'application/json');
     }
 
-    public function searchKey(Request $request) {
+    public function searchKey(Request $request)
+    {
         $key = $request->key;
         $key = trim($key);
         $places = $this->placeRepository->search($key);

@@ -29,6 +29,10 @@ class CommentRepository implements CommentRepositoryInterface
         $comment->user_id = $userId;
         $comment->content = $content;
         $comment->save();
+        $data['id'] = $comment->id;
+        $data['created_at'] = $comment->created_at;
+
+        return $data;
     }
 
     public function update($commentId, $reviewId, $contentUpdate, $userId)

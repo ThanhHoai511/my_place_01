@@ -12,6 +12,7 @@
 */
 Route::get('/login', 'HomeController@index')->name('home')->middleware('CheckLogout');
 Auth::routes();
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdmin'], function () {
@@ -28,9 +29,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdmin'], function () {
     Route::resource('reports', 'ReportController');
     Route::post('approve', 'ReportController@approve')->name('approve');
 });
-Route::group(['prefix' => '/'], function () {
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'member'], function () {
     Route::get('/search', 'SearchController@searchKey')->name('search');
     Route::resource('reviews', 'ReviewController');
     Route::resource('collection', 'CollectionController');
@@ -43,6 +42,7 @@ Route::group(['prefix' => '/'], function () {
     Route::post('updatecomment', 'ReviewController@updateComment');
     Route::post('deletecomment', 'ReviewController@deleteComment');
     Route::get('reviews/{id}/collection', 'ReviewController@addToCollection')->name('savecollection');
+    Route::post('removecolection', 'CollectionController@removeConlection')->name('removecolection');
     Route::get('reviews/{id}/save/{collection_id}', 'CollectionController@save')->name('savereview');
     Route::get('showplace/{id}', 'PlaceController@showPlace')->name('showplace');
     Route::get('editplace/{id}', 'PlaceController@editPlace')->name('editplace');

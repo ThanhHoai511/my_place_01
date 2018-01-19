@@ -86,7 +86,7 @@
     @if(Auth::user()->id == $review->user_id)
     <div class="row">
         <div><a href="{{ route('reviews.edit', $review->id) }}" class="link"><i class="fa fa-pencil-square-o fa-lg"></i>{{ trans('messages.edit') }}</a>
-        |<a href=" {{ route('home') }} " class="remove-review"><i class="fa fa-remove fa-lg" data-id="{{ $review->id }}"></i>{{ trans('messages.delete') }}</a></div>
+        |<a href=" {{ route('home') }} " class="remove-review" data-id="{{ $review->id }}"><i class="fa fa-remove fa-lg" data-id="{{ $review->id }}"></i>{{ trans('messages.delete') }}</a></div>
     </div>
     @endif
         <div class="comment">
@@ -98,7 +98,7 @@
     <div class="show-comment">
         <div class="row">
             @foreach($showComment as $comment)
-            <div class="comment-show">
+            <div class="comment-show comment-{{ $comment->id }}">
                 {{ Form::hidden('lesstext', $comment->id, array('class' => 'comment-id')) }}
                 <div class="col-md-10">
                     {{ HTML::image($comment->user->pathImage, null, ['class' => 'comment-ava']) }}
@@ -122,9 +122,9 @@
                                         </button>
                                 </li>
                                 <li>
-                                    <form class="delete" enctype="multipart/form-data"> 
+                                    <form class="delete-comment" enctype="multipart/form-data"> 
                                         {{ csrf_field() }}
-                                        <button type="submit" class="btn delete btn-manage">
+                                        <button type="button" class="btn delete-comment btn-manage">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i> 
                                             {{ trans('delete') }}
                                         </button>

@@ -101,4 +101,52 @@ class PlaceRepository implements PlaceRepositoryInterface
     {
         return Place::orderBy('total_rate', 'DESC')->take(5)->get();
     }
+
+    public function updateQualityRate($dataValue)
+    {
+        try {
+            $place = Place::findOrFail($dataValue['place_id']);
+            $place->avg_quality_rate = $place->avg_quality_rate
+            - $dataValue['quality_rate_old']
+            + $dataValue['quality_rate'];
+            $place->save();
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return back()->withErrors(trans('messages.updatefail'));
+        }
+    }
+
+    public function updateServiceRate($dataValue, $id)
+    {
+        try {
+            $place = Place::findOrFail($dataValue['place_id']);
+            $place->avg_service_rate = $place->avg_service_rate
+            - $dataValue['service_rate_old']
+            + $dataValue['service_rate'];
+            $place->save();
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return back()->withErrors(trans('messages.updatefail'));
+        }
+    }
+
+    public function updateRateAll($dataValue, $id)
+    {
+        try {
+            $place = Place::findOrFail($dataValue['place_id']);
+            $place->avg_service_rate = $place->avg_service_rate
+            - $dataValue['service_rate_old']
+            + $dataValue['service_rate'];
+            $place->avg_quality_rate = $place->avg_quality_rate
+            - $dataValue['quality_rate_old']
+            + $dataValue['quality_rate'];
+            $place->save();
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return back()->withErrors(trans('messages.updatefail'));
+        }
+    }
 }

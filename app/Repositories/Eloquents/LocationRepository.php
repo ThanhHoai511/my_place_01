@@ -31,7 +31,8 @@ class LocationRepository implements LocationRepositoryInterface
         $location->save();
     }
 
-    public function count() {
+    public function count()
+    {
         return Location::count();
     }
 

@@ -21,4 +21,10 @@ interface PlaceRepositoryInterface
     public function addPlace($namePlace, $address, $image);
 
     public function countReview($placeId);
+
+    public function updateQualityRate($dataValue);
+
+    public function updateRateAll($dataValue, $id);
+
+    public function updateServiceRate($dataValue, $id);
 }
