@@ -3,7 +3,7 @@
         <div class="large-2 medium-4 small-12 columns top-part-no-padding">
             <div class="logo-bg">
                 {{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'logo-admin']) }}
-                 <a href="#" class="logo-title"> myplaces</a>
+                 <a href="{{ route('adminPage') }}" class="logo-title"> myplaces</a>
                 <i class="fi-list toggles" data-toggle="hide"></i>
             </div>
         </div>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="large-4 medium-6 small-12 columns text-center">
                     <div class="row">
-                        <div class="medium-3 small-3 columns">
+{{--                         <div class="medium-3 small-3 columns">
                             <div class="notification">
                                 <i class="fi-mail"></i>
                                 <span class="mail">4</span>
@@ -36,7 +36,7 @@
                         <div class="medium-3 small-3 columns">
                             <i class="fi-power power-off"></i>
                         </div>
-                    </div>
+ --}}                    </div>
                 </div>
             </div>
             <div class="clearfix"></div>

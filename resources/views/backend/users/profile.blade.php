@@ -11,7 +11,8 @@
         </div>
         <div id="profile">
             <div class="row">
-                <div class="large-4 medium-6 columns">
+                @include('errors.note')
+                <div class="large-5 medium-6 columns">
                     <div class="profile-item white-bg border">
                         <h4>{{ $user->name }}</h4>
                         <hr />
@@ -28,27 +29,23 @@
                     </div>
 
                     <div class="ongoing-task white-bg border">
-                        <h4>{{ trans('messages.ongoing-task') }}</h4>
+                        <h4>{{ trans('messages.activities') }}</h4>
                         <hr />
-                        <span>{{ trans('messages.something') }}</span>
+                        <span>{{ trans('messages.review') }}</span>
                         <div class="progress ">
-                            <span class="meter yellow-progress" style="width: 40%"></span>
+                            5 {{ trans('messages.reviews') }}
                         </div>
-                        <span>{{ trans('messages.something') }}</span>
+                        <span>{{ trans('messages.collection') }}</span>
                         <div class="progress ">
-                            <span class="meter purple-progress" style="width: 10%"></span>
+                            6 {{ trans('messages.collection') }}
                         </div>
-                        <span>{{ trans('messages.something') }}</span>
+                        <span>{{ trans('messages.follow') }}</span>
                         <div class="progress success">
-                            <span class="meter" style="width: 90%"></span>
-                        </div>
-                        <span>{{ trans('messages.something') }}</span>
-                        <div class="progress alert">
-                            <span class="meter" style="width: 50%"></span>
+                            5 {{ trans('messages.user')}}
                         </div>
                     </div>
                 </div>
-                <div class="large-8 medium-6 columns">
+                <div class="large-7 medium-6 columns">
                     <div class="profile-info">
                         <div class="white-bg">
                             <div class="custom-panel-heading">
@@ -73,8 +70,8 @@
                                 <div class="content" id="panel2-3">
                                     <h4 class="coral">{{ trans('messages.change-pass') }}</h4>
                                     <hr />
-                                    {{ Form::password('newpassword', array('id' => 'Password2', 'placeholder' => Lang::get('messages.new-pass'), 'required' => 'true')) }}
-                                    {{ Form::password('confirmpassword', array('id' => 'Password3', 'placeholder' => Lang::get('messages.confirm-pass'), 'required' => 'true')) }}
+                                    {{ Form::password('newpassword', array('id' => 'newpassword', 'placeholder' => Lang::get('messages.new-pass'))) }}
+                                    {{ Form::password('confirmpassword', array('id' => 'confirmpassword', 'placeholder' => Lang::get('messages.confirm-pass'))) }}
                                 </div>
                                 <div class="content" id="panel2-4">
                                     <h4 class="coral">{{ trans('messages.security-settings') }}</h4>

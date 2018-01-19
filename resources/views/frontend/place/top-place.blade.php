@@ -21,27 +21,27 @@
                             @endif
                             <tr>
                                 <td>{{ trans('messages.review') }}</td>
-                                <td>{{ $infoPlace->total_rate }} lượt</td>
+                                <td>{{ $infoPlace->total_rate }} {{ trans('time') }}</td>
                             </tr>
                             <tr>
-                                <td>{{ trans('messages.add') }}</td>
+                                <td>{{ trans('messages.address') }}</td>
                                 <td>{{ $infoPlace->add }}</td>
                             </tr>
                             @if($infoPlace->open_hour != null)
                             <tr>
-                                <td>{{ trans('messages.openhour') }}</td>
+                                <td>{{ trans('messages.open-hour') }}</td>
                                 <td>{{ $infoPlace->open_hour }}</td>
                             </tr>
                             @endif
                             @if($infoPlace->close_hour != null)
                             <tr>
-                                <td>{{ trans('messages.closehour') }}</td>
+                                <td>{{ trans('messages.close-hour') }}</td>
                                 <td>{{ $infoPlace->close_hour }}</td>
                             </tr>
                             @endif
                             @if($infoPlace->range != null)
                             <tr>
-                                <td>{{ trans('messages.range') }}</td>
+                                <td>{{ trans('messages.price-range') }}</td>
                                 <td>{{ $infoPlace->range }} đ</td>
                             </tr>
                             @endif
@@ -66,7 +66,7 @@
                                                 <i class='fa fa-star fa-fw'></i>
                                             </li>
                                         </ul>
-                                        <span>{{ number_format($infoPlace->avg_service_rate/$infoPlace->total_rate, 2) }}/5 in {{ $infoPlace->total_rate }} rated </span>
+                                        <span>{{ number_format($infoPlace->avg_service_rate/$infoPlace->total_rate, 2) }}/5 {{ trans('messages.in') }} {{ $infoPlace->total_rate }} {{ trans('messages.rated') }} </span>
                                     </div>
                                 </td>
                             </tr>

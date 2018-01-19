@@ -14,8 +14,8 @@
                 <div class="large-3 medium-6 small-12 columns">
                     <div class="stats border">
                         <div class="left">
-                            {{ trans('messages.sales') }}
-                            <h3>$97334001</h3>
+                            {{ trans('messages.report') }}
+                            <h4>{{ $numberReport }} {{ trans('messages.report') }}</h4>
                         </div>
                         <i class="fi-price-tag right sales"></i>
                         <div class="clearfix"></div>
@@ -24,8 +24,8 @@
                 <div class="large-3 medium-6 small-12 columns">
                     <div class="stats border">
                         <div class="left">
-                            {{ trans('messages.orders') }}
-                            <h3>400</h3>
+                            {{ trans('messages.place') }}
+                            <h4>{{ $numberPending }} {{ trans('messages.placepending') }}</h4>
                         </div>
                         <i class="fi-shopping-cart right orders"></i>
                         <div class="clearfix"></div>
@@ -35,7 +35,7 @@
                     <div class="stats border">
                         <div class="left">
                             {{ trans('messages.profit') }}
-                            <h3>$600</h3>
+                            <h4>$600</h4>
                         </div>
                         <i class="fi-dollar right profit"></i>
                         <div class="clearfix"></div>
@@ -45,7 +45,7 @@
                     <div class="stats border">
                         <div class="left">
                             {{ trans('messages.users') }}
-                            <h3>100</h3>
+                            <h4>{{ $numberUser }} {{ trans('messages.users') }}</h4>
                         </div>
                         <i class="fi-torso right user"></i>
                         <div class="clearfix"></div>

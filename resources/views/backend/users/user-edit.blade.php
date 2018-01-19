@@ -11,7 +11,7 @@
         </div>
         <div id="profile">
             <div class="row">
-                <div class="large-4 medium-6 columns">
+                <div class="large-5 medium-6 columns">
                     <div class="profile-item white-bg border">
                         <h4>Ruth Baby</h4>
                         <hr />
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="large-8 medium-6 columns">
+                <div class="large-7 medium-6 columns">
                     <div class="profile-info">
                         <div class="white-bg">
                             <div class="custom-panel-heading">

@@ -467,7 +467,7 @@ textarea {
     font-size: 7px;
 }
 .padding0 {
-    padding: 0px;
+    padding: 0px !important;
 }
 .navbar-brand {
     color: white !important;
@@ -486,9 +486,6 @@ textarea {
 }
 .icon {
     color: #df5a48;
-}
-.head-dropdown {
-    margin: 5px;
 }
 .head-dropdown-ul {
     padding:0;

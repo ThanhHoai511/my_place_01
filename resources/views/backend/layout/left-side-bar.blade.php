@@ -4,7 +4,7 @@
             <li>
                 <a class="padding-0" href="{{ route('users.index') }}">
                     <div class="col-md-4"><i class="flaticon-profile4"></i></div>
-                    {{ trans('messages.profile') }}
+                    {{ trans('messages.user-list') }}
                 </a>
             </li>
             <li>
@@ -36,9 +36,19 @@
                                             <a href="{{ asset('/admin/place') }}">{{ trans('messages.place') }}</a>
                                         </li>
                                         @if (!$countPlace)
-                                            <li><a href="{{ action('PlaceController@listPlace') }}"><span></span>{{ trans('messages.placepending') }}</a></li>
+                                            <li>
+                                                <a href="{{ action('PlaceController@listPlace') }}">
+                                                    <span></span>
+                                                    {{ trans('messages.placepending') }}</a>
+                                            </li>
                                         @else
-                                            <li><a href="{{ action('PlaceController@listPlace') }}">{{ trans('messages.placepending') }}<span class="count-report-news">{{ $countPlace }}</span></a></li>
+                                            <li>
+                                                <a href="{{ action('PlaceController@listPlace') }}" class="position-relative">
+                                                    {{ trans('messages.placepending') }}
+                                                    <i class="fa fa-circle report"></i>
+                                                    <span class="place-pending">{{ $countPlace }}</span>
+                                                </a>
+                                            </li>
                                         @endif
                                     </ul>
                                 </div>
@@ -47,14 +57,14 @@
                     </li>
                 </ul>
             </li>
-            <li>
+{{--             <li>
                 <a class="padding-0" href="#">
                     <div class="col-md-4">
                         <span class="flaticon-mailbox10"></span>
                     </div>
                     {{ trans('messages.slide') }}
                 </a>
-            </li>
+            </li> --}}
             @if (!$countReport)
                 <li>
                     <a class="padding-0" href="{{ action('ReportController@index') }}">

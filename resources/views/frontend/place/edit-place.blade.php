@@ -18,20 +18,29 @@
         </div>
         <div class="field">
             {{ Form::label('place', trans('messages.choose-city'), array('class' => 'mylabel')) }}
-            {{ Form::select('city', $cityId, null,['class' => 'form-control']) }}
+            @if (isset($city))
+                {{ Form::select('city', $cityId, $city->id, ['class' => 'city-select form-control', 'placeholder' => 'choose a city']) }}
+            @else
+                {{ Form::select('city', $cityId, null, ['class' => 'form-control city-select ', 'placeholder' => 'choose a city']) }}
+            @endif
         </div>
         <div class="field">
-            {{ Form::label('place', trans('messages.choose-dist'), array('class' => 'mylabel')) }}
-            {{ Form::select('dist_id', $distId, null, ['class' => 'form-control']) }}
+        {{ Form::label('dist', trans('messages.choose-dist'), array('class' => 'mylabel')) }}
+        @if ($place->dist_id)
+        <div id="dist-box">
+            {{ Form::select('dist_id', $distId, $place->dist_id, ['class' => 'form-control', 'required' => 1]) }}
+        </div>
+        @else
+        <div id="dist-box"></div>
+        @endif
         </div>
         <div class="field">
             {{ Form::label('place', trans('messages.open-hour'), array('class' => 'mylabel')) }}
             {{ Form::time('open', $place->open_hour, ['class' => 'form-control']) }} 
         </div>
-        <a class="mid-text">{{ trans('messages.to') }}</a>
         <div class="field">
-            {{ Form::label('place', trans('messages.open-hour'), array('class' => 'mylabel')) }}
-            {{ Form::time('close', $place->open_hour, ['class' => 'form-control']) }} 
+            {{ Form::label('place', trans('messages.close-hour'), array('class' => 'mylabel')) }}
+            {{ Form::time('close', $place->close_hour, ['class' => 'form-control']) }} 
         </div>
         <div class="field">
             {{ Form::label('place', trans('messages.price-range'), array('class' => 'mylabel')) }}
@@ -51,4 +60,22 @@
         </div>
     {{ Form::close() }}
 </div>
+@stop
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.city-select').on('change', function() {
+            var getdistURL = window.location.protocol + '//' + window.location.host + '/get-dists?key=' + this.value;
+            $.getJSON(getdistURL, function(data) {
+                console.log(data);
+                var text = '<select name="dist_id" class="form-control" required>';
+                data.forEach(function(d) {
+                    text += '<option value="' + d.id + '">' + d.name + '</option>';
+                });
+                text += '</select>';
+                $('#dist-box').html(text);
+            });
+        })
+    });
+</script>
 @stop

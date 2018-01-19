@@ -11,14 +11,28 @@ class LocationRepository implements LocationRepositoryInterface
     {
         $location = new Location;
         $location->place_id = $id;
-        $location->open_hour = $input['open'];
+        if ($input['open']) {
+            $location->open_hour = $input['open'];
+        }
         $location->name = $input['name'];
         $location->add = $input['add'];
-        $location->close_hour = $input['close'];
-        $location->dist_id = $input['dist_id'];
-        $location->range = $input['range'];
-        $location->image = $input['image'];
+        if ($input['close']) {
+            $location->close_hour = $input['close'];
+        }
+        if ($input['dist_id']) {
+            $location->dist_id = $input['dist_id'];
+        }
+        if ($input['range']) {
+            $location->range = $input['range'];
+        }
+        if ($input['image']) {
+            $location->image = $input['image'];
+        }
         $location->save();
+    }
+
+    public function count() {
+        return Location::count();
     }
 
     public function all()

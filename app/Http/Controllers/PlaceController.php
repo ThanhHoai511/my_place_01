@@ -240,9 +240,9 @@ class PlaceController extends Controller
                 $file->move(config('asset.image_path.imagereviews'), $input['image']);
             }
             $resultPlace = $this->locationRepository->create($input, $id);
+            $alert = ['pass' => trans('messages.request-pending')];
 
-            return redirect()->action('PlaceController@editPlace', $id)
-            ->with('status', trans('messages.deletesuccessfully'));
+            return redirect()->action('PlaceController@showPlace', $id)->with($alert);
         } catch (Exception $e) {
             Log::error($e);
 
