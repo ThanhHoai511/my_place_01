@@ -145,11 +145,12 @@ class UserController extends Controller
         ));
     }
 
-    public function showCollection($id) {
+    public function showCollection($id)
+    {
         $user = $this->userRepository->find($id);
         $collection = $this->collectionRepository->userCollection($id);
         $collectionItem = $this->collectionRepository->findUserCollectionReview($id);
 
-        return view('frontend.user.collection', compact('collection',  'user', 'collectionItem'));
+        return view('frontend.user.collection', compact('collection', 'user', 'collectionItem'));
     }
 }

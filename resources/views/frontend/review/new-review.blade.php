@@ -22,7 +22,7 @@
         </div>
         <div class="field">
             {{ Form::label('place', trans('messages.short-description'), array('class' => 'mylabel')) }}
-            {{ Form::text('title', null, ['id' => 'submary', 'required' => 'true']) }}
+            {{ Form::text('submary', null, ['id' => 'submary', 'required' => 'true']) }}
         </div>
         <div class="field">
             {{ Form::label('place', trans('messages.your-review'), array('class' => 'mylabel')) }}

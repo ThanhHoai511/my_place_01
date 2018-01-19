@@ -6,7 +6,8 @@
             <h2 class="text-center">{{ trans('messages.user-collection', ['name' => $user->name]) }}</h2>
         </div>
         @foreach ($collection as $value)
-            <div>
+        <div class="row colection-{{$value->id}}">
+            <div class="col-md-8">
                 <h3>{{ $value->name}}</h3>
                 <ul class="row padding0">
                     @foreach ($collectionItem as $item)
@@ -24,7 +25,11 @@
                     @endforeach
                 </ul>
             </div>
+            <div class="col-md-4">
+                <h3><i class="fa fa-trash remove-colection" data-id="{{ $value->id }}" data-name="{{ $value->name }}" aria-hidden="true"></i></h3>
+            </div>
             <hr>
+            </div>
         @endforeach
     </div>
 </div>

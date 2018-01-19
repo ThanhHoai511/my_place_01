@@ -34,16 +34,16 @@
                                         <li class='star selected' title='Poor' data-value='1'>
                                             <i class='fa fa-star fa-fw'></i>
                                         </li>
-                                        <li class='star @if ($review->quality_rate >= 2 ) selected @endif' title='Fair' data-value='2'>
+                                        <li class='star @if ($review->service_rate >= 2 ) selected @endif' title='Fair' data-value='2'>
                                             <i class='fa fa-star fa-fw'></i>
                                         </li>
-                                        <li class='star @if ($review->quality_rate >= 3 ) selected @endif' title='Good' data-value='3'>
+                                        <li class='star @if ($review->service_rate >= 3 ) selected @endif' title='Good' data-value='3'>
                                             <i class='fa fa-star fa-fw'></i>
                                         </li>
-                                        <li class='star @if ($review->quality_rate >= 4 ) selected @endif' title='Excellent' data-value='4'>
+                                        <li class='star @if ($review->service_rate >= 4 ) selected @endif' title='Excellent' data-value='4'>
                                             <i class='fa fa-star fa-fw'></i>
                                         </li>
-                                        <li class='star @if ($review->quality_rate == 5 ) selected @endif' title='WOW!!!' data-value='5'>
+                                        <li class='star @if ($review->service_rate == 5 ) selected @endif' title='WOW!!!' data-value='5'>
                                             <i class='fa fa-star fa-fw'></i>
                                         </li>
                                 </ul>

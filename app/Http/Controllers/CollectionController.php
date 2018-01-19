@@ -32,7 +32,7 @@ class CollectionController extends Controller
                 $input['collection_id'] = $collection_id;
                 $this->collectionRepository->saveToCollection($input);
 
-                return redirect('/member/home')
+                return redirect()->route('home')
                 ->with('status', trans('messages.successfull'));
             } catch (Exception $e) {
                 Log::error($e);
@@ -72,7 +72,18 @@ class CollectionController extends Controller
             $alert = ['error' => trans('messages.error-occur')];
 
             return back()->with($alert);
-            
         }
+    }
+
+    public function removeConlection(Request $request)
+    {
+        $collectionId = $request->collectionId;
+        $collectionName = $request->collectionName;
+        $deleteCollection = $this->collectionRepository->destroy($collectionId);
+
+        return response()->json([
+            'collectionId' => $collectionId,
+            'collectionName' => $collectionName,
+        ]);
     }
 }

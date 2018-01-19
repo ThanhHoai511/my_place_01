@@ -62,7 +62,13 @@ class DistrictController extends Controller
         $getCity = $this->cityRepository->findOrFail($dist->city_id);
         $dists = $this->districtRepository->paginate();
         
-        return view('backend.place.dist-edit', compact('dist', 'dists', 'cityId', 'cities', 'getCity'));
+        return view('backend.place.dist-edit', compact(
+            'dist',
+            'dists',
+            'cityId',
+            'cities',
+            'getCity'
+        ));
     }
 
     public function update(DistrictRequest $request, $id)

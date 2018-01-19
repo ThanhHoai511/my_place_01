@@ -8,13 +8,13 @@
             </h2>
         </div>
         <div class="field">
-            {{ Form::hidden('place_id', $review->id, ['id' => 'place_id']) }}
-            {{ Form::hidden('service_rate_old', $review->service_rate, ['id' => 'service_rate_id']) }}
-            {{ Form::hidden('quality_rate_old', $review->quality_rate, ['id' => 'quality_rate_id']) }}
+            {{ Form::hidden('place_id', $review->place_id, ['id' => 'place_id']) }}
+            {{ Form::hidden('service_rate_old', $review->service_rate, ['id' => 'service_rate_id_old']) }}
+            {{ Form::hidden('quality_rate_old', $review->quality_rate, ['id' => 'quality_rate_id_old']) }}
             {{ Form::hidden('service_rate', null, ['id' => 'service_rate_id']) }}
             {{ Form::hidden('quality_rate', null, ['id' => 'quality_rate_id']) }}
             {{ Form::label('place', trans('messages.place'), array('class' => 'mylabel')) }}
-            {{ Form::text('place', $review->place->name, ['id' => 'searchPlace', 'required' => 'true', 'readonly' => 'true']) }}
+            {{ Form::text('placename', $review->place->name, ['id' => 'searchPlace', 'required' => 'true', 'readonly' => 'true']) }}
             <div id="suggesstion-box"></div>
         </div>
         <div class="field">

@@ -79,11 +79,12 @@ class CollectionRepository implements CollectionRepositoryInterface
         $collection->save();
     }
 
-    public function checkIfIn($id) {
-        $collection = Collection::where(function($query) {
+    public function checkIfIn($id)
+    {
+        $collection = Collection::where(function ($query) {
             $query->where('user_id', Auth::user()->id)
                 ->orWhere('user_id', 1);
-            })->where('review_id', $id)
+        })->where('review_id', $id)
                 ->get();
         if ($collection != null) {
             return $collection;
@@ -91,28 +92,30 @@ class CollectionRepository implements CollectionRepositoryInterface
             return 'exist';
         }
     }
-    public function findCollectionVals($review_id, $collection_id) {
-        $collection = Collection::where(function($query) {
+    public function findCollectionVals($review_id, $collection_id)
+    {
+        $collection = Collection::where(function ($query) {
             $query->where('user_id', Auth::user()->id)
                 ->orWhere('user_id', 1);
-            })
-            ->where('review_id', $review_id)
-            ->where('collection_id', $collection_id)
-            ->first();
+        })
+        ->where('review_id', $review_id)
+        ->where('collection_id', $collection_id)
+        ->first();
         return $collection;
     }
 
-    public function findUserCollectionReview($user_id) {
+    public function findUserCollectionReview($user_id)
+    {
         return Collection::whereIn('user_id', [$user_id, 1])
             ->where('review_id', '<>', null)
             ->get();
     }
 
     public function checkExist($review_id, $collection_id) {
-        $collection = Collection::where(function($query) {
+        $collection = Collection::where(function ($query) {
             $query->where('user_id', Auth::user()->id)
                 ->orWhere('user_id', 1);
-            })
+        })
             ->where('review_id', $review_id)
             ->where('collection_id', $collection_id)
             ->get();
@@ -123,5 +126,10 @@ class CollectionRepository implements CollectionRepositoryInterface
     public function delete($id)
     {
         return Collection::destroy($id);
+    }
+
+    public function destroy($collectionId)
+    {
+        return Collection::destroy($collectionId);
     }
 }
