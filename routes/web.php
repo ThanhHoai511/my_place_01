@@ -10,9 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
@@ -30,9 +28,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('approve', 'ReportController@approve')->name('approve');
 });
 Route::group(['prefix' => 'member'], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/search', 'SearchController@searchKey')->name('search');
-    Route::resource('reviews', 'ReviewController')->middleware('auth');
+    Route::resource('reviews', 'ReviewController');
     Route::resource('collection', 'CollectionController');
     Route::post('removereview', 'ReviewController@removeReview')->name('removeReview');
     Route::post('sendreport', 'ReportController@sendReport')->name('sendreport');

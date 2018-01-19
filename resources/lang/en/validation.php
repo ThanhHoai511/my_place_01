@@ -8,5 +8,6 @@ return [
     'place-unique' => 'Place\'s name must be unique',
     'price-required' => 'Price range is required',
     'image-required' => 'Image is required',
-    'image-wrong' => 'Image must be .jpg, .png, .gif or .svg'
+    'image-wrong' => 'Image must be .jpg, .png, .gif or .svg',
+    'content.required' => 'Content is required',
 ];

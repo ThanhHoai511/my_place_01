@@ -1,10 +1,20 @@
 @extends('frontend.master')
 @section('main')
 <div class="block">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row idea-title show-review-title">
         {{ HTML::image($review->user->pathImage) }}
         <a href="{{ route('mywall', $review->user_id) }}">{{ $review->user->name }}</a>
-                <div class="expand dropdown">
+        <div class="expand dropdown">
+        @if(Auth::check())
         {{ Form::button('<i class="fa fa-chevron-down fa-lg"></i>', array('class' => 'btn btn3 dropdown-toggle', 'data-toggle' => 'dropdown')) }}
             <ul class="dropdown-menu dropdown-menu-right collection-ul">
                 <li>
@@ -33,21 +43,21 @@
                             {{ Form::text('content') }}
                             <button type="submit" class="btn btn2">
                                 {{ Form::hidden('reviewId', $review->id) }}
-                                <i class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></i> 
+                                <i class="fa fa-bug" aria-hidden="true"></i>
                                 {{ trans('messages.report') }}
                             </button>
                         </li>
                     @endif
                 {{ Form::close() }}
+                @endif
             </ul>
         </div>
-    </div>
-    <div class="row idea-title show-review-title">
         <i class="fa fa-map-marker fa-lg"></i>
         <a href="{{ route('showplace', $review->place_id) }}">{{ $review->place->name }}</a>
     </div>
+    <br/>
     <p><b>{{ $review->submary }}</b></p>
-    <p class="content-review">{!! $review->content !!}</p><br />
+    <p class="content-review">{!! $review->content !!}</p>
     <div class="slide-image">
     @foreach($review->image  as $item)
     <div>
@@ -72,19 +82,19 @@
     </h4>
     @endforeach
     <h4><i class="fa fa-comment fa-lg"></i><span class="count-comment" data-count="{{ $countComment }}"> {{ $countComment }}</span> {{ trans('messages.comment') }}</h4>
+    @if(Auth::check())
     @if(Auth::user()->id == $review->user_id)
     <div class="row">
         <div><a href="{{ route('reviews.edit', $review->id) }}" class="link"><i class="fa fa-pencil-square-o fa-lg"></i>{{ trans('messages.edit') }}</a>
         |<a href=" {{ route('home') }} " class="remove-review"><i class="fa fa-remove fa-lg" data-id="{{ $review->id }}"></i>{{ trans('messages.delete') }}</a></div>
     </div>
     @endif
-    {{ Form::open(['action' => 'ReviewController@comment']) }}
         <div class="comment">
             {{ Form::text('comment', null, array('class' => 'comment-input', 'placeholder' => trans('messages.leave-comment'))) }}
             {{ Form::button(trans('messages.send'), array('class' => 'send-comment-btn btn btn2')) }}
             {{ Form::hidden('review-id', $review->id, array('id' => 'review-id')) }}
         </div>
-    {{ Form::close() }}
+    @endif
     <div class="show-comment">
         <div class="row">
             @foreach($showComment as $comment)
@@ -99,6 +109,7 @@
                         <p> {{ trans('messages.time') }} {{ $comment->created_at }}</p>
                     </div>
                 </div>
+                @if(Auth::check())
                 @if(Auth::user()->id == $comment->user_id)
                     <div class="col-md-2">
                         <div class="dropdown manage-comment">
@@ -107,7 +118,7 @@
                                 <li class="edit">
                                     <button type="submit" class="btn edit-comment btn-manage" data-comment-id="{{ $comment->id }}" data-review-id="{{ $comment->review_id }}" data-content="{{ $comment->content }}">
                                         <i class="fa fa-pencil"></i> 
-                                        {{ trans('site.edit') }}
+                                        {{ trans('edit') }}
                                         </button>
                                 </li>
                                 <li>
@@ -115,13 +126,14 @@
                                         {{ csrf_field() }}
                                         <button type="submit" class="btn delete btn-manage">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i> 
-                                            {{ trans('site.delete') }}
+                                            {{ trans('delete') }}
                                         </button>
                                     </form>
                                 </li>
                             </ul>
                         </div>
                     </div>
+                @endif
                 @endif
             </div>    
             @endforeach

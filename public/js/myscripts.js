@@ -324,7 +324,7 @@ $('.delete').on('submit', function(e) {
                 _token: $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
-                alert('Delete success id = ' + data['commentId']);
+                
             },
         }); 
     });  

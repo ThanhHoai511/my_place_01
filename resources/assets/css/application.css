@@ -269,7 +269,7 @@ textarea {
     display: none;
 }
 .morelink {
-    display: block;
+    margin: 0px !important;
 }
 .search-option {
     height: 200px;

@@ -100,10 +100,7 @@
     <div class="block">
         <div class="row idea-title">
             {{ HTML::image($review->user->pathImage) }}
-            <b>{{ trans('messages.user') }}</b>
             <a href="{{ route('mywall', $review->user_id) }}">{{ $review->user->name }}</a>
-        </div>
-        <div class="row idea-title">
             <b>{{ trans('messages.at') }}</b>
             <i class="fa fa-map-marker fa-lg"></i>
             <a href="#">{{ $review->place->name }}</a>
@@ -197,11 +194,7 @@
             <br/>
         </div>
         <div class="row idea-btn">
-            @if(Auth::check())
             <div class="btn"><i class="fa fa-eye fa-lg"></i><a href="{{ route('reviews.show', $review->id) }}">{{ trans('messages.show') }}</a></div>
-            @else
-            <div class="btn"><i class="fa fa-eye fa-lg"></i><a href="{{ route('login', $review->id) }}">{{ trans('messages.loginmore') }}</a></div>
-            @endif
         </div>
     </div>
     @endforeach
