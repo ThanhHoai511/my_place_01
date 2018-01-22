@@ -11,6 +11,4 @@ interface LocationRepositoryInterface
     public function findOrFail($id);
 
     public function delete($placeId);
-
-    public function destroy($collectionId);
 }

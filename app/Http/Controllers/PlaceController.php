@@ -171,12 +171,11 @@ class PlaceController extends Controller
             $address,
             $image
         );
-        $input['place_id'] = $resultAddress->id;
         foreach ($request->category as $value) {
+            $input['place_id'] = $resultAddress;
             $input['cate_id'] = $value;
             $cateVal = $this->categoryValRepository->create($input);
         }
-
         return response()->json([
             'namePlace' => $namePlace,
         ]);

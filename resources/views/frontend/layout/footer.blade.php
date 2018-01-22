@@ -1,5 +1,5 @@
 <footer>
-    <div class="container">
+    <div class="footer">
         myplaces <a id="date"></a>
     </div>
 </footer>
