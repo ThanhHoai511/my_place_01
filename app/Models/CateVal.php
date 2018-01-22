@@ -13,4 +13,9 @@ class CateVal extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function place()
+    {
+    	return $this->belongsTo(Place::class);
+    }
 }

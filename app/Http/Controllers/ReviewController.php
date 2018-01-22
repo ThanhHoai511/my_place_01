@@ -10,8 +10,10 @@ use App\Repositories\Contracts\RateReviewValRepositoryInterface;
 use App\Repositories\Contracts\ReportRepositoryInterface;
 use App\Repositories\Contracts\RateReviewRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\CollectionRepositoryInterface;
 use App\Repositories\Contracts\PlaceRepositoryInterface;
+use App\Http\Requests\CreateReviewRequest;
 use Storage;
 use Auth;
 
@@ -25,6 +27,7 @@ class ReviewController extends Controller
     protected $reportRepository;
     protected $collectionRepository;
     protected $placeRepository;
+    protected $categoryRepository;
 
     public function __construct(
         ReviewRepositoryInterface $reviewRepository,
@@ -34,6 +37,7 @@ class ReviewController extends Controller
         CommentRepositoryInterface $commentRepository,
         CollectionRepositoryInterface $collectionRepository,
         PlaceRepositoryInterface $placeRepository,
+        CategoryRepositoryInterface $categoryRepository,
         ReportRepositoryInterface $reportRepository
     ) {
         $this->reviewRepository = $reviewRepository;
@@ -43,15 +47,22 @@ class ReviewController extends Controller
         $this->rateReviewRepository = $rateReviewRepository;
         $this->commentRepository = $commentRepository;
         $this->reportRepository = $reportRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->collectionRepository = $collectionRepository;
     }
 
     public function create()
     {
-        return view('frontend.review.new-review');
+        $category = $this->categoryRepository->getParent();
+        $cateChild = [];
+        foreach ($category as $value) {
+            $cateChild[$value->id] = $this->categoryRepository->getChild($value->id);
+        }
+
+        return view('frontend.review.new-review', compact('category', 'cateChild'));
     }
 
-    public function store(Request $request)
+    public function store(CreateReviewRequest $request)
     {
         try {
             if ($request->hasFile('file')) {

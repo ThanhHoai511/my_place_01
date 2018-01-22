@@ -29,7 +29,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdmin'], function () {
     Route::resource('reports', 'ReportController');
     Route::post('approve', 'ReportController@approve')->name('approve');
 });
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'member'], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/search', 'SearchController@searchKey')->name('search');
     Route::resource('reviews', 'ReviewController');
     Route::resource('collection', 'CollectionController');
@@ -48,6 +52,7 @@ Route::group(['prefix' => 'member'], function () {
     Route::get('editplace/{id}', 'PlaceController@editPlace')->name('editplace');
     Route::post('uploadplace/{id}', 'PlaceController@uploadPlace')->name('uploadplace');
     Route::get('topweek', 'PlaceController@topWeek')->name('topweek');
+    Route::get('category/{id}', 'CategoryController@cate')->name('cateShow');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
         Route::get('wall/{id}', 'UserController@myWall')->name('mywall');

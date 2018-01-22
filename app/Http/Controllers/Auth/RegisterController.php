@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use Illuminate\Http\Request;
 use Auth;
 use Mail;
 use Session;
@@ -42,6 +42,7 @@ class RegisterController extends Controller
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
+        $this->middleware('guest')->except('logout');
     }
 
     /**
@@ -53,18 +54,31 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'name' => 'required',
+            'add' => 'required',
+            'phone' => 'required',
+            'birthday' => 'required|date',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
+    protected function messages()
+    {
+        return [
+            'name.required' => trans('validation.username-required'),
+            'add.required' => trans('validation.add-required'),
+            'phone.required' => trans('validation.phone-required'),
+            'birthday.required' => trans('validation.birthday-required'),
+            'birthday.date' => trans('validation.birthday-date'),
+            'password.required' => trans('validation.pass-required'),
+            'email.required' => trans('validation.email-required'),
+            'email.unique' => trans('validation.email-unique'),
+            'email.email' => trans('validation.email'),
+            'password.min' => trans('validation.pass-min'),
+        ];
+    }
+
     protected function register(Request $request)
     {
         try {

@@ -5,19 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Repositories\Contracts\CategoryValRepositoryInterface;
+use App\Repositories\Contracts\PlaceRepositoryInterface;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     protected $categoryRepository;
+    protected $categoryValRepository;
+    protected $placeRepository;
     
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
-    {
+    public function __construct(
+        CategoryRepositoryInterface $categoryRepository,
+        PlaceRepositoryInterface $placeRepository,
+        CategoryValRepositoryInterface $categoryValRepository
+    ) {
         $this->categoryRepository = $categoryRepository;
+        $this->placeRepository = $placeRepository;
+        $this->categoryValRepository = $categoryValRepository;
     }
 
     public function index()
@@ -116,12 +120,18 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function cate($id)
+    {
+        $cate_name = $this->categoryRepository->find($id);
+        $cateShow = $this->categoryValRepository->getCate($id);
+        $places = [];
+        foreach ($cateShow as $value) {
+            $places[] = $this->placeRepository->findOrFail($value->place_id);
+        }
+
+        return view('frontend.category.category', compact('places', 'cate_name'));
+    }
+
     public function destroy($id)
     {
         $categories = $this->categoryRepository->find($id);

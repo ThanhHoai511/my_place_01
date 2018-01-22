@@ -14,7 +14,24 @@
         {{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'logo-img']) }}
         myplaces</a></li>
             <li><a class="head-item-1st active" href="{{ action('HomeController@index') }}">{{ trans('messages.home') }}</a></li>
-            <li><a class="head-item-2nd" href="/pages/info">{{ trans('messages.personal') }}</a></li>
+            <div class="dropdown-cate">
+                <button class="dropbtn-cate">{{ trans('messages.category') }}</button>
+                <div class="dropdown-content-parent">
+                    @foreach ($cateParent as $value)
+                        <li class="parent">
+                            <a href="{{ route('cateShow', $value->id) }}">{{ $value->name }}</a>
+                            @if (isset($cateChild[$value->id]))
+                                <ul class="dropdown-level-2">
+                                    @foreach ($cateChild[$value->id] as $item)
+                                        <li><a href="{{ route('cateShow', $item->id) }}">{{ $item->name }} - {{ $item->type_concept }}</a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
+
+                </div>
+            </div>
         </ul>
         {{ Form::open(['action' => ['SearchController@searchKey'], 'method' => 'get']) }}
             <div class="input-group stylish-input-group search-bar">
@@ -29,7 +46,7 @@
             @if(Auth::check())
             <div class="dropdown color-white float-right">
                 <button class="btn btn-secondary dropdown-toggle color-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                        {{ HTML::image(Auth::user()->PathImage) }}
+                        {{ HTML::image(Auth::user()->PathImage, null, ['class' => 'ava-img']) }}
                     <strong>
                     {{ Auth::user()->name}}
                     </strong>
