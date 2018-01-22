@@ -28,4 +28,9 @@ class Place extends Model
     {
         return $this->hasMany(Location::class);
     }
+
+    public function cateVal()
+    {
+        return $this->hasMany(CateVal::class);
+    }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\Report;
 use App\Models\Location;
 use App\Models\Place;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,18 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Form::macro('labelWithHTML', function ($html) {
             echo '<label>'.'<input type="checkbox" name="remember" >'.$html.'</label>';
+        });
+
+        view()->composer(['frontend.layout.header'], function ($view) {
+            $cateParent = Category::where('parent_id', null)->get();
+            $cateChild = [];
+            foreach ($cateParent as $value) {
+                $cateChild[$value->id] = Category::where('parent_id', $value->id)->get();
+            }
+            $view->with([
+                'cateParent' => $cateParent,
+                'cateChild' => $cateChild,
+            ]);
         });
 
         view()->composer(['backend.layout.left-side-bar'], function ($view) {
@@ -99,6 +112,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\Contracts\LocationRepositoryInterface',
             'App\Repositories\Eloquents\LocationRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Contracts\CategoryValRepositoryInterface',
+            'App\Repositories\Eloquents\CategoryValRepository'
         );
     }
 }

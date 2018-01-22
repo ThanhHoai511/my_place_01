@@ -2,21 +2,17 @@
 
 namespace App\Repositories\Contracts;
 
-interface CategoryRepositoryInterface
+interface CategoryValRepositoryInterface
 {
     public function all();
 
     public function find($id);
 
-    public function getParent();
+    public function getCate($cateId);
 
-    public function getChild($parent_id);
+    public function getCatePlace($placeId);
 
     public function paginate();
-
-    public function showParent();
-
-    public function showConcept();
 
     public function create(array $input);
 

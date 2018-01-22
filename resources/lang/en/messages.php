@@ -190,4 +190,9 @@ return [
     'request-pending' => 'We have to send your request to Admin, please wait to be approved',
     'activities' => 'Activities',
     'reviews' => 'Reviews',
+    'successfull' => 'Successfull!',
+    'pass-match' => 'Password match!',
+    'pass-not-match' => 'Password do not match!',
+    'registersuccess' => 'Register Successfull',
+    'choose-cate' => 'Choose category',
 ];

@@ -110,7 +110,25 @@
                 <li>{{ trans('messages.postalcode') }}: <span id="postal_code"></span></li>
                 <li>{{ trans('messages.country') }}: <span id="country"></span></li>
                 <li>{{ trans('messages.latitude') }}: <span id="lat"></span></li>
-                <li>{{ trans('messages.longitude') }}: <span id="lon"></span></li>
+                <li>{{ trans('messages.longtitude') }}: <span id="lon"></span></li>
+                <ul style="display: inline;">{{ Form::label('category', trans('messages.choose-cate'), array('class' => 'mylabel')) }}
+                    @foreach ($category as $value)
+                        <li>
+                            <ul>{{ Form::checkbox('category', $value->id, null, ['class' => 'col-md-1']) }} 
+                            {{ Form::label('place', $value->name . ' - ' . $value->type_concept, array('class' => 'col-md-11')) }}
+                            @foreach ($cateChild[$value->id] as $item)
+                                @if ($item->parent_id == $value->id)
+                                <li>
+                                    <div class="col-md-1"></div>
+                                    {{ Form::checkbox('category', $item->id, null, ['class' => 'col-md-1']) }}
+                                    {{ Form::label('place', $item->name .' - '. $item->type_concept, array('class' => 'col-md-10')) }}
+                                    @endif
+                                </li>
+                            @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
+                </ul>
                 {{ Form::button(trans('messages.add-address'), ['class' => 'upload btn btn-primary btn2 col-md-3 add-address']) }}
             </ul>
         </div>
@@ -133,4 +151,9 @@
     
     document.getElementById("defaultOpen").click();
 </script>
+<style type="text/css">
+    ul, li {
+        list-style: none;
+    }
+</style>
 @stop

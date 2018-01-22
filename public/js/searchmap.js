@@ -70,12 +70,19 @@ function initMap() {
         $(document).ready(function(){
             $('.add-address').on('click', function(e) {
                 var url = baseUrl + 'member/addplace';
+                var category = new Array();
+                $('input[name="category"]:checked').each(function() {
+                    category.push(this.value);
+                });
+                alert(category);
+                var cate_id = ;
                 $.ajax({
                     type: 'post',
                     url: url,
                     data:{
                         'namePlace': place.name,
                         'add': add,
+                        'category': category,
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(data) {

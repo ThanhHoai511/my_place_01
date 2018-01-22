@@ -16,6 +16,7 @@ use App\Repositories\Contracts\RateReviewValRepositoryInterface;
 use App\Repositories\Contracts\PlaceRepositoryInterface;
 use App\Repositories\Contracts\LocationRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
+use App\Repositories\Contracts\CategoryValRepositoryInterface;
 use Auth;
 
 class PlaceController extends Controller
@@ -28,6 +29,7 @@ class PlaceController extends Controller
     protected $rateValRepository;
     protected $commentRepository;
     protected $locationRepository;
+    protected $categoryValRepository;
     
     public function __construct(
         CityRepositoryInterface $cityRepository,
@@ -37,6 +39,7 @@ class PlaceController extends Controller
         RateReviewRepositoryInterface $rateRepository,
         RateReviewValRepositoryInterface $rateValRepository,
         CommentRepositoryInterface $commentRepository,
+        CategoryValRepositoryInterface $categoryValRepository,
         LocationRepositoryInterface $locationRepository
     ) {
         $this->cityRepository = $cityRepository;
@@ -47,7 +50,9 @@ class PlaceController extends Controller
         $this->rateValRepository = $rateValRepository;
         $this->commentRepository = $commentRepository;
         $this->locationRepository = $locationRepository;
+        $this->categoryValRepository = $categoryValRepository;
     }
+
     public function index()
     {
         $cities = $this->cityRepository->all();
@@ -166,6 +171,11 @@ class PlaceController extends Controller
             $address,
             $image
         );
+        $input['place_id'] = $resultAddress->id;
+        foreach ($request->category as $value) {
+            $input['cate_id'] = $value;
+            $cateVal = $this->categoryValRepository->create($input);
+        }
 
         return response()->json([
             'namePlace' => $namePlace,

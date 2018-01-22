@@ -17,6 +17,16 @@ class CategoryRepository implements CategoryRepositoryInterface
         return Category::find($id);
     }
 
+    public function getParent()
+    {
+        return Category::where('parent_id', null)->get();
+    }
+
+    public function getChild($parent_id)
+    {
+        return Category::where('parent_id', $parent_id)->get();
+    }
+
     public function paginate()
     {
         return Category::paginate(config('paginate.paginateCate'));
