@@ -1,10 +1,9 @@
 body {
     padding-top: 20px;
     background: #e9ebee;
-    margin: 33px;
 }
 footer {
-    margin-top: 100px;
+    margin-top: 200px;
 }
 table, td, th {
     vertical-align: middle;

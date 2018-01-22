@@ -74,8 +74,6 @@ function initMap() {
                 $('input[name="category"]:checked').each(function() {
                     category.push(this.value);
                 });
-                alert(category);
-                var cate_id = ;
                 $.ajax({
                     type: 'post',
                     url: url,
@@ -86,7 +84,7 @@ function initMap() {
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(data) {
-                        alert('Thêm thành công địa điểm' +  data['namePlace']);
+                        alert('Thêm thành công địa điểm ' +  data['namePlace']);
                     },
                 }); 
             });

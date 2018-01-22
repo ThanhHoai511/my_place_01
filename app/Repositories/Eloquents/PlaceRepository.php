@@ -15,7 +15,8 @@ class PlaceRepository implements PlaceRepositoryInterface
     public function search($key)
     {
         return Place::where('name', 'like', '%' . $key . '%')
-            ->get();
+        ->orWhere('add', 'like', '%' . $key . '%')
+        ->get();
     }
 
     public function create(array $input)
@@ -75,6 +76,8 @@ class PlaceRepository implements PlaceRepositoryInterface
         $place->image = $image;
         $place->status = config('checkbox.checkzero');
         $place->save();
+
+        return $place->id;
     }
 
     public function countReview($placeId)

@@ -47,7 +47,52 @@ class ImagesTableSeeder extends Seeder
                 'new_id' => 4,
                 'link' => 'cu-xa.jpg',
                 'created_at' => new DateTime(),
-            ]
+            ], [
+                'review_id' => 4,
+                'new_id' => NULL,
+                'link' => 'cu-xa.jpg',
+                'created_at' => new DateTime(),
+            ], [
+                'review_id' => 5,
+                'new_id' => NULL,
+                'link' => 'bufetsenviet.jpg',
+                'created_at' => new DateTime(),
+            ], [
+                'review_id' => 6,
+                'new_id' => NULL,
+                'link' => 'bufetsenviet.jpg',
+                'created_at' => new DateTime(),
+            ], [
+                'review_id' => 7,
+                'new_id' => NULL,
+                'link' => 'buffet-shabu.jpg',
+                'created_at' => new DateTime(),
+            ], [
+                'review_id' => 8,
+                'new_id' => NULL,
+                'link' => 'buffet-shabu.jpg',
+                'created_at' => new DateTime(),
+            ], [
+                'review_id' => 9,
+                'new_id' => NULL,
+                'link' => 'trungtamchieuphim.jpg',
+                'created_at' => new DateTime(),
+            ], [
+                'review_id' => 10,
+                'new_id' => NULL,
+                'link' => 'trungtamchieuphim.jpg',
+                'created_at' => new DateTime(),
+            ], [
+                'review_id' => 11,
+                'new_id' => NULL,
+                'link' => 'cgv-vincom-nguyen-chi-thanh.jpg',
+                'created_at' => new DateTime(),
+            ], [
+                'review_id' => 12,
+                'new_id' => NULL,
+                'link' => 'cgv-vincom-nguyen-chi-thanh.jpg',
+                'created_at' => new DateTime(),
+            ],
         ]);
     }
 }

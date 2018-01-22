@@ -34,7 +34,7 @@ class CategoryValRepository implements CategoryValRepositoryInterface
 
     public function create(array $input)
     {
-        $cateVal = new CateVal;
+        $category = new CateVal;
         $category->place_id = $input['place_id'];
         $category->cate_id = $input['cate_id'];
         $category->save();
