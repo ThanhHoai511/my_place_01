@@ -22,21 +22,32 @@
                                 <td>{{ trans('messages.add') }}</td>
                                 <td>{{ $infoPlace->add }}</td>
                             </tr>
+                            <tr>
+                                <td>{{ trans('messages.category') }}</td>
+                                @if ($cate)
+                                    <td>
+                                        @foreach ($cate as $item)
+                                            {{ $item->name }} @if ($item->type_concept) - {{ $item->type_concept }} @endif
+                                            <br/>
+                                        @endforeach
+                                    </td>
+                                @endif
+                            </tr>
                             @if($infoPlace->open_hour != null)
                             <tr>
-                                <td>{{ trans('messages.openhour') }}</td>
+                                <td>{{ trans('messages.open-hour') }}</td>
                                 <td>{{ $infoPlace->open_hour }}</td>
                             </tr>
                             @endif
                             @if($infoPlace->close_hour != null)
                             <tr>
-                                <td>{{ trans('messages.closehour') }}</td>
+                                <td>{{ trans('messages.close-hour') }}</td>
                                 <td>{{ $infoPlace->close_hour }}</td>
                             </tr>
                             @endif
                             @if($infoPlace->range != null)
                             <tr>
-                                <td>{{ trans('messages.range') }}</td>
+                                <td>{{ trans('messages.price-range') }}</td>
                                 <td>{{ $infoPlace->range }} đ</td>
                             </tr>
                             @endif

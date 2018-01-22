@@ -35,6 +35,26 @@
         @endif
         </div>
         <div class="field">
+            <ul style="display: inline;">{{ Form::label('category', trans('messages.choose-cate'), array('class' => 'mylabel')) }}
+                    @foreach ($category as $value)
+                        <li>
+                            <ul>{{ Form::checkbox('category', $value->id, null, ['class' => 'col-md-1']) }} 
+                            {{ Form::label('place', $value->name . ' - ' . $value->type_concept, array('class' => 'col-md-11')) }}
+                            @foreach ($cateChild[$value->id] as $item)
+                                @if ($item->parent_id == $value->id)
+                                <li>
+                                    <div class="col-md-1"></div>
+                                    {{ Form::checkbox('category', $item->id, null, ['class' => 'col-md-1']) }}
+                                    {{ Form::label('place', $item->name .' - '. $item->type_concept, array('class' => 'col-md-10')) }}
+                                    @endif
+                                </li>
+                            @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
+                </ul>
+        </div>
+        <div class="field">
             {{ Form::label('place', trans('messages.open-hour'), array('class' => 'mylabel')) }}
             {{ Form::time('open', $place->open_hour, ['class' => 'form-control']) }} 
         </div>

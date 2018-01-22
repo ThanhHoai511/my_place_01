@@ -4,7 +4,7 @@ body {
     margin: 33px;
 }
 footer {
-    margin-top: 100px;
+    margin-top: 200px;
 }
 table, td, th {
     vertical-align: middle;
@@ -33,6 +33,7 @@ li {
 }
 .ava-img {
     width: 30px !important;
+    height: 30px !important;
 }
 .cate-div {
     padding: 5px;

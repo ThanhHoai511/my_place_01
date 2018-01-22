@@ -14,6 +14,7 @@ use App\Repositories\Contracts\PlaceRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
 use App\Http\Requests\UserUpdateRequest;
 use Auth;
+use Hash;
 
 class UserController extends Controller
 {
@@ -58,17 +59,15 @@ class UserController extends Controller
         $user = $this->userRepository->find($id);
         if (Auth::user()->level == config('const.roleAdmin')) {
             return view('backend.users.profile', compact('user'));
-        } elseif (Auth::user()->level == config('const.roleUser')) {
+        } elseif (Auth::user()->level == config('const.roleUser') && Auth::user()->id == $id) {
             return view('frontend.user.edit-profile', compact('user'));
+        } else {
+            return redirect()->route('home');
         }
     }
 
     public function update(UserUpdateRequest $request, $id)
     {
-        $this->validate($request, [
-            'avatar' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
-            'name' => 'required',
-        ]);
         $user = $this->userRepository->find($id);
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
@@ -86,7 +85,7 @@ class UserController extends Controller
                 return redirect()->action('UserController@index')
                 ->with('status', trans('messages.successfull'));
             } elseif (Auth::user()->level == config('const.roleUser')) {
-                return redirect()->route('editprofile', Auth::user()->id)
+                return redirect()->route('home', Auth::user()->id)
                 ->with('status', trans('messages.successfull'));
             }
         } catch (Exception $e) {
@@ -113,6 +112,41 @@ class UserController extends Controller
             return redirect()->action('UsersController@index')
             ->withErrors(trans('messages.deletefailed'));
         }
+    }
+
+    public function editProfile(UserUpdateRequest $request, $id)
+    {
+        $user = $this->userRepository->find($id);
+        // if (Hash::check($request->current_password, Auth::user()->password)) {
+            if ($request->hasFile('avatar')) {
+                $file = $request->avatar;
+                $file->move('images/Upload', $file->getClientOriginalName());
+                $linkimage = $file->getClientOriginalName();
+            } else {
+                $linkimage = $this->userRepository->updateavatar($id);
+            }
+            try {
+                $dataUpdate = $request->only('name', 'email', 'add', 'phone');
+                $dataUpdate['avatar'] = $linkimage;
+                $dataUpdate['password'] = $request->newpassword;
+                $result = $this->userRepository->update($dataUpdate, $id);
+                if (Auth::user()->level == config('const.roleAdmin')) {
+                    return redirect()->action('UserController@index')
+                    ->with('status', trans('messages.successfull'));
+                } elseif (Auth::user()->level == config('const.roleUser')) {
+                    return redirect()->route('home')
+                    ->with('status', trans('messages.successfull'));
+                }
+            } catch (Exception $e) {
+                Log::error($e);
+
+                return back()->withErrors(trans('messages.updatefail'));
+            }
+        // } else {
+        //     $alert = ['error' => trans('Wrong pass!')];
+
+        //     return back()->with($alert);
+        // }
     }
 
     public function myWall($id)
