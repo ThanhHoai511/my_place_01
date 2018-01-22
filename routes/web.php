@@ -55,6 +55,7 @@ Route::group(['prefix' => 'member'], function () {
     Route::get('category/{id}', 'CategoryController@cate')->name('cateShow');
     Route::group(['prefix' => 'user'], function () {
         Route::get('edit/{id}', 'UserController@edit')->name('editprofile');
+        Route::post('edit/{id}', 'UserController@editProfile');
         Route::get('wall/{id}', 'UserController@myWall')->name('mywall');
         Route::get('collection/{id}', 'UserController@showCollection')->name('mycollection');
     });

@@ -17,6 +17,7 @@ use App\Repositories\Contracts\PlaceRepositoryInterface;
 use App\Repositories\Contracts\LocationRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
 use App\Repositories\Contracts\CategoryValRepositoryInterface;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 use Auth;
 
 class PlaceController extends Controller
@@ -30,6 +31,7 @@ class PlaceController extends Controller
     protected $commentRepository;
     protected $locationRepository;
     protected $categoryValRepository;
+    protected $categoryRepository;
     
     public function __construct(
         CityRepositoryInterface $cityRepository,
@@ -40,6 +42,7 @@ class PlaceController extends Controller
         RateReviewValRepositoryInterface $rateValRepository,
         CommentRepositoryInterface $commentRepository,
         CategoryValRepositoryInterface $categoryValRepository,
+        CategoryRepositoryInterface $categoryRepository,
         LocationRepositoryInterface $locationRepository
     ) {
         $this->cityRepository = $cityRepository;
@@ -51,6 +54,7 @@ class PlaceController extends Controller
         $this->commentRepository = $commentRepository;
         $this->locationRepository = $locationRepository;
         $this->categoryValRepository = $categoryValRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function index()
@@ -104,6 +108,11 @@ class PlaceController extends Controller
         $getdistId = $this->districtRepository->findOrFail($place->dist_id);
         $city = $getdistId ? $this->cityRepository->findOrFail($getdistId->city_id) : null;
         $places = $this->placeRepository->paginate();
+        $category = $this->categoryRepository->getParent();
+        $cateChild = [];
+        foreach ($category as $value) {
+            $cateChild[$value->id] = $this->categoryRepository->getChild($value->id);
+        }
 
         return view('backend.place.place-edit', compact(
             'place',
@@ -113,6 +122,8 @@ class PlaceController extends Controller
             'cityId',
             'distId',
             'places',
+            'category',
+            'cateChild',
             'city'
         ));
     }
@@ -190,6 +201,11 @@ class PlaceController extends Controller
         $dists = $this->districtRepository->all();
         $distId = $this->districtRepository->showDist();
         $places = $this->placeRepository->paginate();
+        $category = $this->categoryRepository->getParent();
+        $cateChild = [];
+        foreach ($category as $value) {
+            $cateChild[$value->id] = $this->categoryRepository->getChild($value->id);
+        }
         
         return view('frontend.place.edit-place', compact(
             'place',
@@ -198,6 +214,8 @@ class PlaceController extends Controller
             'cityId',
             'dists',
             'distId',
+            'category',
+            'cateChild',
             'places'
         ));
     }
@@ -209,6 +227,11 @@ class PlaceController extends Controller
             $infoPlace = $this->placeRepository->findOrFail($id);
             $rateReviewVals = $this->reviewRepository->listReviewVal();
             $rateReview = $this->rateRepository->findRateLike();
+            $placeCategory = $this->categoryValRepository->getCatePlace($id);
+            $cate = [];
+            foreach ($placeCategory as $value) {
+                $cate[] = $this->categoryRepository->find($value->cate_id);
+            }
             if (Auth::check()) {
                 $userId = Auth::user()->id;
                 foreach ($reviews as $review) {
@@ -229,6 +252,7 @@ class PlaceController extends Controller
                 'rateReview',
                 'countComment',
                 'hasLike',
+                'cate',
                 'countLike'
             ));
         } catch (Exception $e) {

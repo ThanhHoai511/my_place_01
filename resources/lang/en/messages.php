@@ -195,4 +195,5 @@ return [
     'pass-not-match' => 'Password do not match!',
     'registersuccess' => 'Register Successfull',
     'choose-cate' => 'Choose category',
+    'admin-page' => 'Admin page',
 ];
