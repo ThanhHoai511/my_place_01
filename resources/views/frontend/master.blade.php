@@ -21,7 +21,7 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="head-navbar">
             @include('frontend.layout.header')
         </nav>
-        <div class="container">
+        <div class="container mt-35">
             @include('frontend.layout.left-side-bar')
             @include('frontend.layout.right-slide')
             <div class="col-md-6 col-md-offset-2 padding0">

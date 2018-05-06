@@ -42,7 +42,7 @@
             </div>
         {{ Form::close() }}
         <p class="navbar-text pull-right color-white">
-        <div class="col-md-1 dropdown head-dropdown float-right">
+        <div class="dropdown head-dropdown float-right">
             @if(Auth::check())
             <div class="dropdown color-white float-right">
                 <button class="btn btn-secondary dropdown-toggle color-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown">
@@ -77,6 +77,99 @@
             <a class="navbar-brand" href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true">{{ trans('messages.loginhome') }}</i></a>
             @endif
         </div>
+        @if(Auth::check())
+            <div class="notification text-center dropdown head-dropdown">
+                <button class="btn btn-secondary dropdown-toggle color-white" type="button" data-toggle="dropdown">
+                    <i class="fa fa-bell"></i>
+                    <div class="noti-count"><a>4</a></div>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <ul>
+                        <li class="new-noti">
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                <div>dddddddd</div>
+                            </a>
+                        </li>
+                        <li class="see-div text-center">
+                            <a href="#" class="see-more">Xem tất cả</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @endif
         </p>
     </div>
 </div>
