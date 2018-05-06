@@ -577,7 +577,10 @@ border: none;
     border-color:#ccc;
 }
 .head-bar {
-    width: 80%;
+    width: 100%;
+}
+.mt-35 {
+    margin-top: 35px;
 }
 .stylish-input-group button{
     border:0;
@@ -592,6 +595,89 @@ border: none;
 }
 .col-review-div img {
     padding-left: 0px;
+}
+.notification {
+    width: 50px;
+    font-size: 21px;
+    color: white;
+    position: relative;
+    float: right !important;
+}
+.notification .fa-bell {
+    background-color: transparent; 
+}
+.notification .dropdown-menu {
+    left: -252px;
+}
+.noti-count {
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    right: 3px;
+    top: 3px;
+    font-size: 10px;
+    padding: 3px;
+}
+.noti-count a {
+    color: white;
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+.notification:hover, .noti-count a:hover {
+    color: white;
+}
+.notification ul {
+    width: 300px;
+    max-height: 400px;
+    overflow: scroll;
+}
+.notification img {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+}
+.notification li {
+    padding: 5px 10px !important;
+    display: inline-block;
+    width: 100%;
+    float: left;
+    line-height: 45px;
+}
+.notification li a {
+    display: inline-block;
+    width: 100%;
+}
+.notification .btn {
+    width: 100%;
+    font-size: 21px;
+}
+.notification .btn:hover,  .notification .btn:focus {
+    color: white !important;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); 
+}
+.see-div {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 30px !important;
+    line-height: 20px;
+}
+.see-more {
+    color: blue;
+}
+.see-div:hover a {
+    text-decoration: underline;
+    color: blue;
+}
+.new-noti {
+    background-color: #cee6ee !important;
+}
+.new-noti:hover {
+    background-color: lightblue !important;
 }
 body::-webkit-scrollbar {
     width: 1em;
