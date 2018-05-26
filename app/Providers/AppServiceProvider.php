@@ -9,6 +9,9 @@ use App\Models\Report;
 use App\Models\Location;
 use App\Models\Place;
 use App\Models\Category;
+use App\Models\Notification;
+use Auth;
+use Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,12 +31,26 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(['frontend.layout.header'], function ($view) {
             $cateParent = Category::where('parent_id', null)->get();
             $cateChild = [];
-            foreach ($cateParent as $value) {
-                $cateChild[$value->id] = Category::where('parent_id', $value->id)->get();
+            if (is_array($cateParent) || is_object($cateParent))
+            {
+                foreach ($cateParent as $value) {
+                    $cateChild[$value->id] = Category::where('parent_id', $value->id)->get();
+                }
+            }
+            $notifications = Notification::orderBy('id', 'desc')->get();
+            $countNotification = 0;
+            if(Auth::check()) {
+                foreach ($notifications as $notification) {
+                    if($notification->review->user_id == Auth::user()->id  && $notification->status == config('notification.notseen')) {
+                        $countNotification++;
+                    }
+                }
             }
             $view->with([
                 'cateParent' => $cateParent,
                 'cateChild' => $cateChild,
+                'notifications' => $notifications,
+                'countNotification' => $countNotification,
             ]);
         });
 
@@ -116,6 +133,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\Contracts\CategoryValRepositoryInterface',
             'App\Repositories\Eloquents\CategoryValRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Contracts\NotificationRepositoryInterface',
+            'App\Repositories\Eloquents\NotificationRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Contracts\FollowRepositoryInterface',
+            'App\Repositories\Eloquents\FollowRepository'
         );
     }
 }

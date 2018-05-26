@@ -13,9 +13,12 @@ use App\Repositories\Contracts\CommentRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\CollectionRepositoryInterface;
 use App\Repositories\Contracts\PlaceRepositoryInterface;
+use App\Repositories\Contracts\NotificationRepositoryInterface;
 use App\Http\Requests\CreateReviewRequest;
+use App\Events\Notifications;
 use Storage;
 use Auth;
+use Log;
 
 class ReviewController extends Controller
 {
@@ -28,6 +31,7 @@ class ReviewController extends Controller
     protected $collectionRepository;
     protected $placeRepository;
     protected $categoryRepository;
+    protected $notificationRepository;
 
     public function __construct(
         ReviewRepositoryInterface $reviewRepository,
@@ -38,7 +42,8 @@ class ReviewController extends Controller
         CollectionRepositoryInterface $collectionRepository,
         PlaceRepositoryInterface $placeRepository,
         CategoryRepositoryInterface $categoryRepository,
-        ReportRepositoryInterface $reportRepository
+        ReportRepositoryInterface $reportRepository,
+        NotificationRepositoryInterface $notificationRepository
     ) {
         $this->reviewRepository = $reviewRepository;
         $this->imageRepository = $imageRepository;
@@ -49,6 +54,7 @@ class ReviewController extends Controller
         $this->reportRepository = $reportRepository;
         $this->categoryRepository = $categoryRepository;
         $this->collectionRepository = $collectionRepository;
+        $this->notificationRepository = $notificationRepository;
     }
 
     public function create()
@@ -68,9 +74,9 @@ class ReviewController extends Controller
             if ($request->hasFile('file')) {
                 $data = [];
                 foreach ($request->file('file') as $file) {
-                    $nameImage = str_random(4) . date('h:i') . $file->getClientOriginalName();
+                    $nameImage = str_random(6) . $file->getClientOriginalName();
                     array_push($data, $nameImage);
-                    $file->move(config('asset.image_path.imagereviews'), $nameImage);
+                    $file->move(public_path('images/postreview'), $nameImage);
                 }
             }
             $dataValue = $request->only(
@@ -202,15 +208,27 @@ class ReviewController extends Controller
         $reviewId = $request->reviewId;
         $rateId = $request->rateId;
         $userId = Auth::user()->id;
+        $userName = Auth::user()->name;
         $hasLike = $this->rateReviewValRepository->findReviewID($reviewId, $userId);
         $rateReviewVal = $this->rateReviewValRepository->all();
         $rateReview = $this->rateReviewRepository->findRateLike();
         if ($hasLike == config('const.hasLike')) {
             $icon = true;
             $resultReviewVal = $this->rateReviewValRepository->create($userId, $rateId, $reviewId);
+            $review =  $this->reviewRepository->findNameReview($reviewId);
+            $notificationData = [
+                'action' => config('notification.like'),
+                'content' => $userName . config('notification.content') . $review->submary,
+                'status' => config('notification.notseen'),
+                'review_id' => $reviewId,
+                'user_id' => $userId,
+            ];
+            $notification = $this->notificationRepository->create($notificationData);
+            event(new Notifications($notification->content, 1, Auth::user()->PathImage, $reviewId, $notification->review->user_id, $notification->id, $notification->action));
         } else {
             $icon = false;
             $resultReviewVal = $this->rateReviewValRepository->disLike($reviewId, $userId);
+            $notificationId = $this->notificationRepository->findAndDelete($reviewId);
         }
         $countLike = $this->rateReviewValRepository->getLikes($reviewId);
         
@@ -229,6 +247,16 @@ class ReviewController extends Controller
         $avatarUser = Auth::user()->avatar;
         $nameUser = Auth::user()->name;
         $data = $this->commentRepository->create($content, $reviewId, $userId);
+        $review =  $this->reviewRepository->findNameReview($reviewId);
+        $notificationData = [
+            'action' => config('notification.comment'),
+            'content' => $nameUser . config('notification.contentcomment') . $review->submary,
+            'status' => config('notification.notseen'),
+            'review_id' => $reviewId,
+            'user_id' => $userId,
+        ];
+        $notification = $this->notificationRepository->create($notificationData);
+        event(new Notifications($notification->content, 1, Auth::user()->PathImage, $reviewId, $notification->review->user_id, $notification->id, $notification->action));
         return response(view('frontend.showcoment.show-comment', compact(
             'content',
             'data',
@@ -287,5 +315,10 @@ class ReviewController extends Controller
         $collection = $this->collectionRepository->userCollection(Auth::user()->id);
 
         return view('frontend.add-to-collection', compact('review', 'collection'));
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $this->notificationRepository->changeStatus($request->notificationId);
     }
 }

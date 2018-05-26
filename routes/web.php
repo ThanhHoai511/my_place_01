@@ -58,8 +58,12 @@ Route::group(['prefix' => 'member'], function () {
         Route::post('edit/{id}', 'UserController@editProfile');
         Route::get('wall/{id}', 'UserController@myWall')->name('mywall');
         Route::get('collection/{id}', 'UserController@showCollection')->name('mycollection');
+        Route::post('follow', 'UserController@follow')->name('follow');
+        Route::post('unfollow', 'UserController@unFollow')->name('unFollow');
     });
-
+    Route::group(['prefix' => 'notifications'], function () {
+        Route::post('changestatus', 'NotificationController@changeStatus')->name('changestatus');
+    });
 });
 Route::get('/get-places', 'SearchController@getPlaces');
 Route::get('/get-dists', 'SearchController@getDists');

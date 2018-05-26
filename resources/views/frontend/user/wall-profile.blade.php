@@ -37,6 +37,19 @@
                                 <td>{{ trans('messages.collection') }}</td>
                                 <td><a href="{{ route('mycollection', $infoUser->id) }}">{{ trans('messages.show') }}</a></td>
                             </tr>
+                            @if(Auth::user()->id != $infoUser->id)
+                            <tr class="interactive">
+                                <td>{{ trans('messages.interactive') }}</td>
+                                <td>
+                                @if($checkFollow >0)
+                                    <button type="button" class="btn btn-success unfollow" data-user-follower="{{ Auth::user()->id }}" data-user-following="{{ $infoUser->id }}">{{ trans('messages.following') }}</button>
+                                @else
+                                    <button type="button" class="btn btn-primary follow" data-user-follower="{{ Auth::user()->id }}" data-user-following="{{ $infoUser->id }}">{{ trans('messages.follow') }}</button>
+                                @endif
+                                    <button type="button" class="btn btn-danger">{{ trans('messages.messages') }}</button>
+                                </td>
+                            </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

@@ -133,4 +133,7 @@ return [
     'avatar' => 'Ảnh đại diện',
     'update' => 'Cập nhật',
     'need-current-pass' => 'Xác nhận mật khẩu hiện tại cho thay đổi',
+    'interactive' => 'Tương tác',
+    'messages' => 'Tin nhắn',
+    'following' => 'Đang theo dõi',
 ];

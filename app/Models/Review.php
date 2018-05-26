@@ -44,4 +44,9 @@ class Review extends Model
     {
         return $this->hasMany(Report::class);
     }
+
+    public function nofitications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

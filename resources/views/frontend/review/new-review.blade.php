@@ -5,6 +5,15 @@
         <button class="tablinks" onclick="openCity(event, 'Location-exists')" id="defaultOpen">Địa điểm có sẵn</button>
         <button class="tablinks" onclick="openCity(event, 'Location-new')">Tạo mới địa điểm</button>
     </div>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div id="Location-exists" class="tabcontent">
         <div id="error_explanation">
             <h2>

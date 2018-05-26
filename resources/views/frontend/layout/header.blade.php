@@ -7,6 +7,9 @@
         <span class="icon-bar"></span>
         </button>
     </div>
+    @if(Auth::check())
+        <input id="checkUser" type="hidden" value="{{ Auth::user()->id }}">
+    @endif
     <div class="collapse navbar-collapse">
         <div class="input-group stylish-input-group head-bar padding0">
         <ul class="nav navbar-nav">
@@ -79,94 +82,36 @@
         </div>
         @if(Auth::check())
             <div class="notification text-center dropdown head-dropdown">
-                <button class="btn btn-secondary dropdown-toggle color-white" type="button" data-toggle="dropdown">
+                <button class="btn-noti btn-secondary dropdown-toggle color-white" type="button" data-toggle="dropdown">
                     <i class="fa fa-bell"></i>
-                    <div class="noti-count"><a>4</a></div>
+                    <div class="noti-count"><a class="noti">{{ $countNotification }}</a></div>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <ul>
-                        <li class="new-noti">
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>{{ HTML::image(config('asset.image_path.icon') . 'map-icon.png', trans('messages.logo'), ['class' => 'float-left']) }}</div>
-                                <div>dddddddd</div>
-                            </a>
-                        </li>
-                        <li class="see-div text-center">
-                            <a href="#" class="see-more">Xem tất cả</a>
-                        </li>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="notification">
+                    <ul class='list-notification'>
+                    @foreach($notifications as $notification)
+                            @if($notification->review->user_id == Auth::user()->id)
+                                @if ($notification->status == config('notification.notseen')) {
+                                    <li class="noti-not-seen" data-id="{{ $notification->id }}">
+                                        <a href="{{ route('reviews.show', $notification->review->id) }}">
+                                        <div>{{ HTML::image($notification->user->PathImage, trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                        <div>{{ $notification->content }}</div>
+                                        </a>
+                                    </li>
+                                } @else {
+                                    <li class="seen" data-id="{{ $notification->id }}">
+                                        <a href="{{ route('reviews.show', $notification->review->id) }}">
+                                        <div>{{ HTML::image($notification->user->PathImage, trans('messages.logo'), ['class' => 'float-left']) }}</div>
+                                        <div>{{ $notification->content }}</div>
+                                        </a>
+                                    </li>
+                                }
+                                @endif
+                            @endif
+                    @endforeach
                     </ul>
+                    <div class="new-noti">
+                        <a href="#" class="see-more">Xem tất cả</a>
+                    </div>
                 </div>
             </div>
         @endif

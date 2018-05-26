@@ -24,7 +24,7 @@ class CreateReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'content' => 'required',
             'timewrite' => 'required',
             'rateservice' => 'required',
             'ratequality' => 'required',
@@ -35,7 +35,7 @@ class CreateReviewRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => trans('validation.title-required'),
+            'content.required' => trans('validation.content-required'),
             'timewrite.required' => trans('validation.timewrite-required'),
             'rateservice.required' => trans('validation.rateservice-required'),
             'ratequality.required' => trans('validation.ratequality-required'),

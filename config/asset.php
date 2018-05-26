@@ -4,6 +4,6 @@ return [
         'icon' => 'images/icon/',
         'slide' => 'images/slide/',
         'upload' => 'images/Upload/',
-        'imagereviews' => 'images/reviews/',
+        'imagereviews' => 'images/postreview/',
     ],
 ];
