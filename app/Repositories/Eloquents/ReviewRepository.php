@@ -5,6 +5,8 @@ namespace App\Repositories\Eloquents;
 use App\Repositories\Contracts\ReviewRepositoryInterface;
 use App\Models\Review;
 use App\Models\RateReviewVal;
+use App\Models\Notification;
+use Auth;
 
 class ReviewRepository implements ReviewRepositoryInterface
 {
@@ -27,7 +29,16 @@ class ReviewRepository implements ReviewRepositoryInterface
 
     public function create($dataValue)
     {
-        return $result = Review::create($dataValue);
+        $result = Review::create($dataValue);
+        $dataNotification = [
+            'action' => config('notification.review'),
+            'content' => config('notification.contentreview') .  $result->place->name,
+            'status' => config('notification.notseen'),
+            'review_id' => $result->id,
+            'user_id' => Auth::user()->id,
+        ];
+        $notification = Notification::create($dataNotification);
+        return $result;
     }
 
     public function find($id)
@@ -50,6 +61,11 @@ class ReviewRepository implements ReviewRepositoryInterface
     public function findReview($id)
     {
         return Review::where('status', '=', config('checkbox.checktrue'))->where('user_id', '=', $id)->get();
+    }
+
+    public function findNameReview($id)
+    {
+        return Review::where('status', '=', config('checkbox.checktrue'))->where('id', '=', $id)->first();
     }
 
     public function edit($dataValue, $id)

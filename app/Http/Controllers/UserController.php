@@ -12,9 +12,13 @@ use App\Repositories\Contracts\ImageRepositoryInterface;
 use App\Repositories\Contracts\RateReviewValRepositoryInterface;
 use App\Repositories\Contracts\PlaceRepositoryInterface;
 use App\Repositories\Contracts\CommentRepositoryInterface;
+use App\Repositories\Contracts\FollowRepositoryInterface;
+use App\Repositories\Contracts\NotificationRepositoryInterface;
 use App\Http\Requests\UserUpdateRequest;
+use App\Events\Notifications;
 use Auth;
 use Hash;
+use Log;
 
 class UserController extends Controller
 {
@@ -26,6 +30,8 @@ class UserController extends Controller
     protected $collectionRepository;
     protected $imageRepository;
     protected $placeRepository;
+    protected $followRepository;
+    protected $notificationRepository;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -35,7 +41,9 @@ class UserController extends Controller
         CollectionRepositoryInterface $collectionRepository,
         PlaceRepositoryInterface $placeRepository,
         ImageRepositoryInterface $imageRepository,
-        CommentRepositoryInterface $commentRepository
+        CommentRepositoryInterface $commentRepository,
+        FollowRepositoryInterface $followRepository,
+        NotificationRepositoryInterface $notificationRepository
     ) {
         $this->userRepository = $userRepository;
         $this->reviewRepository = $reviewRepository;
@@ -45,6 +53,8 @@ class UserController extends Controller
         $this->placeRepository = $placeRepository;
         $this->imageRepository = $imageRepository;
         $this->commentRepository = $commentRepository;
+        $this->followRepository = $followRepository;
+        $this->notificationRepository = $notificationRepository;
     }
 
     public function index()
@@ -153,6 +163,7 @@ class UserController extends Controller
     {
         $infoUser = $this->userRepository->find($id);
         $reviews = $this->reviewRepository->findReview($id);
+        $checkFollow = $this->followRepository->checkFollow($id);
         $rateReviewVals = $this->reviewRepository->listReviewVal();
         $rateReview = $this->rateRepository->findRateLike();
         if (Auth::check()) {
@@ -174,6 +185,7 @@ class UserController extends Controller
             'countLike',
             'rateReview',
             'countComment',
+            'checkFollow',
             'hasLike',
             'infoUser'
         ));
@@ -186,5 +198,17 @@ class UserController extends Controller
         $collectionItem = $this->collectionRepository->findUserCollectionReview($id);
 
         return view('frontend.user.collection', compact('collection', 'user', 'collectionItem'));
+    }
+
+    public function follow(Request $request)
+    {
+        $dataFollow = $request->only('userfollower_id', 'userfollowing_id');
+        $userFollow = $this->followRepository->followUser($dataFollow);
+    }
+
+    public function unFollow(Request $request)
+    {
+        $dataUnFollow = $request->only('userfollower_id', 'userfollowing_id');
+        $user = $this->followRepository->findAndUnFollow($dataUnFollow);
     }
 }

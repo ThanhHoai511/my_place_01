@@ -5,12 +5,93 @@ d = n.getDate();
 var baseUrl = window.location.origin+window.location.pathname.split('/')[0] + '/';
 document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
 var $jq = jQuery.noConflict();
-var number = 0;// Declaring and defining global increment variable for rate star.
+var number = 0;
 function selectPlace(val) {
     $('#searchPlace').val(val);
     $('#suggesstion-box').hide();
 }
 $(document).ready(function(){
+    var pusher = new Pusher('8943d5df75785a738cfe', {
+        cluster: 'ap1',
+        encrypted: true
+    });
+    var userID = $('#checkUser').val();
+    var countNotifications = $('.noti').text();
+    //Push Notification
+    var channel = pusher.subscribe('notifications');
+    channel.bind('App\\Events\\Notifications', addNotifications);
+    function addNotifications(data) {
+        if (userID == data.notificationOfUser)
+        {
+            if (data.action == 'follow')
+            {
+                countNotifications = Number(countNotifications) + data.numberNotification;
+                li = '';
+                li += '<li style="background-color:#c9edfb" data-id='+ data.notificationId +'>';
+                li += '<a href="/member/user/wall/' + data.reviewId + '">';
+                li += '<div>';
+                li += '<img src="' + data.avatar + '"' + ' class="float-left" alt="Logo">';
+                li += '<div>'+ data.message + '</div>';
+                li += '</div>';
+                li += '</a>';
+                li += '</li>';
+                $("#notification ul").prepend(li);
+                $('.noti').replaceWith('<a class="noti">' + countNotifications + '</a>');
+
+            } else {
+                countNotifications = Number(countNotifications) + data.numberNotification;
+                li = '';
+                li += '<li style="background-color:#c9edfb" data-id='+ data.notificationId +'>';
+                li += '<a href="/member/reviews/' + data.reviewId + '">';
+                li += '<div>';
+                li += '<img src="' + data.avatar + '"' + ' class="float-left" alt="Logo">';
+                li += '<div>'+ data.message + '</div>';
+                li += '</div>';
+                li += '</a>';
+                li += '</li>';
+                $("#notification ul").prepend(li);
+                $('.noti').replaceWith('<a class="noti">' + countNotifications + '</a>');
+            }
+        } else {
+            return false
+        }
+    };
+    //Disbale notification
+    var channelDisableNotification = pusher.subscribe('disableNotification');
+    channelDisableNotification.bind('App\\Events\\DisableNotificaton', disAbleNotifications);
+    function disAbleNotifications(data)
+    {
+        var notificationId = $(this).data("id");
+        if (userID == data.notificationOfUser && data.status == 1) {
+            if (countNotifications > 0) {
+                countNotifications = Number(countNotifications) - 1;
+            }
+            $('.noti').replaceWith('<a class="noti">' + countNotifications + '</a>');
+            $('.list-notification li').first().remove();
+        } else {
+            return false
+        }
+    };
+    //Change status
+    $("ul.list-notification").on("click","li", function(){
+        var notificationId = $(this).data("id");
+        var url = baseUrl + ('member/notifications/changestatus')
+        $.ajax({
+            type: 'post',
+            url: url,
+            data:{
+                'notificationId': notificationId, 
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+                if (countNotifications > 0) {
+                    countNotifications = Number(countNotifications) - 1;
+                }
+                $('.noti').replaceWith('<a class="noti">' + countNotifications + '</a>');
+            }
+        });
+        });
+
     $(".like-show").click(function(){
         $(".like").toggle();
     });
@@ -24,7 +105,6 @@ $(document).ready(function(){
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        // dots: true,
         autoplaySpeed: 1000,
         vertical: true,
         verticalSwiping: true,
@@ -39,11 +119,8 @@ $(document).ready(function(){
         cssEase: 'linear'
       });
       
-    /* 1. Visualizing things on Hover - See next part for action on click */
     $('#stars-quality li').on('mouseover', function(){
-        var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
-   
-    // Now highlight all the stars that's not after the current hovered star
+        var onStar = parseInt($(this).data('value'), 10);
         $(this).parent().children('li.star').each(function(e){
           if (e < onStar) {
             $(this).addClass('hover');
@@ -363,9 +440,44 @@ $('.show-comment').on('click', '.delete-comment', function(e) {
             },
         }); 
     });
+//Following 
+$('.interactive').on('click', '.follow', function (){
+    var userFollower = $(this).data("user-follower");
+    var userFollowing = $(this).data("user-following");
+    var url = baseUrl + 'member/user/follow';
+    $.ajax({
+        type: 'post',
+        url: url,
+        data:{
+            'userfollower_id': userFollower,
+            'userfollowing_id': userFollowing,
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data) {
+            $('.interactive .follow').removeClass('btn-primary follow').addClass('btn-success unfollow').html('Following');
+        },
+    }); 
+});
 
+$('.interactive').on('click', '.unfollow', function (){
+    var userFollower = $(this).data("user-follower");
+    var userFollowing = $(this).data("user-following");
 
-///////////
+    var url = baseUrl + 'member/user/unfollow';
+    $.ajax({
+        type: 'post',
+        url: url,
+        data:{
+            'userfollower_id': userFollower,
+            'userfollowing_id': userFollowing,
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data) {
+            $('.interactive .unfollow').removeClass('btn-success unfollow').addClass('btn-primary follow').html('Follow');
+        },
+    }); 
+
+})
 
 $('.show-comment').on('click', '.edit-comment', function (e) {
     var commentId = $(this).attr('data-comment-id');

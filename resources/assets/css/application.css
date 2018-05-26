@@ -242,22 +242,22 @@ border: none;
     margin: 0;
     border-top: 1px solid #e5e5e5;
 }
-.btn {
+.btn-noti {
     border: none;
     padding:10px;
     background-color: transparent;
     float: left;
 }
-.btn:hover {
+.btn-noti:hover {
     background-color: #b3b3ff;
     text-decoration: none;
 }
-.btn a:hover {
+.btn-noti a:hover {
     text-decoration: none;
     background: transparent;
     color: #666;
 }
-.btn img {
+.btn-noti img {
     width: 20px;
     margin: 0px 10px;
 }
@@ -618,7 +618,7 @@ border: none;
     font-size: 10px;
     padding: 3px;
 }
-.noti-count a {
+.noti{
     color: white;
     width: 13px;
     height: 13px;
@@ -653,8 +653,11 @@ border: none;
     width: 100%;
     font-size: 21px;
 }
-.notification .btn:hover,  .notification .btn:focus {
+.notification .btn-noti:hover,  .notification .btn-noti:focus {
     color: white !important;
+}
+.noti-not-seen{
+    background-color:#c9edfb;
 }
 ::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2); 
@@ -668,13 +671,14 @@ border: none;
 }
 .see-more {
     color: blue;
+    line-height:20px;
 }
 .see-div:hover a {
     text-decoration: underline;
     color: blue;
 }
 .new-noti {
-    background-color: #cee6ee !important;
+    text-align: center;
 }
 .new-noti:hover {
     background-color: lightblue !important;

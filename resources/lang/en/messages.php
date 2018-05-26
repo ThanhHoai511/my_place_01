@@ -196,4 +196,7 @@ return [
     'registersuccess' => 'Register Successfull',
     'choose-cate' => 'Choose category',
     'admin-page' => 'Admin page',
+    'interactive' => 'Interactive',
+    'messages' => 'Messages',
+    'following' => 'Following'
 ];

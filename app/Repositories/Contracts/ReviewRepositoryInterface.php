@@ -18,6 +18,8 @@ interface ReviewRepositoryInterface
 
     public function findReview($id);
 
+    public function findNameReview($id);
+
     public function edit($dataValue, $id);
 
     public function findPlace($id);

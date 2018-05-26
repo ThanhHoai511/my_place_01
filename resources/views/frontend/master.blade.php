@@ -15,6 +15,8 @@
         {{ Html::script('assets/slick-carousel/slick/slick.min.js') }}
         {{ Html::script('assets/jscroll/jquery.jscroll.js') }}
         {{ Html::script('assets/sweetalert2/dist/sweetalert2.all.min.js') }}
+        {{ Html::script('assets/pusher-js/dist/node/pusher.js') }}
+        <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
     </head>
     <body>
         <meta name="csrf-token" content="{{ csrf_token() }}">

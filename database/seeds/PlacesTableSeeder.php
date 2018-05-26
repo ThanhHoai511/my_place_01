@@ -13,7 +13,7 @@ class PlacesTableSeeder extends Seeder
     {
         DB::table('places')->insert([
             [
-                'name' => 'Cafe Cuối ngõ',
+                'name' => 'Đại học giao thông',
                 'add' => 'Ngõ 79 Đường Cầu Giấy',
                 'dist_id' => 1,
                 'image' => 'cafe-cuoi-ngo.jpg',

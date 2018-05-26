@@ -15,13 +15,11 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriesTableSeeder::class);
         $this->call(CitiesTableSeeder::class);
         $this->call(DistsTableSeeder::class);
-        $this->call(FollowsTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
         $this->call(CollectionsTableSeeder::class);
         $this->call(ReviewsTableSeeder::class);
         $this->call(PlacesTableSeeder::class);
         $this->call(RateRiviewsTableSeeder::class);
-        $this->call(RateReviewValsTableSeeder::class);
         $this->call(CateValsTableSeeder::class);
         $this->call(SildesTableSeeder::class);
         $this->call(ImagesTableSeeder::class);
